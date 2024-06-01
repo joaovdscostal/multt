@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="jsmin" default="main" basedir=".">
+	<property name="versionSemHiffen" value="0.0.1" />
+	<property name="version" value="-${versionSemHiffen}" />
+
+	<property name="js" value="${basedir}/WebContent/js/" />
+	<property name="css" value="${basedir}/WebContent/css/" />
+
+	<property name="output" value="output" />
+	<property name="comprimir" value="comprimir" />
+
+	<property name="yui-compressor.jar" location="${basedir}/lib/yuicompressor-2.4.2.jar" />
+	<property name="yui-compressor-ant-task.jar" location="${basedir}/lib/yui-compressor-ant-task-0.5.1.jar" />
+
+	<path id="task.classpath">
+		<pathelement location="${yui-compressor.jar}" />
+		<pathelement location="${yui-compressor-ant-task.jar}" />
+	</path>
+
+	<taskdef name="yui-compressor" classname="net.noha.tools.ant.yuicompressor.tasks.YuiCompressorTask">
+		<classpath refid="task.classpath" />
+	</taskdef>
+
+
+	<target name="clean">
+		<delete dir="${output}" />
+		<delete dir="${css}compactado/${versionSemHiffen}" />
+		<delete dir="${js}compactado/${versionSemHiffen}" />
+	</target>
+
+	<target name="main" depends="clean">
+		<mkdir dir="${comprimir}" />
+
+		<concat destfile="${output}/bibliotecas.css" force="no">
+			<fileset file="${css}/plugins/bootstrap/bootstrap-theme.css" />
+			<fileset file="${css}/plugins/fontawesome/all.min.css" />
+			<fileset file="${css}/plugins/feather/feather.min.css" />
+			<fileset file="${css}/plugins/codemirror/codemirror.css" />
+			<fileset file="${css}/plugins/fileinput/fileinput.min.css" />
+			<fileset file="${css}/plugins/datatables/datatables.min.css" />
+			<fileset file="${css}/plugins/summernote/summernote.css" />
+			<fileset file="${css}/plugins/summernote/summernote-bs4.css" />
+			<fileset file="${css}/plugins/sweetalert/sweetalert.css" />
+			<fileset file="${css}/plugins/toastr/toastr.min.css" />
+			<fileset file="${css}/plugins/flatpickr/flatpickr.min.css" />
+			<fileset file="${css}/plugins/select/bootstrap-select.min.css" />
+		</concat>
+
+		<copy file="${css}/admin/admin.css" tofile="${output}/admin.css"/>
+
+		<yui-compressor warn="false" charset="UTF-8" munge="true" preserveallsemicolons="false" fromdir="${output}" todir="${comprimir}"></yui-compressor>
+		<copy file="${comprimir}/bibliotecas-min.css" tofile="${css}compactado/${versionSemHiffen}/bibliotecas-min.css"/>
+		<copy file="${comprimir}/admin-min.css" tofile="${css}compactado/${versionSemHiffen}/admin-min.css"/>
+
+		<copy file="${js}admin/paginate.js" tofile="${js}compactado/${versionSemHiffen}/paginate.js" />
+		<copy file="${js}admin/notificacao.js" tofile="${js}compactado/${versionSemHiffen}/notificacao.js" />
+		<copy file="${js}admin/admin.js" tofile="${js}compactado/${versionSemHiffen}/admin.js" />
+		<copy file="${js}admin/forms.js" tofile="${js}compactado/${versionSemHiffen}/forms.js" />
+		<copy file="${js}admin/dinamico.js" tofile="${js}compactado/${versionSemHiffen}/dinamico.js" />
+		<copy file="${js}admin/Ajax.js" tofile="${js}compactado/${versionSemHiffen}/Ajax.js" />
+		<copy file="${js}admin/Modal.js" tofile="${js}compactado/${versionSemHiffen}/Modal.js" />
+
+		<copy todir="${js}compactado/${versionSemHiffen}/controller" >
+		    <fileset dir="${js}admin/controller" includes="**"/>
+		</copy>
+
+
+	</target>
+</project>
