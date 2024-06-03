@@ -597,3 +597,162 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
   padding: 10px 15px;
 }
 
+/*..NEW MENU MULTT START......................................................................................................................................*/
+
+  .nav-cont-dashMenu {
+    position: fixed;
+    width: 60px;
+    top: 0;
+    height: 100vh;
+    z-index: 100;
+    background-color: #202020;
+    overflow: hidden;
+    transition: width 0.3s ease;
+    cursor: pointer;
+    box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.4);
+  }
+  .nav-cont-dashMenu:hover {
+    width: 250px;
+  }
+  @media screen and (min-width: 600px) {
+    .nav-cont-dashMenu {
+      width: 80px;
+    }
+  }
+  
+  .nav {
+    list-style-type: none;
+    color: white;
+    display: block !important;
+    padding-left: 2.5rem !important;
+  }
+  .nav:first-child {
+    padding-top: 1.5rem;
+  }
+  
+  .nav-items-dashMenu {
+    font-family: "roboto";
+    height: 35px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding-top: 6px;
+  }
+
+  .nav-items-dashMenu img{
+    padding-left: 40px;
+    padding-top: 2px;
+    position: relative;
+    display: block;
+    top: -29px;
+    height: 25px;
+  }
+  
+  .nav-items-dashMenu a {
+    position: relative;
+    display: block;
+    top: -32px;
+    padding-left: 25px;
+    padding-right: 15px;
+    transition: all 0.3s ease;
+    margin-left: 25px;
+    margin-right: 10px;
+    text-decoration: none;
+    color: white;
+    font-family: "roboto";
+    font-weight: 100;
+    font-size: 1.35em;
+
+  }
+  
+  .nav-items-dashMenu svg {
+    width: 36px;
+    height: 36px;
+    position: relative;
+    left: -25px;
+    cursor: pointer;
+  }
+
+  .dashboard-container{
+    margin-left: 90px;
+  }
+
+  .mobile-header-menu-dashboard{
+    background-color: #202020;
+    padding-left: 12px;
+    padding-right: 12px;
+    overflow: hidden;
+  }
+
+  .dashboard-mobile-menu-logo-container img{
+    height: 20px;
+  }
+
+  .line-header-menu-dashboard{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  @media (min-width: 769px) {
+    .nav-items-dashMenu a:hover {
+        color:#dea3f1;
+        transition: color 0.5s ease;
+    }
+  }
+
+  @media (min-width: 600px) {
+    .nav-items-dashMenu svg {
+      width: 32px;
+      height: 32px;
+      left: -15px;
+    }
+
+    .nav-items-dashMenu .perfil{
+      width: 42px;
+      height: 42px;
+      left: -20px;
+    }
+  }
+
+  .dashboard-mobile-menu-conteudo ul{
+    list-style: none;
+    color: white;
+    text-align: center;
+    padding: 0px !important;
+  }
+
+  .dashboard-mobile-menu-conteudo li{
+    font-weight: 300;
+    font-family: "roboto";
+    font-size: 1.1em;
+    margin-bottom: 10px;
+  }
+
+  .dashboard-mobile-menu-conteudo{
+    border-top: 1px solid rgba(255, 255, 255, 0.137);
+    padding-top: 10px;
+  }
+  
+  #dashboard-menu-main-content{
+	  padding-bottom: 15px;
+	  padding-top: 15px;
+  }
+
+  @media (max-width: 426px) {
+    .desktop-dashboard {
+        display: none !important;
+    }
+
+    .dashboard-container {
+        margin-left: 0px;
+    }	
+  }
+
+  @media (min-width: 426px) {
+    .mobile-dashboard{
+        display: none !important;
+    }
+  }
+
+/*..NEW MENU MULTT FIM......................................................................................................................................*/
