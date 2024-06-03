@@ -67,12 +67,12 @@
 						
                         <div>
                             <label for="nomeUsuario"> Seu e-mail </label>
-                            <input name="" type="text" placeholder="exemplo@exemplo.com" id="nomeUsuarioMobile" class="form-control trasparent-input required"/>
+                            <input type="text" placeholder="exemplo@exemplo.com" id="nomeUsuarioMobile" class="form-control trasparent-input required"/>
                         </div>
                         
                         <div>
                             <label for="senhaUsuario"> Sua senha </label>
-                            <input name="" type="password" placeholder="*************" id="senhaUsuarioMobile" class="form-control trasparent-input required"/>
+                            <input type="password" placeholder="*************" id="senhaUsuarioMobile" class="form-control trasparent-input required"/>
                             <div class="d-flex justify-content-end">
                                 <a href="${sessao.urlPadrao}contas/cadastrar">Esqueci minha senha</a>
                             </div>
@@ -122,11 +122,11 @@
                         
                         <div>
                             <label for="nomeUsuario"> Seu e-mail </label>
-                            <input name="" type="text" placeholder="exemplo@exemplo.com" id="nomeUsuario" class="form-control trasparent-input required"/>
+                            <input type="text" placeholder="exemplo@exemplo.com" id="nomeUsuario" class="form-control trasparent-input required"/>
                         </div>
                         <div>
                             <label for="senhaUsuario"> Sua senha </label>
-                            <input name="" type="password" placeholder="*************" id="senhaUsuario" class="form-control trasparent-input required"/>
+                            <input type="password" placeholder="*************" id="senhaUsuario" class="form-control trasparent-input required"/>
                             <div class="d-flex justify-content-end">
                                 <a href="${sessao.urlPadrao}contas/cadastrar">Esqueci minha senha</a>
                             </div>
@@ -224,7 +224,7 @@
 	<script src="${sessao.urlPadrao}js/plugins/jquery/jquery-3.3.1.min.js"></script>
 	<script src="${sessao.urlPadrao}js/plugins/bootstrap/bootstrap.min.js"></script>
 	<script src="${sessao.urlPadrao}js/admin/notificacao.js"></script>
-	<script src="${sessao.urlPadrao}js/admin/login.js"></script>
+	<script src="${sessao.urlPadrao}js/admin/controller/login.js"></script>
 </body>
 
 </html>
