@@ -40,6 +40,9 @@ public class LoginController extends br.com.jvlabs.controller.ControllerProjeto{
 		}
 
 	}
+	
+	@Get("/contas/cadastrar") @Site
+	public void cadastrarPage(){}
 
 	@Post("/adm/login") @Site
 	public void logar(Usuario usuario){

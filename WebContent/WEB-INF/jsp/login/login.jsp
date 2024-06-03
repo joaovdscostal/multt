@@ -74,7 +74,7 @@
                             <label for="senhaUsuario"> Sua senha </label>
                             <input name="" type="password" placeholder="*************" id="senhaUsuarioMobile" class="form-control trasparent-input required"/>
                             <div class="d-flex justify-content-end">
-                                <a href="#">Esqueci minha senha</a>
+                                <a href="${sessao.urlPadrao}contas/cadastrar">Esqueci minha senha</a>
                             </div>
                         </div>
                         
@@ -128,7 +128,7 @@
                             <label for="senhaUsuario"> Sua senha </label>
                             <input name="" type="password" placeholder="*************" id="senhaUsuario" class="form-control trasparent-input required"/>
                             <div class="d-flex justify-content-end">
-                                <a href="#">Esqueci minha senha</a>
+                                <a href="${sessao.urlPadrao}contas/cadastrar">Esqueci minha senha</a>
                             </div>
                         </div>
                         <div>
