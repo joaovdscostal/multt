@@ -353,7 +353,15 @@
                 </div>
             </header>
             <div id="dashboard-menu-main-content">
-            	<jsp:doBody/>
+            	<div>
+            		<jsp:doBody/>
+            	</div>
+            	<div class="multt-footer-padrao container-fluid">
+            		<p>
+                        <img src="${sessao.urlPadrao}/img/LOGO_MULTT_PRETO.png" alt="Logo Multt"/>
+                        Copyright © 2024 - multt. Todos os direitos reservados.
+                    </p>
+            	</div>
             </div>
         </div>
 			

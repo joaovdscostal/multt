@@ -742,6 +742,10 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
   #dashboard-menu-main-content{
 	  padding-bottom: 15px;
 	  padding-top: 15px;
+	  height: 100vh;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: space-between;
   }
 
   @media (max-width: 426px) {
@@ -766,8 +770,24 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 	font-family: 'Myanmar Khyay', sans-serif;
 }
 
-.titulo-index-page{
+.multt-titulo-line-padrao{
 	border-bottom: 2px solid #9448AE;
+	width: 150px;
+}
+
+.titulo-de-formulario .multt-sub-header-title{
+	max-width: 325px;
+	font-size: 13px;
+	line-height: 1.2;
+	margin-top: 5px;
+}
+
+.titulo-de-formulario .multt-sub-header-title a{
+	text-decoration: underline;
+}
+
+
+.titulo-index-page{
 	padding-left: 10px;
 	padding-right: 10px;
 	font-size: 22px;
@@ -841,6 +861,11 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 	position: relative;
 }
 
+.btn-light-rose{
+	background-color: #DDB6EA;
+	color: #9448AE;
+}
+
 .quadro-padrao-container .icon-left-multt-quadro{
 	display: flex;
 	gap: 5px;
@@ -876,6 +901,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 
 .form-multt-padrao input{
 	background-color: #E6E6E6;
+	color: #9E9E9E;
 	border: none;
 }
 
@@ -909,6 +935,22 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 }
 .form-multt-padrao input::-ms-input-placeholder{
 	color: #9E9E9E;
+}
+
+.multt-footer-padrao{
+	padding-top: 15px;
+	padding-bottom: 15px;
+	text-align: center;
+	width: 100%;
+}
+
+.multt-footer-padrao img{
+	height: 12px;
+	margin-right: 5px;
+}
+
+.multt-footer-padrao p{
+	font-size: 10px;
 }
 
 

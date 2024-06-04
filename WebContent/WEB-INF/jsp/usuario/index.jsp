@@ -11,10 +11,11 @@
 					<h1 class="header-title titulo-index-page">
 						Usu&aacute;rios
 					</h1>
+					<div class="multt-titulo-line-padrao"></div>
 				</div>
 				<div class="col-auto">
-					<a href="${sessao.urlAdm}/usuarios/novo" class="btn btn-primary btn-circle">
-						<i class="fas fa-plus"></i>
+					<a href="${sessao.urlAdm}/usuarios/novo" class="btn btn-circle btn-primary">
+						<i class="fas fa-plus "></i>
 					</a>
 				</div>
 			</div>
@@ -57,7 +58,7 @@
 	
 					 <div class="form-group col-md-2 form-group-button d-flex align-items-end" >
 				   		<button type="button" class="btn btn-outline-secondary btn-circle empty-form-paginate ml-1 mr-1" data-toggle="tooltip" data-placement="top" title="Limpar filtro"><i class="fas fa-redo-alt"></i></button>
-			   	    	<button class="btn btn-primary btn-circle ml-1 mr-1" type="submit"><i class="far fa-filter"></i></button>
+			   	    	<button class="btn btn-light-rose btn-circle ml-1 mr-1" type="submit"><i class="fas fa-filter"></i></button>
 	                 </div>
 	             </div>
 			</form>
