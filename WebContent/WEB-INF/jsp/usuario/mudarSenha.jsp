@@ -34,8 +34,7 @@
 	
 						<div class="form-group col-md-6">
 							<label for="usuarioSenhaConfirmacao" class="control-label">Confirmar senha</label>
-							<input type="password" name="usuario.senhaConfirmacao" id="usuarioSenhaConfirmacao" pattern=".{5,}"
-								class="form-control required" />
+							<input type="password" name="usuario.senhaConfirmacao" id="usuarioSenhaConfirmacao" pattern=".{5,}" class="form-control required" />
 						</div>
 					</div>
 
