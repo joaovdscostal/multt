@@ -91,7 +91,7 @@ public class UsuarioController extends ControllerProjeto {
 		addMessage("Usuario atualizado!");
 		result.redirectTo(this).index();
 	}
-
+	
 	@Get("/adm/usuarios/{usuario.id}/editar") @Privado({TipoUsuario.ADMINISTRADOR})
 	public void editar(Usuario usuario) {
 		try {

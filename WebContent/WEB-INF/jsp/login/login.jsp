@@ -52,7 +52,7 @@
                         <img src="${sessao.urlPadrao}/img/LOGO MULTT.png"/>
                     </div>
                     <div class="form-login-section">
-                    
+      
                     	<c:if test="${not empty message}">
 							<div class="btn-msg-login"> ${message} </div>
 						</c:if>

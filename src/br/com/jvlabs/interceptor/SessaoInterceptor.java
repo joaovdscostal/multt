@@ -73,6 +73,10 @@ public class SessaoInterceptor implements Interceptor {
 		if(sessao.isAdministrador()) {
 			return true;
 		}
+		
+		if(sessao.isUsuario()) {
+			return true;
+		}
 
 		if(method.containsAnnotation(Privado.class)) {
 			Privado privado = method.getMethod().getAnnotation(Privado.class);

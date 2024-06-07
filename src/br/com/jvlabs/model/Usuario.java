@@ -74,8 +74,17 @@ public class Usuario extends EntidadeNomeAtivo {
 		setEncryptedPassword(this.senha);
 		this.contadorAcesso = 0;
 	}
-
+	
 	public void init() throws BusinessException {
+		init(null);
+	}
+	
+	public void init(String senhaPadrao) throws BusinessException {
+		if(senhaPadrao != null && !senhaPadrao.trim().isEmpty()) {
+			this.senha = senhaPadrao;
+			this.senhaConfirmacao = senhaPadrao;
+		}
+
 		verificaSenha();
 
 		this.senha = EncryptionUtils.md5(senha);
@@ -201,6 +210,10 @@ public class Usuario extends EntidadeNomeAtivo {
 
 	public boolean temEmail() {
 		return this.email != null && !this.email.trim().isEmpty();
+	}
+
+	public boolean isUsuario() {
+		return this.tipo != null && this.tipo.isUsuario();
 	}
 
 

@@ -209,7 +209,7 @@
       </style>   
 	</head>
 	<body id="body-projeto">
-		<main id="main-content" class="main-content ${sessao.usuario.abaLateral ? '': 'hidden'} fonte-padrao" >
+		<main id="main-content" class="main-content hidden fonte-padrao" >
 		<c:if test="${not empty errors}">
 		<div class="container-fluid">
 			<div class="alert alert-danger alert-principal" style="margin-top: 15px; margin-bottom: 0px;">

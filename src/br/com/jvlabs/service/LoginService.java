@@ -23,9 +23,13 @@ public class LoginService extends ServiceProjeto {
 		if (!usuario.getEncryptedPassword().equals(usuarioBanco.getSenha()))
 			throw new BusinessException("Senha incorreta!");
 
-		sessao.login(usuarioBanco);
+		logarNaSessao(usuarioBanco);
 
 		return usuarioBanco;
+	}
+
+	public void logarNaSessao(Usuario usuarioBanco) {
+		sessao.login(usuarioBanco);
 	}
 
 }

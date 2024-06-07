@@ -6,8 +6,7 @@
 <template:admin>
 	<div class="container-fluid">
 		<div class="container-form-multt">
-			<form class="validateForm load" action="${sessao.urlPadrao}adm/usuarios" method="post" role="form"
-				enctype="multipart/form-data">
+			<form class="validateForm load" action="${sessao.urlPadrao}adm/usuarios" method="post" role="form" enctype="multipart/form-data">
 				<%@include file="form.jsp"%>
 			</form>
 		</div>
