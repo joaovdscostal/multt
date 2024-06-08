@@ -3,7 +3,7 @@ package br.com.jvlabs.model;
 public enum TipoUsuario {
 
 	ADMINISTRADOR("Administrador"),
-	PROJETO("Projeto");
+	USUARIO("Usuário");
 
 	private String exibicao;
 
@@ -18,6 +18,10 @@ public enum TipoUsuario {
 
 	public boolean isAdministrador() {
 		return this.equals(TipoUsuario.ADMINISTRADOR);
+	}
+	
+	public boolean isUsuario() {
+		return this.equals(TipoUsuario.USUARIO);
 	}
 
 }

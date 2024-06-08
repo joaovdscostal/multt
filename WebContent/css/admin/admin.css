@@ -2,6 +2,11 @@ body, html{
 	position: relative;
 }
 
+@font-face {
+    font-family: 'Myanmar Khyay';
+    src: url(../fonts/khyay-regular.ttf);
+}
+
 .toast{
 	position: fixed;
 	top:20px;
@@ -610,6 +615,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
     transition: width 0.3s ease;
     cursor: pointer;
     box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.4);
+    z-index: 999999;
   }
   .nav-cont-dashMenu:hover {
     width: 250px;
@@ -631,7 +637,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
   }
   
   .nav-items-dashMenu {
-    font-family: "roboto";
+    font-family: 'Myanmar Khyay', sans-serif;
     height: 35px;
     margin-top: 25px;
     margin-bottom: 25px;
@@ -658,7 +664,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
     margin-right: 10px;
     text-decoration: none;
     color: white;
-    font-family: "roboto";
+    font-family: 'Myanmar Khyay', sans-serif;
     font-weight: 100;
     font-size: 1.35em;
 
@@ -724,7 +730,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 
   .dashboard-mobile-menu-conteudo li{
     font-weight: 300;
-    font-family: "roboto";
+    font-family: 'Myanmar Khyay', sans-serif;
     font-size: 1.1em;
     margin-bottom: 10px;
   }
@@ -737,6 +743,10 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
   #dashboard-menu-main-content{
 	  padding-bottom: 15px;
 	  padding-top: 15px;
+	  height: 100vh;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: space-between;
   }
 
   @media (max-width: 426px) {
@@ -756,3 +766,234 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
   }
 
 /*..NEW MENU MULTT FIM......................................................................................................................................*/
+
+.fonte-padrao{
+	font-family: 'Myanmar Khyay', sans-serif;
+}
+
+.multt-titulo-line-padrao{
+	border-bottom: 2px solid #9448AE;
+	width: 150px;
+}
+
+.titulo-de-formulario .multt-sub-header-title{
+	max-width: 325px;
+	font-size: 13px;
+	line-height: 1.2;
+	margin-top: 5px;
+}
+
+.titulo-de-formulario .multt-sub-header-title a{
+	text-decoration: underline;
+}
+
+
+.titulo-index-page{
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 22px;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    padding: 6px 0px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.92857;
+}
+
+.dataTable{
+	border-collapse: separate; /* Use 'separate' em vez de 'collapse' */
+    border-spacing: 0; /* Elimina espaços entre bordas */
+    border-radius: 10px;
+    overflow: hidden; /* Garante que o border-radius funcione */
+}
+
+.dataTable th, td {
+    border: none; /* Remove bordas individuais das células */
+    
+}
+
+.dataTable th {
+    border: none; /* Remove bordas individuais das células */
+    color: #9E9E9E !important;
+}
+
+.dataTable thead{
+	background: none;
+	border-bottom: none;
+}
+
+
+.dataTable tbody{
+	background-color: #EAEAEA;
+	border-radius: 10px;	
+	color: #9E9E9E !important;
+}
+
+.dataTable td:first-child, th:first-child {
+   border-left: none; /* Remove borda esquerda das primeiras células */
+}
+
+.dataTable td:last-child, th:last-child {
+   border-right: none; /* Remove borda direita das últimas células */
+}
+
+.odd{
+	padding: 0px !important;
+}
+
+.dataTables_empty{
+	padding: 30px !important;
+}
+
+.quadro-padrao-container{
+	background-color: #DDB6EA;
+	text-align: center;
+	color:#1D1D1D;
+	border-radius: 12px;
+	padding: 40px;
+	margin-bottom:30px;
+	margin-top:30px;
+	position: relative;
+}
+
+.btn-light-rose{
+	background-color: #DDB6EA;
+	color: #9448AE;
+}
+
+.quadro-padrao-container .icon-left-multt-quadro{
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	position: absolute;
+	left: 30px;
+}
+
+.quadro-padrao-container .icon-left-multt-quadro i{
+	color:#9448AE;
+	line-height: 0.7;
+}
+
+.quadro-padrao-container .icon-left-multt-quadro p{
+	margin: 0px;
+}
+
+.quadro-padrao-container span{
+	color:#9448AE;	
+}
+
+.header-padrao-multt{
+	padding-top: 40px;
+}
+
+.titulo-de-formulario{
+	margin-bottom: 35px;
+}
+
+.quadro-padrao-container h1,h2,h3,h4,h5,h6{
+	margin-bottom: 0px;
+}
+
+.form-multt-padrao input{
+	background-color: #E6E6E6;
+	color: #9E9E9E;
+	border: none;
+}
+
+.form-multt-padrao input:focus{
+	background-color: #E6E6E6;
+	border: none;
+	color: rgb(0, 0, 0);
+}
+
+.form-multt-padrao select{
+	background-color: #E6E6E6;
+	border: none;
+	color: #9E9E9E;
+}
+
+.form-multt-padrao select:focus{
+	background-color: #E6E6E6;
+	border: none;
+	color: rgb(0, 0, 0);
+}
+
+
+
+.form-multt-padrao input::-webkit-input-placeholder{
+	color: #9E9E9E;
+}
+
+.form-multt-padrao input::-moz-placeholder{
+	color: #9E9E9E;
+	opacity: 1;
+}
+.form-multt-padrao input::-ms-input-placeholder{
+	color: #9E9E9E;
+}
+
+.multt-footer-padrao{
+	padding-top: 15px;
+	padding-bottom: 15px;
+	text-align: center;
+	width: 100%;
+}
+
+.multt-footer-padrao img{
+	height: 12px;
+	margin-right: 5px;
+}
+
+.multt-footer-padrao p{
+	font-size: 10px;
+}
+
+/* Input File CSS ................................................................................................*/
+
+.input-file-field{
+	position:relative;	
+	z-index: 999;
+	overflow: hidden;
+}
+
+.input-file-field img{
+	height: 100%;
+	cursor: pointer;
+	
+	
+}
+
+.input-file-field .file-img-container {
+	margin-right: 10px;
+	height: 50px;
+	width:50px;
+	border-radius: 50px;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+}
+
+.file-input-container{
+	position: relative;
+}
+
+.file-input-container input{
+	display: none;
+}
+
+.file-input-container label{
+	cursor: pointer;
+	height: 30px;
+	line-height: 0.9;
+	font-family: Arial, sans-serif;
+	overflow: hidden;
+}
+
+/* Input File CSS ................................................................................................*/
+ 

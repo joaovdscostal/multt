@@ -156,4 +156,8 @@ public class Sessao implements Serializable{
 		this.configuracao = configuracao;
 	}
 
+	public boolean isUsuario() {
+		return this.usuario != null && this.usuario.isUsuario();
+	}
+
 }

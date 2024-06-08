@@ -209,7 +209,7 @@
       </style>   
 	</head>
 	<body id="body-projeto">
-		<main id="main-content" class="main-content ${sessao.usuario.abaLateral ? '': 'hidden'}" >
+		<main id="main-content" class="main-content hidden fonte-padrao" >
 		<c:if test="${not empty errors}">
 		<div class="container-fluid">
 			<div class="alert alert-danger alert-principal" style="margin-top: 15px; margin-bottom: 0px;">
@@ -353,7 +353,15 @@
                 </div>
             </header>
             <div id="dashboard-menu-main-content">
-            	<jsp:doBody/>
+            	<div>
+            		<jsp:doBody/>
+            	</div>
+            	<div class="multt-footer-padrao container-fluid">
+            		<p>
+                        <img src="${sessao.urlPadrao}/img/LOGO_MULTT_PRETO.png" alt="Logo Multt"/>
+                        Copyright © 2024 - multt. Todos os direitos reservados.
+                    </p>
+            	</div>
             </div>
         </div>
 			

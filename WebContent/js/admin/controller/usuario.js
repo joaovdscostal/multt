@@ -25,11 +25,11 @@
       },
       {
         title: "Remover",
-        icon: "far fa-trash",
+        icon: "fas fa-trash",
         url: urlPadrao + "adm/usuarios/{id}/apagar",
         confirm: true,
         confirmMessage: "Deseja excluir este usuario?",
-        warning: true
+
       }
     ])
     .start();

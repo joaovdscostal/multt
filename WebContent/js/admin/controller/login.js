@@ -9,7 +9,7 @@
 function gerenciarTamanhoDeTelaDoDispositivo(){
 	var tamanhoDaTela = $(window).width()
 	
-	if(tamanhoDaTela < 821){
+	if(tamanhoDaTela < 931){
 		console.log("modo mobile ativado")
 		$('#nomeUsuarioMobile').addClass('required')
 		$('#senhaUsuarioMobile').addClass('required')
