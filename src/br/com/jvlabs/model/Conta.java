@@ -25,6 +25,8 @@ public class Conta extends EntidadeNome implements Cloneable, EntidadeInterface{
 	
 	private String celular;
 	
+	private String imagem;
+	
 	@OneToOne
 	private Usuario usuario;
 	

@@ -1,8 +1,11 @@
 package br.com.jvlabs.service;
 
+import java.io.IOException;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
+import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.jvlabs.dao.ContaDao;
 import br.com.jvlabs.enumerated.TipoConta;
 import br.com.jvlabs.exception.BusinessException;
@@ -14,6 +17,7 @@ public class ContaService extends ServiceProjeto {
 
 	@Inject private ContaDao contaDao;
 	@Inject private UsuarioService usuarioService;
+	@Inject private ArquivoServicePadrao arquivoServicePadrao;
 	
 	public Conta cria(Conta conta) throws BusinessException {
 		Usuario usuario = conta.getUsuario();
@@ -26,9 +30,29 @@ public class ContaService extends ServiceProjeto {
 		return conta;
 	}
 
-	public void atualiza(Conta conta)  {
-		contaDao.update(conta);
+	public Conta atualiza(Conta conta,UploadedFile imagem) throws BusinessException, IOException  {
+		Conta banco = contaDao.get(conta.getId());
+		
+		conta.setTipoConta(banco.getTipoConta());
+		conta.setUsuario(banco.getUsuario());
+		
+		if(imagem != null) {
+			String nomeImagem = arquivoServicePadrao.salvarDocumentoParaPerfilDeConta(imagem, conta);
+
+			if(!arquivoServicePadrao.isExtensaoValidaParaImagem(nomeImagem)) {
+				throw new BusinessException("Este tipo de arquivo não é válido para este campo");
+			}
+
+			conta.setImagem(nomeImagem);
+
+		} else {
+			conta.setImagem(banco.getImagem());
+		}
+		
+		conta = contaDao.merge(conta);
 		logService.criarLog("CONTA-UPDATE", conta);
+		
+		return conta;
 	}
 
 	public void apagar(Conta conta) {

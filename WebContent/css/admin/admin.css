@@ -615,6 +615,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
     transition: width 0.3s ease;
     cursor: pointer;
     box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.4);
+    z-index: 999999;
   }
   .nav-cont-dashMenu:hover {
     width: 250px;
@@ -953,5 +954,46 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 	font-size: 10px;
 }
 
+/* Input File CSS ................................................................................................*/
 
+.input-file-field{
+	position:relative;	
+	z-index: 999;
+	overflow: hidden;
+}
+
+.input-file-field img{
+	height: 100%;
+	cursor: pointer;
+	
+	
+}
+
+.input-file-field .file-img-container {
+	margin-right: 10px;
+	height: 50px;
+	width:50px;
+	border-radius: 50px;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+}
+
+.file-input-container{
+	position: relative;
+}
+
+.file-input-container input{
+	display: none;
+}
+
+.file-input-container label{
+	cursor: pointer;
+	height: 30px;
+	line-height: 0.9;
+	font-family: Arial, sans-serif;
+	overflow: hidden;
+}
+
+/* Input File CSS ................................................................................................*/
  

@@ -89,9 +89,122 @@
 
 	})
 
+	//.........Img.Input.File..............................................................................................
+	
+	$('.input-file-field input[type="file"]').change(function() {
+        carregarImagem(this);
+        $(this).closest('.input-file-field').css('border-color','#CECECE');
+    });
+    
+    $('.input-file-field img').click(function() {
+        var imagemSelecionada = $(this).closest('.input-file-field').find('img').attr('src');
+        $('#display-imagem-jogo').attr('src',imagemSelecionada);
+        $('#imagemJogoSelecionada').modal('show');
+    });
+    
+    $('.sendForm').click(function() {
+        verificaValidadeInputImagemParaForm(); 
+    });
+    
+//.....................................................................................................................
 
 	iniciarFuncoesDeCep();
 })();
+
+//.........Img.Input.File..............................................................................................
+
+	function carregarImagem(input) {
+		var aceitaVideo = $(input).attr('data-aceita-video')
+		
+        if (input.files && input.files[0]) {
+            var leitor = new FileReader();
+			var nomeArquivo = input.files[0].name;
+			var campoImagem = $(input).closest('.input-file-field').find('img');
+			var campoVideo = aceitaVideo =='true' ? $(input).closest('.input-file-field').find('video') : null;
+			var campoTexto = $(input).closest('.input-file-field').find('label');
+
+		if (aceitaVideo == 'false' ? validarArquivoDeImagem(nomeArquivo) : validarArquivoDeImagemEVideo(nomeArquivo)) {
+			leitor.onload = function(e) {
+				if (!nomeArquivo.includes('.mp4')) {
+					$(campoVideo).hide();
+					$(campoImagem).attr('src', e.target.result);
+					$(campoImagem).show();
+				}
+				if(nomeArquivo.includes('.mp4')){
+					$(campoImagem).hide();
+					$(campoVideo).attr('poster', e.target.result);
+				}
+
+			}
+			leitor.readAsDataURL(input.files[0]);
+		} else {
+			new Notificacao(`Só sao permitidas as seguintes extensoes para imagens: jpg, jpeg, png, webp${aceitaVideo == "false"? " ou avif" : ", avif ou mp4"}`).erro();
+			$(campoImagem).attr('src', urlPadrao + 'img/sem-imagem.jpg');
+			$(campoImagem).show();
+			if(possuiValorSemValidarZero($(campoVideo))){
+				$(campoVideo).hide();
+				$(campoVideo).attr('poster', '');
+			}
+			$('.file-input-container label').html('Selecionar arquivo...');
+			$(input).val('');
+
+		}
+	}
+}   
+    
+    function validarArquivoDeImagemEVideo(nomeArquivo){
+		if(nomeArquivo.includes(".mp4")){
+    		return true;
+    	}
+		return validarArquivoDeImagem(nomeArquivo)
+	} 
+    
+    function validarArquivoDeImagem(nomeArquivo){
+    	if(nomeArquivo.includes(".jpg")){
+    		return true;
+    	}
+    	
+    	if(nomeArquivo.includes(".png")){
+    		return true;
+    	}
+    	
+    	if(nomeArquivo.includes(".jpeg")){
+    		return true;
+    	}
+    	
+    	if(nomeArquivo.includes(".webp")){
+    		return true;
+    	}
+    	
+    	if(nomeArquivo.includes(".avif")){
+    		return true;
+    	}
+    	
+    	return false;
+    	
+    }
+    
+    function verificaValidadeInputImagemParaForm(){
+    	$('.input-file-field').each(function(index,inputFileField){	
+    		var input = $(inputFileField).find('input');
+    		if($(input).hasClass('required')){	
+	    		if(!inputFileTemConteudo(input)){
+	    			$(inputFileField).css('border-color','red');		
+	    		} 		
+    		}
+    	})
+    }
+    
+    function inputFileTemConteudo(input){
+    	var inputFile = $(input);
+		if (inputFile[0].files.length > 0) {
+		    return true;
+		} else {
+		     return false;
+		}
+    }
+
+//.....................................................................................................................
 
 function notificacao(background, message){
 	var html = '' +

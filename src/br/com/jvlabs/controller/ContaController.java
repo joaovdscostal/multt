@@ -1,5 +1,7 @@
 package br.com.jvlabs.controller;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.validation.Valid;
@@ -9,6 +11,7 @@ import org.hibernate.HibernateException;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
+import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.jvlabs.annotation.Privado;
 import br.com.jvlabs.annotation.Site;
 import br.com.jvlabs.dao.ContaDao;
@@ -38,22 +41,10 @@ public class ContaController extends ControllerProjeto {
 	
 	@Get("/contas/cadastrar") @Site
 	public void cadastrarPage(){}
-
-	@Get("/adm/contas/json") @Privado
-	public void paginate(Table datatable) {
-		try {
-			datatable.filters(request, "nome");
-			TableResponse<Conta> response = contaDao.paginate(datatable);
-			String retorno = new GsonUtils().padrao().toJson(response);
-			addPlainAjax(retorno);
-		} catch (StackOverflowError e) {
-			addErroAjax("Erro ao serializar paginate!");
-		}
-	}
-
+	
 	@Post("/contas/cadastrar") @Site
 	public void criar(@Valid Conta conta) {
-		validator.onErrorForwardTo(this).novo();
+		validator.onErrorForwardTo(this).cadastrarPage();
 
 		try {
 			HibernateUtil.beginTransaction();
@@ -77,37 +68,54 @@ public class ContaController extends ControllerProjeto {
 		result.redirectTo(IndexController.class).admin();
 		
 	}
-
-	@Get("/adm/contas/novo") @Privado
-	public void novo() {
+	
+	@Get("/adm/contas/alterar-conta") @Privado
+	public void alterarContaPage(){
+		if(sessao.logado()) {
+			result.include("conta",contaDao.buscarPorUsuario(sessao.getUsuario()));
+		}	
 	}
-
+	
 	@Post("/adm/contas/editar") @Privado
-	public void atualizar(Conta conta) {
-		validator.onErrorForwardTo(this).editar(conta);
+	public void atualizar(Conta conta,UploadedFile imagem) {
+		validator.onErrorForwardTo(this).alterarContaPage();
 
 		try {
 			HibernateUtil.beginTransaction();
-			contaService.atualiza(conta);
+			contaService.atualiza(conta,imagem);
 			HibernateUtil.commit();
 		} catch (HibernateException e) {
 			HibernateUtil.rollback();
 			addLogAndSendToErrorPage(e, "ContaController.atualizar");
+		} catch (BusinessException e) {
+			HibernateUtil.rollback();
+			addValidation(e.getMessage());
+			validator.onErrorForwardTo(this).alterarContaPage();
+		} catch (IOException e) {
+			HibernateUtil.rollback();
+			addValidation(e.getMessage());
+			validator.onErrorForwardTo(this).alterarContaPage();
 		}
 
 		addMessage("Conta atualizada com sucesso!");
-		result.redirectTo(this).index();
+		result.redirectTo(this).alterarContaPage();
 	}
 
-	@Get("/adm/contas/{conta.id}/editar") @Privado
-	public void editar(Conta conta) {
+	@Get("/adm/contas/json") @Privado
+	public void paginate(Table datatable) {
 		try {
-			result.include("conta", contaDao.get(conta.getId()));
-		}catch (NoResultException e) {
-			addValidation("Conta nao encontrada!");
-			validator.onErrorForwardTo(this).index();
+			datatable.filters(request, "nome");
+			TableResponse<Conta> response = contaDao.paginate(datatable);
+			String retorno = new GsonUtils().padrao().toJson(response);
+			addPlainAjax(retorno);
+		} catch (StackOverflowError e) {
+			addErroAjax("Erro ao serializar paginate!");
 		}
 	}
+
+	
+
+	
 
 	@Get("/adm/contas/{conta.id}/apagar") @Privado
 	public void apagar(Conta conta) {
@@ -143,7 +151,7 @@ public class ContaController extends ControllerProjeto {
 		}
 
 		addMessage("Conta clonada com sucesso!");
-		result.redirectTo(this).editar(conta);
+		result.redirectTo(this).alterarContaPage();
 	}
 
 

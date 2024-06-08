@@ -1,17 +1,15 @@
 package br.com.jvlabs.dao;
 
-import java.util.List;
-
 import javax.enterprise.context.RequestScoped;
 
 import org.hibernate.criterion.Conjunction;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.MatchMode;
-
+import org.hibernate.criterion.Restrictions;
 
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
 import br.com.jvlabs.model.Conta;
+import br.com.jvlabs.model.Usuario;
 
 
 
@@ -28,6 +26,12 @@ public class ContaDao extends HibernateDao<Conta> {
 			}
 
 		return datatableDao.carregandoParametros(conjunction).paginate();
+	}
+
+	public Conta buscarPorUsuario(Usuario usuario) {
+		HibernateCriteriaDao<Conta> criteria = createCriteria();
+		criteria.add(Restrictions.eq("usuario", usuario));
+		return criteria.uniqueResult();
 	}
 
 
