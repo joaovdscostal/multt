@@ -3,48 +3,36 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="template" tagdir="/WEB-INF/tags"%>
 <template:admin>
-	<div class="header">
-		<div class="container-fluid">
-			<div class="header-body">
-				<div class="row align-items-end">
-					<div class="col">
-						<h6 class="header-pretitle">
-							<nav aria-label="breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="${sessao.urlPadrao}adm">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Contas</li>
-								</ol>
-							</nav>
-						</h6>
-						<h1 class="header-title">
-							Contas
-						</h1>
-					</div>
-					<div class="col-auto">
-						<a href="${sessao.urlPadrao}adm/contas/novo" class="btn btn-primary">
-							<i class="fas fa-plus"></i> Nova conta
-						</a>
-					</div>
+	<div class="header header-padrao-multt mb-5">
+		<div class="container-fluid fonte-padrao">
+			<div class="d-flex justify-content-between align-items-center">
+				<div>
+					<h1 class="header-title titulo-index-page">
+						Contas
+					</h1>
+					<div class="multt-titulo-line-padrao"></div>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="container-fluid">
-		<div class="row justify-content-center">
-			<div class="col-12">
-				<form class="form-inline" id="contaForm">
-					<div class="col p-0">
-						<label class="sr-only" for="contaNome">Nome</label>
-						<input type="text" name="nome" class="form-control mb-2 mr-sm-2 form-control-sm" id="nome"
-							placeholder="Nome" >
-
-					<button type="submit" class="btn btn-outline-primary mb-2 btn-sm"><i class="fad fa-search"></i>
-						Pesquisar</button>
+		<div class="form-multt-padrao">
+			
+			<form id="contaForm">
+				<div class="form-row">
+					<div class="form-group col-md-2">
+						 <label for="usuarioNome" class="control-label">Nome</label>
+						<input type="text" name="nome" class="form-control " id="nome" placeholder="Ex.: Jo&atilde;o">
 					</div>
-				</form>
-
-			</div>
+	
+					 <div class="form-group col-md-2 form-group-button d-flex align-items-end" >
+				   		<button type="button" class="btn btn-outline-secondary btn-circle empty-form-paginate ml-1 mr-1" data-toggle="tooltip" data-placement="top" title="Limpar filtro"><i class="fas fa-redo-alt"></i></button>
+			   	    	<button class="btn btn-light-rose btn-circle ml-1 mr-1" type="submit"><i class="fas fa-filter"></i></button>
+	                 </div>
+	             </div>
+			</form>
+			
 			<div class="col-12">
 				<div class="table-responsive">
 					<table class="table table-nowrap" id="contaDatatable">

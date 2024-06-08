@@ -30,9 +30,7 @@ public class UsuarioController extends ControllerProjeto {
 	@Inject private Sessao sessao;
 
 	@Get("/adm/usuarios") @Privado({TipoUsuario.ADMINISTRADOR})
-	public void index() {
-		//empty
-	}
+	public void index() {}
 
 	@Get("/adm/usuarios/json") @Privado({TipoUsuario.ADMINISTRADOR})
 	public void paginate(Table datatable) {

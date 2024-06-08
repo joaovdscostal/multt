@@ -6,7 +6,7 @@
     .form("contaForm")
     .columns([
       { title: "#", data: "id" },
-	    	{ title: "Nome", data: "nome"  },
+	  { title: "Nome", data: "nome"  },
     ])
     .buttons([
     {
