@@ -118,12 +118,12 @@ public class UsuarioController extends ControllerProjeto {
 
 	//alterar todas senhas
 
-	@Get("/adm/usuarios/{usuario.id}/senha") @Privado({TipoUsuario.ADMINISTRADOR})
+	@Get("/adm/usuarios/{usuario.id}/senha") @Privado()
 	public void mudarSenha(Usuario usuario) {
 		result.include("usuario", usuarioDao.get(usuario.getId()));
 	}
 
-	@Post("/adm/usuarios/{usuario.id}/senha") @Privado({TipoUsuario.ADMINISTRADOR})
+	@Post("/adm/usuarios/{usuario.id}/senha") @Privado()
 	public void senha(Usuario usuario) {
 
 		try {
@@ -141,6 +141,8 @@ public class UsuarioController extends ControllerProjeto {
 
 		addMessage("Senha atualizada!");
 		result.redirectTo(this).index();
+		
+		
 	}
 
 	//alterar minha senha

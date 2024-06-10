@@ -64,7 +64,7 @@ public class ContaController extends ControllerProjeto {
 
 		addMessage("Conta criada com sucesso!");
 		
-		loginService.logarNaSessao(conta.getUsuario());
+		loginService.logarNaSessao(conta.getUsuario(),conta);
 		result.redirectTo(IndexController.class).admin();
 		
 	}

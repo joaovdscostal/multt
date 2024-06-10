@@ -36,6 +36,16 @@ public class Conta extends EntidadeNome implements Cloneable, EntidadeInterface{
 	@Enumerated(EnumType.STRING)
 	private TipoConta tipoConta;
 	
+	public String pegarPrimeiroNome() {
+		String texto = this.getNome();
+		
+        if (texto == null || texto.isEmpty()) {
+            return "";
+        }
+        String[] palavras = texto.split("\\s+");
+        return palavras[0];
+    }
+	
 	@Override
 	public void validarTransient() {}
 

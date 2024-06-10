@@ -618,9 +618,9 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
     z-index: 999999;
   }
   .nav-cont-dashMenu:hover {
-    width: 250px;
+    width: 300px;
   }
-  @media screen and (min-width: 600px) {
+  @media (min-width: 600px) {
     .nav-cont-dashMenu {
       width: 80px;
     }
@@ -632,6 +632,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
     display: block !important;
     padding-left: 2.5rem !important;
   }
+  
   .nav:first-child {
     padding-top: 1.5rem;
   }
@@ -667,6 +668,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
     font-family: 'Myanmar Khyay', sans-serif;
     font-weight: 100;
     font-size: 1.35em;
+    white-space: nowrap;
 
   }
   
@@ -681,7 +683,66 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
   .dashboard-container{
     margin-left: 90px;
   }
-
+  
+  .menu-perfil-dashboard{
+	position: absolute;
+	bottom: 0;
+	min-width: 80px;
+	display: block !important;
+	padding-bottom: 10px;
+  }
+  
+  #dropdown-perfil-dashboard{
+	 color: white;
+	 top: -36.5px !important;
+	 padding-left:15px;
+  }
+  
+  #dropdown-perfil-dashboard{
+	 position: relative;
+     display: block;
+     top: -32px;
+     padding-left: 25px;
+     padding-right: 15px;
+     transition: all 0.3s ease;
+     margin-left: 25px;
+     margin-right: 10px;
+     text-decoration: none;
+     color: white;
+     font-family: 'Myanmar Khyay', sans-serif;
+     font-weight: 100;
+     font-size: 1.35em;
+     white-space: nowrap;
+  }
+  
+  .menu-perfil-dashboard .dropdown-menu {
+	  position: relative;
+  }
+  
+  .dropdown-menu a{
+	 position: relative;
+     display: inline-block;
+     top: 0;
+     padding-left: 12px;
+     padding-right: 0px;
+     margin-left: 0px;
+     margin-right: 0px;
+     text-decoration: none;
+     color: black;
+     font-family: 'Myanmar Khyay', sans-serif;
+     font-weight: 100;
+     font-size: 1em;
+  }
+  
+  .dropdown-menu {
+	  left: 50px !important;
+  }
+  
+  .menu-perfil-dashboard #logout-dashboard:hover {
+	 padding-left: 16px;
+	 color: #dea3f1;
+  }
+  
   .mobile-header-menu-dashboard{
     background-color: #202020;
     padding-left: 12px;
@@ -977,6 +1038,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 	overflow: hidden;
 	display: flex;
 	justify-content: center;
+	background-color: rgb(40, 40, 40);
 }
 
 .file-input-container{
@@ -996,4 +1058,6 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 }
 
 /* Input File CSS ................................................................................................*/
+
+
  

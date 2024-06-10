@@ -52,6 +52,7 @@ public class ContaService extends ServiceProjeto {
 		conta = contaDao.merge(conta);
 		logService.criarLog("CONTA-UPDATE", conta);
 		
+		sessao.setConta(conta);
 		return conta;
 	}
 

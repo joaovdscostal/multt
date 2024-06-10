@@ -6,6 +6,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import br.com.jvlabs.model.Configuracao;
+import br.com.jvlabs.model.Conta;
 import br.com.jvlabs.model.TipoUsuario;
 import br.com.jvlabs.model.Usuario;
 import lombok.Getter;
@@ -18,6 +19,7 @@ public class Sessao implements Serializable{
 	private static final long serialVersionUID = -2716020570285741943L;
 
 	private Usuario usuario;
+	private Conta conta;
 	private String url;
 	private String titulo;
 
@@ -31,24 +33,34 @@ public class Sessao implements Serializable{
 	public Sessao() {
 	}
 
-	public void login(Usuario usuario) {
+	public void login(Usuario usuario, Conta conta) {
 		this.usuario = usuario;
+		this.conta = conta;
 	}
+	
 	public void logout() {
 		this.usuario = null;
 	}
+	
 	public boolean logado() {
 		return this.usuario != null && !this.usuario.isTransient();
 	}
+	
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
+	
+	public Conta getConta() {
+		return this.conta;
+	}
+	
 	public TipoUsuario getTipoUsuario() {
 		if(getUsuario()==null)
 			return null;
 
 		return getUsuario().getTipo();
 	}
+	
 	public Long getUsuarioId() {
 		if(getUsuario()==null)
 			return null;

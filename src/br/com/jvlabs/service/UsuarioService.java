@@ -101,6 +101,7 @@ public class UsuarioService extends ServiceProjeto {
 		this.usuarioDao.merge(usuarioBanco);
 
 		logService.criarLog("USUARIO-UPDATEPASSWORD", usuario);
+
 	}
 
 	public void verificarUsuarioAdmin() {
