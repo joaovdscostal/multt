@@ -285,8 +285,6 @@
         }
     }
 
-
-
 </style>
 <body>
 	<form class="validateForm load" action="${sessao.urlPadrao}contas/cadastrar" method="post" role="form" enctype="multipart/form-data">
