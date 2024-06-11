@@ -128,7 +128,7 @@
                             <label for="senhaUsuario"> Sua senha </label>
                             <input type="password" placeholder="*************" id="senhaUsuario" class="form-control trasparent-input required"/>
                             <div class="d-flex justify-content-end">
-                                <a href="${sessao.urlPadrao}contas/cadastrar">Esqueci minha senha</a>
+                                <a href="#">Esqueci minha senha</a>
                             </div>
                         </div>
                         <div>
@@ -136,7 +136,7 @@
                         </div>
                         
                         <div class="d-flex justify-content-between form-login-footer-links">
-                            <a href="#">Não tenho conta</a>
+                            <a href="${sessao.urlPadrao}contas/cadastrar">Não tenho conta</a>
                             <a href="#">Política de privacidade</a>
                         </div>
                         

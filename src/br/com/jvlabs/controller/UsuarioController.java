@@ -66,9 +66,7 @@ public class UsuarioController extends ControllerProjeto {
 	}
 
 	@Get("/adm/usuarios/novo") @Privado({TipoUsuario.ADMINISTRADOR})
-	public void novo() {
-		//empty
-	}
+	public void novo() {}
 
 	@Post("/adm/usuarios/editar") @Privado({TipoUsuario.ADMINISTRADOR})
 	public void atualizar(Usuario usuario) {
@@ -138,9 +136,15 @@ public class UsuarioController extends ControllerProjeto {
 			HibernateUtil.rollback();
 			addValidation(e.getMessage()).onErrorForwardTo(this).mudarSenha(usuario);
 		}
-
 		addMessage("Senha atualizada!");
-		result.redirectTo(this).index();
+		
+		if(sessao.isAdministrador()) {
+			result.redirectTo(this).index();
+		} else {
+			result.redirectTo(ContaController.class).alterarContaPage();
+		}
+		
+		
 		
 		
 	}
