@@ -111,6 +111,19 @@
 	})
 /* Auxiliar Multt Form Menu JS ................................................................................................*/
 
+	$(document).on('mouseleave','.nav-cont-dashMenu', function() {
+		console.log("mouseleave")
+		$(this).find(".collapse").collapse('hide')
+		
+		$(this).find('.nav-menu').addClass("scrollbar-hide")
+	});
+	
+	$(document).on('mouseenter','.nav-cont-dashMenu', function() {
+		console.log("mouseenter")
+		
+		$(this).find('.nav-menu').removeClass("scrollbar-hide")
+	});
+	
 	iniciarFuncoesDeCep();
 })();
 

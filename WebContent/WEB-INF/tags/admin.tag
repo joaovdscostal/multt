@@ -230,7 +230,7 @@
 		</c:if>
 		<div id="graficoDiv"></div>
 		<nav class="nav-cont-dashMenu desktop-dashboard">
-            <ul class="nav">	        
+            <ul class="nav nav-menu scrollbar-hide">	        
 		        <li class="nav-items-dashMenu ">
 		            <svg width="47" height="34" viewBox="0 0 47 34" fill="none" xmlns="http://www.w3.org/2000/svg">
 		                <g clip-path="url(#clip0_80_2797)">
@@ -275,7 +275,19 @@
 		                <path d="M33.0369 9.03711C32.2603 9.03711 31.6307 9.66673 31.6307 10.4434C31.6307 14.6512 28.2073 18.0746 23.9994 18.0746C19.7915 18.0746 16.3682 14.6512 16.3682 10.4434C16.3682 9.66673 15.7385 9.03711 14.9619 9.03711C14.1853 9.03711 13.5557 9.66673 13.5557 10.4434C13.5557 16.202 18.2407 20.8871 23.9994 20.8871C29.7582 20.8871 34.4432 16.202 34.4432 10.4434C34.4432 9.66673 33.8135 9.03711 33.0369 9.03711Z" fill="#EEEEEE"/>
 		            </svg>
 		            <a href="">Vendas</a>
+		            
 		        </li>
+				
+				<li class="nav-items-dashMenu ">
+					<svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+						<path d="M22 3c.53 0 1.039.211 1.414.586s.586.884.586 1.414v14c0 .53-.211 1.039-.586 1.414s-.884.586-1.414.586h-20c-.53 0-1.039-.211-1.414-.586s-.586-.884-.586-1.414v-14c0-.53.211-1.039.586-1.414s.884-.586 1.414-.586h20zm1 8h-22v8c0 .552.448 1 1 1h20c.552 0 1-.448 1-1v-8zm-15 5v1h-5v-1h5zm13-2v1h-3v-1h3zm-10 0v1h-8v-1h8zm-10-6v2h22v-2h-22zm22-1v-2c0-.552-.448-1-1-1h-20c-.552 0-1 .448-1 1v2h22z" stroke="#EEEEEE"/>
+					</svg>
+		            <a class="dropdown-toggle" data-toggle="collapse" href="#collapseFinanceiro" role="button" aria-expanded="false" aria-controls="collapseFinanceiro">Financeiro</a>
+		        </li>
+		        
+		        <div class="collapse" id="collapseFinanceiro" style="">				
+					 <a class="multt-sub-grid-link" href="#"><i class="fas fa-credit-card mr-2"></i>Metodos de Pagamento</a>			 
+				</div>
 		
 		        <li class="nav-items-dashMenu ">
 		            <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -376,13 +388,31 @@
                             <div class="collapse" id="collapseExample">
                                 <div class="mb-3 mt-2 dashboard-mobile-menu-conteudo">
                                     <ul>
-                                        <li>Dashboard</li>
-                                        <li>Vendas</li>
-                                        <li>Relatório</li>
-                                        <li>Produtos</li>
-                                        <li>Links</li>
-                                        <li>Compras</li>
-                                        <li>Ver Mais</li>
+                                        <li>
+                                        	<a href="#">Dashboard</a>
+                                        </li>
+                                        <li>
+                                        	<a href="#">Vendas</a>
+                                        </li>
+                                        <li>
+                                        	<a class="dropdown-toggle" data-toggle="collapse" href="#collapseFinanceiroMobile" role="button" aria-expanded="false" aria-controls="collapseFinanceiroMobile">Financeiro</a>
+                                        	<div class="collapse" id="collapseFinanceiroMobile">				
+												 <a class="multt-sub-grid-link" href="#"><i class="fas fa-credit-card mr-2"></i>Metodos de Pagamento</a>			 
+											</div>
+                                        </li>
+                                        
+                                        <li>
+                                        	<a href="#">Relatório</a>
+                                        </li>
+                                        <li>
+                                        	<a href="#">Produtos</a>
+                                        </li>
+                                        <li>
+                                        	<a href="#">Links</a>
+                                        </li>
+                                        <li>
+                                        	<a href="#">Compras</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
