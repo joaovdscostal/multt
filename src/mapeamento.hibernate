@@ -4,3 +4,11 @@ br.com.jvlabs.model.Log
 br.com.jvlabs.model.Configuracao
 
 br.com.jvlabs.model.Conta
+
+br.com.jvlabs.model.Produto
+br.com.jvlabs.model.Imagem
+br.com.jvlabs.model.Oferta
+br.com.jvlabs.model.CategoriaProduto
+br.com.jvlabs.model.MetodoDePagamento
+br.com.jvlabs.model.OrdemBump
+br.com.jvlabs.model.CondicaoDePagamento

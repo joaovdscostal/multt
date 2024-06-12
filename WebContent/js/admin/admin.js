@@ -71,22 +71,15 @@
 		var isOpenAtualizado = $(this).attr('data-is-open')
 		var idUsuario = $(this).attr('data-usuario-id')
 			$.ajax({
-
-			        url: urlPadrao + "adm/usuarios/admin-tag/ajax",
-			        type: "POST",
-			        data: {
-						"usuario.id": idUsuario,
-						"usuario.abaLateral": isOpenAtualizado,
-					},
-			        success: function(data) {
-
-			        },
-			        error: function() {
-
-
-			        }
-			      })
-
+		        url: urlPadrao + "adm/usuarios/admin-tag/ajax",
+		        type: "POST",
+		        data: {
+					"usuario.id": idUsuario,
+					"usuario.abaLateral": isOpenAtualizado,
+				},
+		        success: function(data) {},
+		        error: function() {}
+			})
 	})
 
 	//.........Img.Input.File..............................................................................................
@@ -107,9 +100,41 @@
     });
     
 //.....................................................................................................................
+/* Auxiliar Multt Form Menu JS ................................................................................................*/
+	$(document).on('click','.slide-toggle',function(e){
+		var idContainer = $(this).attr('data-container-id');
+		
+		$('.multt-form-menu').removeClass('container-ativo')
+		
+		$(`${idContainer}`).addClass('container-ativo');
+		console.log(idContainer)
+	})
+/* Auxiliar Multt Form Menu JS ................................................................................................*/
 
 	iniciarFuncoesDeCep();
 })();
+
+function inputImages() {
+	$('.input-images-produto').each(function() {
+			var dataJson = $(this).attr('data-json');
+
+			if (dataJson) {
+				var preload = JSON.parse(dataJson);
+
+
+				$(this).imageUploader({
+					label: 'Insira as fotos do produto aqui',
+					preloaded: preload,
+					'imagesInputName': 'images'
+				});
+			} else {
+				$(this).imageUploader({
+					label: 'Insira as fotos do produto aqui',
+					'imagesInputName': 'images'
+				});
+			}
+		});
+}
 
 //.........Img.Input.File..............................................................................................
 
@@ -461,3 +486,5 @@ function iniciarFuncoesDeCep(){
         }
     });
 }
+
+

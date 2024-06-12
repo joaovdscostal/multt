@@ -609,13 +609,13 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
     width: 60px;
     top: 0;
     height: 100vh;
-    z-index: 100;
+
     background-color: #202020;
     overflow: hidden;
     transition: width 0.3s ease;
     cursor: pointer;
     box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.4);
-    z-index: 999999;
+    z-index: 9999;
   }
   .nav-cont-dashMenu:hover {
     width: 300px;
@@ -973,6 +973,18 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 	color: rgb(0, 0, 0);
 }
 
+.form-multt-padrao textarea{
+	background-color: #E6E6E6;
+	color: #9E9E9E;
+	border: none;
+}
+
+.form-multt-padrao textarea:focus{
+	background-color: #E6E6E6;
+	border: none;
+	color: rgb(0, 0, 0);
+}
+
 .form-multt-padrao select{
 	background-color: #E6E6E6;
 	border: none;
@@ -1059,5 +1071,18 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 
 /* Input File CSS ................................................................................................*/
 
+/* Auxiliar Multt Form Menu CSS ................................................................................................*/
 
+.container-ativo{
+	display: block !important;
+}
+
+.multt-form-menu{
+	display: none;
+}
+
+#multt-menu-editar-produto{
+	padding-top: 40px;
+}
+/* Auxiliar Multt Form Menu CSS ................................................................................................*/
  

@@ -26,6 +26,7 @@
 			<link href="${sessao.urlPadrao}css/plugins/flatpickr/flatpickr.min.css" rel="stylesheet">
 			<link href="${sessao.urlPadrao}css/plugins/select/bootstrap-select.min.css" rel="stylesheet">
 			<link rel="stylesheet" type="text/css" href="https://at.alicdn.com/t/font_o5hd5vvqpoqiwwmi.css">
+			<link type="text/css" rel="stylesheet" href="${sessao.urlPadrao}js/plugins/img-upload/image-uploader.min.css">
 			<link href="${sessao.urlPadrao}css/admin/admin.css" rel="stylesheet">
 		</c:if>
 		<c:if test="${ambiente != 'desenvolvimento'}">
@@ -288,7 +289,7 @@
 		                <path d="M42.875 16.3318C42.8743 15.6157 42.6852 14.9124 42.3269 14.2925C41.9685 13.6725 41.4535 13.1577 40.8333 12.7997L26.5417 4.633C25.9209 4.27461 25.2168 4.08594 24.5 4.08594C23.7832 4.08594 23.0791 4.27461 22.4583 4.633L8.16667 12.7997C7.54654 13.1577 7.03146 13.6725 6.67311 14.2925C6.31476 14.9124 6.12573 15.6157 6.125 16.3318V32.6651C6.12573 33.3812 6.31476 34.0844 6.67311 34.7044C7.03146 35.3243 7.54654 35.8391 8.16667 36.1972L22.4583 44.3638C23.0791 44.7222 23.7832 44.9109 24.5 44.9109C25.2168 44.9109 25.9209 44.7222 26.5417 44.3638L40.8333 36.1972C41.4535 35.8391 41.9685 35.3243 42.3269 34.7044C42.6852 34.0844 42.8743 33.3812 42.875 32.6651V16.3318Z" stroke="#EEEEEE" stroke-width="4.08333" stroke-linecap="round" stroke-linejoin="round"/>
 		                <path d="M6.7373 14.291L24.4998 24.4993M24.4998 24.4993L42.2623 14.291M24.4998 24.4993V44.916" stroke="#EEEEEE" stroke-width="4.08333" stroke-linecap="round" stroke-linejoin="round"/>
 		            </svg>
-		            <a href="">Produtos</a>
+		            <a href="${sessao.urlPadrao}adm/produtos">Produtos</a>
 		        </li>
 		
 		        <li class="nav-items-dashMenu ">
@@ -438,6 +439,8 @@
 
 		<script src="${sessao.urlPadrao}js/plugins/loading/js/jquery.showLoading.js"></script>
 		<script src="${sessao.urlPadrao}js/plugins/cookie/lib.js"></script>
+		
+		<script type="text/javascript" src="${sessao.urlPadrao}js/plugins/img-upload/image-uploader.min.js"></script>
 
 
 		<c:if test="${ambiente == 'desenvolvimento'}">
