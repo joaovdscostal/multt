@@ -12,6 +12,7 @@ import org.hibernate.criterion.MatchMode;
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
 import br.com.jvlabs.model.OrdemBump;
+import br.com.jvlabs.model.Produto;
 
 
 
@@ -25,6 +26,12 @@ public class OrdemBumpDao extends HibernateDao<OrdemBump> {
 
 
 		return datatableDao.carregandoParametros(conjunction).paginate();
+	}
+
+	public List<OrdemBump> buscarBumpsDoProduto(Produto produto) {
+		HibernateCriteriaDao<OrdemBump> criteria = createCriteria();
+		criteria.add(Restrictions.eq("produtoReferencia", produto));
+		return criteria.list();
 	}
 
 

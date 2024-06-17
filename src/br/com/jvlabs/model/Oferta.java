@@ -9,12 +9,15 @@ import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "OFERTA")
 @SQLDelete(sql = "UPDATE OFERTA SET excluido = 'T' WHERE id = ?", check = ResultCheckStyle.COUNT)
-@Where(clause = "excluido <> 'T'") @Getter @Setter
+@Where(clause = "excluido <> 'T'") @Getter @Setter @Builder @AllArgsConstructor @NoArgsConstructor
 public class Oferta extends EntidadeNomeAtivo implements Cloneable, EntidadeInterface{
 	private static final long serialVersionUID = 6870418303029482722L;
 	

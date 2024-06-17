@@ -6,6 +6,7 @@ import java.util.List;
 
 import br.com.jvlabs.dao.OfertaDao;
 import br.com.jvlabs.model.Oferta;
+import br.com.jvlabs.model.Produto;
 
 @RequestScoped
 public class OfertaService extends ServiceProjeto {
@@ -14,15 +15,13 @@ public class OfertaService extends ServiceProjeto {
 	private OfertaDao ofertaDao;
 
 	public Oferta cria(Oferta oferta) {
-
-
 		oferta = ofertaDao.merge(oferta);
 		logService.criarLog("OFERTA-CREATE", oferta);
 		return oferta;
 	}
 
 	public void atualiza(Oferta oferta)  {
-		ofertaDao.update(oferta);
+		ofertaDao.merge(oferta);
 		logService.criarLog("OFERTA-UPDATE", oferta);
 	}
 
@@ -39,6 +38,19 @@ public class OfertaService extends ServiceProjeto {
 		clonada = ofertaDao.merge(clonada);
 		logService.criarLog("OFERTA-CLONE", oferta);
 		return clonada;
+	}
+
+	public Oferta criarOfertaPadraoParaProduto(Produto produto) {
+		Oferta oferta = Oferta.builder()
+						.produto(produto)
+						.valor(produto.getValor())
+						.build();
+		
+		oferta.setNome(produto.getNome());
+		oferta = ofertaDao.merge(oferta);
+		logService.criarLog("OFERTA-CREATE", oferta);
+		
+		return oferta;
 	}
 
 

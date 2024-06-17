@@ -11,6 +11,8 @@
 		<title>${configuracao.nome} - Administra&ccedil;&atilde;o</title>
 		<link rel="icon" type="image/png" href="${sessao.urlPadrao}img/favicon-32x32.png" sizes="32x32" />
 		<link rel="icon" type="image/png" href="${sessao.urlPadrao}img/favicon-16x16.png" sizes="16x16" />
+		<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		
 
 		<c:if test="${ambiente == 'desenvolvimento'}">
 			<link href="${sessao.urlPadrao}css/plugins/bootstrap/bootstrap-theme.css" rel="stylesheet">
@@ -286,7 +288,7 @@
 		        </li>
 		        
 		        <div class="collapse" id="collapseFinanceiro" style="">				
-					 <a class="multt-sub-grid-link" href="#"><i class="fas fa-credit-card mr-2"></i>Metodos de Pagamento</a>			 
+					 <a class="multt-sub-grid-link" href="${sessao.urlPadrao}adm/metodo-pagamento"><i class="fas fa-credit-card mr-2"></i>Metodos de Pagamento</a>			 
 				</div>
 		
 		        <li class="nav-items-dashMenu ">
@@ -354,7 +356,7 @@
 							 <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    ${sessao.getConta().pegarPrimeiroNome()} <i class="fas fa-caret-circle-down ml-2"></i>
 							 </a>
-							 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							 <div class="dropdown-menu dropdown-menu-dashboard" aria-labelledby="dropdownMenuLink">
 							    <a class="dropdown-item" href="${sessao.urlPadrao}adm/contas/alterar-conta">Editar Perfil</a>
 							    <a class="dropdown-item" href="${sessao.urlPadrao}adm/usuarios/${sessao.getUsuario().getId()}/senha">Alterar Senha</a>
 							    <a class="dropdown-item" href="${sessao.urlPadrao}adm/logout">Sair <i class="fas fa-sign-out ml-2"></i></a>						    
@@ -397,7 +399,9 @@
                                         <li>
                                         	<a class="dropdown-toggle" data-toggle="collapse" href="#collapseFinanceiroMobile" role="button" aria-expanded="false" aria-controls="collapseFinanceiroMobile">Financeiro</a>
                                         	<div class="collapse" id="collapseFinanceiroMobile">				
-												 <a class="multt-sub-grid-link" href="#"><i class="fas fa-credit-card mr-2"></i>Metodos de Pagamento</a>			 
+												 <a class="multt-sub-grid-link" href="${sessao.urlPadrao}adm/metodo-pagamento">
+												 	<i class="fas fa-credit-card mr-2"></i>Metodos de Pagamento
+												 </a>			 
 											</div>
                                         </li>
                                         

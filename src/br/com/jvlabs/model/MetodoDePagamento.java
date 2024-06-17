@@ -32,9 +32,6 @@ public class MetodoDePagamento extends EntidadeNomeAtivo implements Cloneable, E
 
 	private BigDecimal desconto;
 
-	@Transient
-	private List<CondicaoDePagamento> condicoes;
-
 	@Override
 	public void validarTransient() {}
 

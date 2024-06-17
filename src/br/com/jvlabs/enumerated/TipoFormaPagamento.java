@@ -9,11 +9,11 @@ public enum TipoFormaPagamento {
 	BOLETO("Boleto", "BOLETO"),
 	GRATUITA("Gratuita", "GRATUITA");
 
-	private String exibicao;
+	private String descricao;
 	private String asaas;
 
 	TipoFormaPagamento(String exibicao, String asaas) {
-		this.exibicao = exibicao;
+		this.descricao = exibicao;
 		this.asaas = asaas;
 	}
 

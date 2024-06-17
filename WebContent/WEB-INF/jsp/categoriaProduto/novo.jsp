@@ -4,23 +4,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="template" tagdir="/WEB-INF/tags" %>
 <template:admin>
-	<div class="header">
-		<div class="container-fluid">
-			<div class="header-body">
-				<div class="row align-items-end">
-					<div class="col">
-						<h6 class="header-pretitle">
-							<nav aria-label="breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="${sessao.urlPadrao}adm">Home</a></li>
-									<li class="breadcrumb-item"><a href="${sessao.urlPadrao}adm/categorias-de-produto">Categorias de Produto</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Nova categoria de produto</li>
-								</ol>
-							</nav>
-						</h6>
-						<h1 class="header-title">
-							Nova categoria de produto
-						</h1>
+	<div class="header header-padrao-multt titulo-de-formulario">
+	<div class="container-fluid fonte-padrao">
+			<div class="d-flex justify-content-between align-items-center ">
+				<div>
+					<h1 class="header-title titulo-index-page">
+						Nova Categoria
+					</h1>
+					<div class="multt-titulo-line-padrao"></div>
+					<div class="multt-sub-header-title">
+						Aprenda sobre as configurações 
+						de <a href="#">parcelamento</a> no checkout
 					</div>
 				</div>
 			</div>

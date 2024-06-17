@@ -7,10 +7,11 @@ import javax.enterprise.context.RequestScoped;
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.MatchMode;
-
+import org.hibernate.criterion.Projections;
 
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
+import br.com.jvlabs.model.Conta;
 import br.com.jvlabs.model.Produto;
 
 
@@ -28,6 +29,12 @@ public class ProdutoDao extends HibernateDao<Produto> {
 			}
 
 		return datatableDao.carregandoParametros(conjunction).paginate();
+	}
+
+	public List<Produto> buscarProdutosDaConta(Conta conta) {
+		HibernateCriteriaDao<Produto> criteria = createCriteria();
+		criteria.add(Restrictions.eq("conta", conta));
+		return criteria.list();
 	}
 
 

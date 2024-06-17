@@ -1,6 +1,7 @@
 package br.com.jvlabs.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Embedded;
@@ -10,13 +11,16 @@ import javax.persistence.Enumerated;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import br.com.jvlabs.dto.ImagemJsonDTO;
 import br.com.jvlabs.enumerated.TipoDeProduto;
 import br.com.jvlabs.enumerated.TipoPagamentoProduto;
+import br.com.jvlabs.util.GsonUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,7 +30,8 @@ import lombok.Setter;
 public class Produto extends EntidadeNomeAtivo implements Cloneable, EntidadeInterface{
 
 	private static final long serialVersionUID = 6870418303029482722L;
-
+	
+	@Transient
 	private BigDecimal valor;
 
 	@Lob
@@ -42,11 +47,11 @@ public class Produto extends EntidadeNomeAtivo implements Cloneable, EntidadeInt
 	@Enumerated(EnumType.STRING)
 	private TipoPagamentoProduto tipoPagamento;
 	
-	@OneToMany
+	@OneToMany(mappedBy="produto")
 	private List<Imagem> imagens;
 	
-	@OneToMany
-	private List<Oferta> oferta;
+	@OneToMany(mappedBy="produto")
+	private List<Oferta> ofertas;
 	
 	@OneToOne
 	private Conta conta;
@@ -57,9 +62,12 @@ public class Produto extends EntidadeNomeAtivo implements Cloneable, EntidadeInt
 	@Embedded
 	private ConfiguracaoProduto configuracao;
 	
-	
 	@Override
-	public void validarTransient() {}
+	public void validarTransient() {
+		if(this.categoria != null && this.categoria.getId() == null) {
+			this.categoria = null;
+		}
+	}
 
 	@Override
 	public Entidade clone() throws CloneNotSupportedException {
@@ -72,7 +80,53 @@ public class Produto extends EntidadeNomeAtivo implements Cloneable, EntidadeInt
 		return this.conta != null;
 	}
 
+	public void limparListas() {
+		this.ofertas = null;
+		
+	}
 
+	public void addOferta(Oferta ofertaPadrao) {
+		if(this.ofertas == null) {
+			this.ofertas = new ArrayList<Oferta>();
+		}
+		
+		this.ofertas.add(ofertaPadrao);
+	}
+
+	public void validarImagens() {
+		if(this.imagens == null) {
+			this.imagens = new ArrayList<Imagem>();
+		}
+		
+	}
+	
+	public String pegarPrimeiraImagem() {
+		
+		if(this.imagens != null && !this.imagens.isEmpty()) {
+			return this.imagens.get(1).getNomeImagem();
+		}
+		
+		return null; 
+	}
+
+	public String getImagensJson(String url) {
+		List<ImagemJsonDTO> listImagem = new ArrayList<>();
+
+		if(imagens != null) {
+			for(Imagem imagem : imagens) {
+				listImagem.add(ImagemJsonDTO.builder()
+											.id(imagem.getId())
+											.src(url + "arquivos/imagens/" + imagem.getNomeImagem())
+											.build());
+			}
+		}
+
+		try {
+			return new GsonUtils().padrao().toJson(listImagem);
+		}catch (Exception e) {
+			return "";
+		}
+	}
 
 
 

@@ -1,20 +1,18 @@
 package br.com.jvlabs.controller;
 
-import java.util.LinkedList;
-import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.validation.Valid;
+
 import org.hibernate.HibernateException;
+
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
-import br.com.jvlabs.exception.BusinessException;
 import br.com.jvlabs.annotation.Privado;
 import br.com.jvlabs.dao.MetodoDePagamentoDao;
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
-import br.com.jvlabs.model.TipoUsuario;
 import br.com.jvlabs.model.MetodoDePagamento;
 import br.com.jvlabs.service.MetodoDePagamentoService;
 import br.com.jvlabs.util.GsonUtils;

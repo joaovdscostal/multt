@@ -14,15 +14,13 @@ public class OrdemBumpService extends ServiceProjeto {
 	private OrdemBumpDao ordembumpDao;
 
 	public OrdemBump cria(OrdemBump ordembump) {
-
-
 		ordembump = ordembumpDao.merge(ordembump);
 		logService.criarLog("ORDEMBUMP-CREATE", ordembump);
 		return ordembump;
 	}
 
 	public void atualiza(OrdemBump ordembump)  {
-		ordembumpDao.update(ordembump);
+		ordembumpDao.merge(ordembump);
 		logService.criarLog("ORDEMBUMP-UPDATE", ordembump);
 	}
 

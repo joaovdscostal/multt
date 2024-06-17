@@ -788,7 +788,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 	  position: relative;
   }
   
-  .dropdown-menu a{
+  .menu-perfil-dashboard .dropdown-menu a{
 	 position: relative;
      display: inline-block;
      top: 0;
@@ -803,7 +803,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
      font-size: 1em;
   }
   
-  .dropdown-menu {
+  .menu-perfil-dashboard .dropdown-menu {
 	  left: 50px !important;
   }
   
@@ -1159,4 +1159,122 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 	padding-top: 40px;
 }
 /* Auxiliar Multt Form Menu CSS ................................................................................................*/
- 
+
+/* Auxiliar Multt Form List CSS ................................................................................................*/
+.lista-item-container{
+	border: 1px solid #d9d9d9;
+}
+
+.multt-aviso-vazio-padrao{
+	width: 100%;
+	text-align: center;
+}
+/* Auxiliar Multt Form List CSS ................................................................................................*/
+
+.multt-produto-ofertas-list-container{
+	border-top: 1px solid #d9d9d9;
+	border-bottom: 1px solid #d9d9d9;
+	padding: 10px; 
+}
+
+.pre-vizualizacao-order-bump{
+	border: 2px dashed gray;
+	min-height: 50px;
+	width: 100%;
+}
+
+.pre-vizualizacao-order-bump .card{
+	width: 100%;
+	max-width: 100%;
+	flex-shrink: none !important;
+}
+
+.pre-vizualizacao-order-bump .card>*{
+	flex-shrink: 1 !important;
+}
+
+.pre-vizualizacao-order-bump .img-container-bump{
+	border-top-left-radius: calc(0.5rem - 1px);
+	border-bottom-left-radius: calc(0.5rem - 1px);
+	min-width: 10%;
+	max-width: 15%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+
+.pre-vizualizacao-order-bump .container-bump{
+	border-left: 1px solid #edf2f9;
+	width: 100%;
+	flex-grow: 1;
+}
+
+.pre-vizualizacao-order-bump .container-bump .card-header{
+	border-top-left-radius: 0px;
+	background-color: gray;
+	color: white;
+	height: auto !important;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	white-space: normal;
+	word-wrap: break-word;
+}
+
+.pre-vizualizacao-order-bump .container-bump .card-body{
+	height: auto !important;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	white-space: normal;
+	word-wrap: break-word;
+}
+
+.pre-vizualizacao-order-bump .container-bump .card-header input{
+	height: 20px;
+	width: 20px;
+}
+
+@media (max-width: 550px) {
+   
+   .bump-mobile{
+	  display: block;
+	  height: 50px;
+	  width: 50px;
+   }
+   
+   .pre-vizualizacao-order-bump .img-container-bump{
+	  border: 1px solid #edf2f9 !important;
+	  border-bottom: none;
+	  min-width: 100%;
+	  max-width: unset;
+	  height: 100px;
+	  background-repeat: no-repeat;
+	  background-size: contain;
+	  background-position: center;   
+   }
+   
+   .pre-vizualizacao-order-bump .container-bump .card-header{
+		border-top-left-radius: 0px !important;
+		border-top-right-radius: 0px !important;
+	}
+   
+   .bump-desktop{
+	  display: none !important;
+	  height: 0px;
+	  width: 0px;
+   }
+}
+
+@media (min-width: 550px) {
+    .bump-mobile{
+	  display: none;
+	  height: 0px;
+	  width: 0px;
+   }
+   
+   .bump-desktop{
+	  display: block;
+   }
+}
+
+
+

@@ -3,48 +3,40 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="template" tagdir="/WEB-INF/tags"%>
 <template:admin>
-	<div class="header">
-		<div class="container-fluid">
-			<div class="header-body">
-				<div class="row align-items-end">
-					<div class="col">
-						<h6 class="header-pretitle">
-							<nav aria-label="breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="${sessao.urlPadrao}adm">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Metodos de Pagamento</li>
-								</ol>
-							</nav>
-						</h6>
-						<h1 class="header-title">
-							Metodos de Pagamento
-						</h1>
-					</div>
-					<div class="col-auto">
-						<a href="${sessao.urlPadrao}adm/metodo-pagamento/novo" class="btn btn-primary">
-							<i class="fas fa-plus"></i> Novo metodo de pagamento
-						</a>
-					</div>
+	<div class="header header-padrao-multt mb-5">
+		<div class="container-fluid fonte-padrao">
+			<div class="d-flex justify-content-between align-items-center">
+				<div>
+					<h1 class="header-title titulo-index-page">
+						Metodos de Pagamento
+					</h1>
+					<div class="multt-titulo-line-padrao"></div>
+				</div>
+				<div class="col-auto">
+					<a href="${sessao.urlAdm}/metodo-pagamento/novo" class="btn btn-circle btn-primary">
+						<i class="fas fa-plus "></i>
+					</a>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="container-fluid">
-		<div class="row justify-content-center">
-			<div class="col-12">
-				<form class="form-inline" id="metododepagamentoForm">
-					<div class="col p-0">
-						<label class="sr-only" for="metododepagamentoNome">Nome</label>
-						<input type="text" name="nome" class="form-control mb-2 mr-sm-2 form-control-sm" id="nome"
-							placeholder="Nome" >
-
-					<button type="submit" class="btn btn-outline-primary mb-2 btn-sm"><i class="fad fa-search"></i>
-						Pesquisar</button>
+		<div class="form-multt-padrao">
+			<form id="metododepagamentoForm">
+				<div class="form-row">
+					<div class="form-group col-md-2">
+						 <label for="usuarioNome" class="control-label">Nome</label>
+						<input type="text" name="nome" class="form-control " id="nome" placeholder="Ex.: Jo&atilde;o">
 					</div>
-				</form>
-
-			</div>
+	
+					 <div class="form-group col-md-2 form-group-button d-flex align-items-end" >
+				   		<button type="button" class="btn btn-outline-secondary btn-circle empty-form-paginate ml-1 mr-1" data-toggle="tooltip" data-placement="top" title="Limpar filtro"><i class="fas fa-redo-alt"></i></button>
+			   	    	<button class="btn btn-light-rose btn-circle ml-1 mr-1" type="submit"><i class="fas fa-filter"></i></button>
+	                 </div>
+	             </div>
+			</form>
+				
 			<div class="col-12">
 				<div class="table-responsive">
 					<table class="table table-nowrap" id="metododepagamentoDatatable">

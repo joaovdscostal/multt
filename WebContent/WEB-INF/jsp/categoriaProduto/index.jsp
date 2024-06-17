@@ -3,50 +3,43 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="template" tagdir="/WEB-INF/tags"%>
 <template:admin>
-	<div class="header">
-		<div class="container-fluid">
-			<div class="header-body">
-				<div class="row align-items-end">
-					<div class="col">
-						<h6 class="header-pretitle">
-							<nav aria-label="breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="${sessao.urlPadrao}adm">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Categorias de Produto</li>
-								</ol>
-							</nav>
-						</h6>
-						<h1 class="header-title">
-							Categorias de Produto
-						</h1>
-					</div>
-					<div class="col-auto">
-						<a href="${sessao.urlPadrao}adm/categorias-de-produto/novo" class="btn btn-primary">
-							<i class="fas fa-plus"></i> Nova categoria de produto
-						</a>
-					</div>
+	<div class="header header-padrao-multt">
+		<div class="container-fluid fonte-padrao">
+			<div class="d-flex justify-content-between align-items-center">
+				<div>
+					<h1 class="header-title titulo-index-page">
+						Categorias
+					</h1>
+					<div class="multt-titulo-line-padrao"></div>
+				</div>
+				<div class="col-auto d-flex">
+					<a href="${sessao.urlPadrao}adm/categorias-de-produto/novo" class="btn btn-circle btn-primary mr-2">
+						<i class="fas fa-plus "></i>
+					</a>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="container-fluid">
+	<div class="container-fluid fonte-padrao mt-4">
+		<div class="form-multt-padrao">
+			<form id="categoriaprodutoForm">
+				<div class="form-row">
+					<div class="form-group col-md-2">
+						 <label for="usuarioNome" class="control-label">Nome</label>
+						<input type="text" name="nome" class="form-control " id="nome" placeholder="Ex.: Jo&atilde;o">
+					</div>			
+	
+					 <div class="form-group col-md-2 form-group-button d-flex align-items-end" >
+				   		<button type="button" class="btn btn-outline-secondary btn-circle empty-form-paginate ml-1 mr-1" data-toggle="tooltip" data-placement="top" title="Limpar filtro"><i class="fas fa-redo-alt"></i></button>
+			   	    	<button class="btn btn-light-rose btn-circle ml-1 mr-1" type="submit"><i class="fas fa-filter"></i></button>
+	                 </div>
+	             </div>
+			</form>
+		</div>
 		<div class="row justify-content-center">
 			<div class="col-12">
-				<form class="form-inline" id="categoriaprodutoForm">
-					<div class="col p-0">
-						<label class="sr-only" for="categoriaprodutoNome">Nome</label>
-						<input type="text" name="nome" class="form-control mb-2 mr-sm-2 form-control-sm" id="nome"
-							placeholder="Nome" >
-
-					<button type="submit" class="btn btn-outline-primary mb-2 btn-sm"><i class="fad fa-search"></i>
-						Pesquisar</button>
-					</div>
-				</form>
-
-			</div>
-			<div class="col-12">
-				<div class="table-responsive">
+				<div class="table-responsive table-index-container">
 					<table class="table table-nowrap" id="categoriaprodutoDatatable">
 					</table>
 				</div>

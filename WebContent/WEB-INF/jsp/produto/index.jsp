@@ -12,9 +12,17 @@
 					</h1>
 					<div class="multt-titulo-line-padrao"></div>
 				</div>
-				<div class="col-auto">
-					<a href="#" class="btn btn-circle btn-primary cadastrar-rapido-produto">
+				<div class="col-auto d-flex">
+					<a href="#" class="btn btn-circle btn-primary cadastrar-rapido-produto mr-2">
 						<i class="fas fa-plus "></i>
+					</a>
+					<c:if test="${sessao.isAdministrador()}">
+						<a href="${sessao.urlPadrao}adm/categorias-de-produto" class="btn btn-primary">
+							<i class="fas fa-plus mr-2"></i> Categorias
+						</a>
+					</c:if>
+					<a href="${sessao.urlPadrao}adm/categorias-de-produto" class="btn btn-primary">
+						<i class="fas fa-plus mr-2"></i> Categorias
 					</a>
 				</div>
 			</div>

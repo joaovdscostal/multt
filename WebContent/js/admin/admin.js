@@ -134,7 +134,6 @@ function inputImages() {
 			if (dataJson) {
 				var preload = JSON.parse(dataJson);
 
-
 				$(this).imageUploader({
 					label: 'Insira as fotos do produto aqui',
 					preloaded: preload,
@@ -500,4 +499,23 @@ function iniciarFuncoesDeCep(){
     });
 }
 
+function possuiValor(valor){
+	if(valor != undefined && valor != null && valor != "" && valor != NaN){
+		return true
+	}else{
+		if(valor === 0){
+			return true
+		}
+		return false
+	}
+}
+
+function variavelPossuiValor(valor){
+	if(valor != undefined && valor != null && valor != "" && valor != NaN){
+		return true
+	}
+	
+	return false
+	
+}
 
