@@ -19,12 +19,12 @@
   
   .slidemenu{
     font-family: arial, sans-serif;
-    max-width: 300px;
+    max-width: 400px;
     overflow: hidden;
   }
   
   .slidemenu label{
-    width: 50%;
+    width: 33.333333%;
     text-align: center;
     display: block;
     float: left;
@@ -52,7 +52,7 @@
   }
   
   .slider .bar{
-    width: 50%;
+    width: 33.333333%;
     height: 5px;
     background: #9448AE;
     border-radius: 5px;
@@ -69,9 +69,9 @@
   }
 
   .slidemenu #slide-item-1:checked ~ .slider .bar{ margin-left: 0; }
-  .slidemenu #slide-item-2:checked ~ .slider .bar{ margin-left: 50%; }
-  /*.slidemenu #slide-item-3:checked ~ .slider .bar{ margin-left: 50%; }
-  .slidemenu #slide-item-4:checked ~ .slider .bar{ margin-left: 75%; }*/
+  .slidemenu #slide-item-2:checked ~ .slider .bar{ margin-left: 33.333333%; }
+  .slidemenu #slide-item-3:checked ~ .slider .bar{ margin-left: 66.666666% }
+  /*.slidemenu #slide-item-4:checked ~ .slider .bar{ margin-left: 75%; }*/
 </style>
 <!--Fim Menu Slide Produto ........................................................................................... -->
 
@@ -89,8 +89,12 @@
 		      <input type="radio" name="slideItem" id="slide-item-2"  data-container-id="#config" class="slide-toggle">
 		      <label for="slide-item-2"><span>Configurações</span></label>
 		      
+		      <!-- Item 2 -->
+		      <input type="radio" name="slideItem" id="slide-item-3"  data-container-id="#checkout" class="slide-toggle">
+		      <label for="slide-item-3"><span>Checkout</span></label>
+		      
 		      <!-- <input type="radio" name="slideItem" id="slide-item-3" class="slide-toggle">
-		      <label for="slide-item-3"><span>Folio</span></label>
+		      <label for="slide-item-3"><span>Checkout</span></label>
 		      
 		      <input type="radio" name="slideItem" id="slide-item-4" class="slide-toggle">
 		      <label for="slide-item-4"><span>Blog</span></label> -->
@@ -372,6 +376,25 @@
 				    </div>
 				    
 				</div>
+			</div>
+			
+			<div id="checkout" class="multt-form-menu">
+				<div class="header header-padrao-multt titulo-de-formulario p-0">
+					<div class="container-fluid fonte-padrao p-0">
+						<div class="d-flex justify-content-between align-items-center ">
+							<div>
+								<h1 class="header-title titulo-index-page">
+									Checkout
+								</h1>
+								<div class="multt-titulo-line-padrao"></div>
+								<div class="multt-sub-header-title">
+									Aprenda sobre as configurações 
+									de <a href="#">checkout</a> no checkout
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>					
 			</div>
 			
 			<div class="d-flex justify-content-end">
