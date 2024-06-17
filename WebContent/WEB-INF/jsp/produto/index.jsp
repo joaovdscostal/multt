@@ -21,9 +21,6 @@
 							<i class="fas fa-plus mr-2"></i> Categorias
 						</a>
 					</c:if>
-					<a href="${sessao.urlPadrao}adm/categorias-de-produto" class="btn btn-primary">
-						<i class="fas fa-plus mr-2"></i> Categorias
-					</a>
 				</div>
 			</div>
 		</div>

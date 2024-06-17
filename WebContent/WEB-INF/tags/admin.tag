@@ -280,17 +280,19 @@
 		            
 		        </li>
 				
-				<li class="nav-items-dashMenu ">
-					<svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
-						<path d="M22 3c.53 0 1.039.211 1.414.586s.586.884.586 1.414v14c0 .53-.211 1.039-.586 1.414s-.884.586-1.414.586h-20c-.53 0-1.039-.211-1.414-.586s-.586-.884-.586-1.414v-14c0-.53.211-1.039.586-1.414s.884-.586 1.414-.586h20zm1 8h-22v8c0 .552.448 1 1 1h20c.552 0 1-.448 1-1v-8zm-15 5v1h-5v-1h5zm13-2v1h-3v-1h3zm-10 0v1h-8v-1h8zm-10-6v2h22v-2h-22zm22-1v-2c0-.552-.448-1-1-1h-20c-.552 0-1 .448-1 1v2h22z" stroke="#EEEEEE"/>
-					</svg>
-		            <a class="dropdown-toggle" data-toggle="collapse" href="#collapseFinanceiro" role="button" aria-expanded="false" aria-controls="collapseFinanceiro">Financeiro</a>
-		        </li>
-		        
-		        <div class="collapse" id="collapseFinanceiro" style="">				
-					 <a class="multt-sub-grid-link" href="${sessao.urlPadrao}adm/metodo-pagamento"><i class="fas fa-credit-card mr-2"></i>Metodos de Pagamento</a>			 
-				</div>
-		
+				<c:if test="${sessao.isAdministrador()}">
+					<li class="nav-items-dashMenu ">
+						<svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+							<path d="M22 3c.53 0 1.039.211 1.414.586s.586.884.586 1.414v14c0 .53-.211 1.039-.586 1.414s-.884.586-1.414.586h-20c-.53 0-1.039-.211-1.414-.586s-.586-.884-.586-1.414v-14c0-.53.211-1.039.586-1.414s.884-.586 1.414-.586h20zm1 8h-22v8c0 .552.448 1 1 1h20c.552 0 1-.448 1-1v-8zm-15 5v1h-5v-1h5zm13-2v1h-3v-1h3zm-10 0v1h-8v-1h8zm-10-6v2h22v-2h-22zm22-1v-2c0-.552-.448-1-1-1h-20c-.552 0-1 .448-1 1v2h22z" stroke="#EEEEEE"/>
+						</svg>
+			            <a class="dropdown-toggle" data-toggle="collapse" href="#collapseFinanceiro" role="button" aria-expanded="false" aria-controls="collapseFinanceiro">Financeiro</a>
+			        </li>
+			        
+			        <div class="collapse" id="collapseFinanceiro" style="">				
+						 <a class="multt-sub-grid-link" href="${sessao.urlPadrao}adm/metodo-pagamento"><i class="fas fa-credit-card mr-2"></i>Metodos de Pagamento</a>			 
+					</div>
+				</c:if>
+				
 		        <li class="nav-items-dashMenu ">
 		            <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
 		                <path d="M18.75 43.75H31.25M18.75 43.75V33.3333M18.75 43.75H7.5C7.16848 43.75 6.85054 43.6183 6.61612 43.3839C6.3817 43.1495 6.25 42.8315 6.25 42.5V34.5833C6.25 34.2518 6.3817 33.9339 6.61612 33.6994C6.85054 33.465 7.16848 33.3333 7.5 33.3333H18.75M31.25 43.75V18.75M31.25 43.75H42.5C42.8315 43.75 43.1495 43.6183 43.3839 43.3839C43.6183 43.1495 43.75 42.8315 43.75 42.5V7.5C43.75 7.16848 43.6183 6.85054 43.3839 6.61612C43.1495 6.3817 42.8315 6.25 42.5 6.25H32.5C32.1685 6.25 31.8505 6.3817 31.6161 6.61612C31.3817 6.85054 31.25 7.16848 31.25 7.5V18.75M18.75 33.3333V20C18.75 19.6685 18.8817 19.3505 19.1161 19.1161C19.3505 18.8817 19.6685 18.75 20 18.75H31.25" stroke="#EEEEEE" stroke-width="3.125"/>
