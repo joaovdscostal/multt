@@ -210,7 +210,8 @@
 							        <input type="text" name="produto.ofertas[${status.count}].valor" placeholder="Valor da Oferta" class="form-control valorOferta" alt="decimalSemZero" value="${oferta.valor}"/>
 							    </div>
 							     <div class="form-group col-md-1 m-0 d-flex align-items-end">					    	
-				        			<button class="btn btn-circle btn-danger removeOferta"><i class="fas fa-times"></i></button>				        			    
+				        			<button class="btn btn-circle btn-danger removeOferta"><i class="fas fa-times"></i></button>
+				        			<input type="hidden" name="produto.ofertas[${status.count}].id" value="${oferta.id}"/>				        			    
 							    </div>					    
 				        	</div>
 			        	</c:forEach>    	
@@ -370,31 +371,55 @@
 				    	</div>
 						<hr/>					
 				    </div>
-				    
-				    <div class="form-group  col-md-12">
-				    	
-				    </div>
-				    
 				</div>
 			</div>
 			
 			<div id="checkout" class="multt-form-menu">
 				<div class="header header-padrao-multt titulo-de-formulario p-0">
 					<div class="container-fluid fonte-padrao p-0">
-						<div class="d-flex justify-content-between align-items-center ">
+						<div class="d-flex justify-content-between align-items-center justify-content-between">
 							<div>
 								<h1 class="header-title titulo-index-page">
 									Checkout
 								</h1>
-								<div class="multt-titulo-line-padrao"></div>
-								<div class="multt-sub-header-title">
-									Aprenda sobre as configurações 
-									de <a href="#">checkout</a> no checkout
-								</div>
+								<div class="multt-titulo-line-padrao"></div>							
+							</div>
+							<div class="d-flex align-items-center">
+								<button class="btn btn-primary cadastrar-checkout" data-produto-id="${produto.id}"> Add Checkout <i class="fas fa-plus ml-2"></i></button>			
 							</div>
 						</div>
 					</div>
-				</div>					
+				</div>			
+				<div class="ordemBump-container">
+		    		<table class="table">
+		    			<thead>
+		    				<tr>
+			    				<th>#</th>
+			    				<th style="width:100%">Produto</th>
+			    				<th>Ações</th>
+		    				</tr>
+		    			</thead>
+		    			<tbody id="checkoutBody">
+		    			<c:if test="${not empty listaCheckouts}">
+			    			<c:forEach items="${listaCheckouts}" var="checkout">
+			    				<tr>
+				    				<td>${checkout.id}</td>
+				    				<td style="width:100%">${checkout.nome}</td>
+				    				<td class="d-flex">
+				    					<button data-id="${checkout.id}" class="btn btn-circle btn-danger removeCheckout"><i class="fas fa-times"></i></button>				    					
+									</td>
+								</tr>
+			    			</c:forEach>
+		    			</c:if>	
+		    			<c:if test="${empty listaCheckouts}">
+		    				<tr>
+							 	<td colspan="3" class="text-center">Nenhum Checkout Cadastrado</td>
+							</tr>
+		    			</c:if>	
+		    			</tbody>
+		    		</table>
+		    	</div>
+		    	<hr/>
 			</div>
 			
 			<div class="d-flex justify-content-end">

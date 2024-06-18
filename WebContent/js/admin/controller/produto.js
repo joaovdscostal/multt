@@ -54,6 +54,12 @@
 		abrirModalParaCadastroDeOrderBump(idProduto);
 	});
 	
+	$(document).on('click','.cadastrar-checkout',function(e){
+		e.preventDefault();
+		var idProduto = $(this).attr('data-produto-id')
+		abrirModalCheckout(idProduto);
+	});
+	
 	$(document).on('change','#exibirImagemBump',function(e){
 		var produtoImagem = $('#produtoBump').find('option:selected').attr('data-img')
 		
@@ -66,6 +72,17 @@
 	
 	});
 	
+	$(document).on('click','.verificar-disponibilidade-oferta',function(e){
+		var idOferta = $(this).attr('data-oferta-id');
+		verificarDisponibilidadeDaOferta(idOferta,this)
+	});
+	
+	$(document).on('click','.removeCheckout',function(e){
+		e.preventDefault();
+		var idCheckout = $(this).attr('data-id')
+		apagarCheckout(idCheckout);
+	});
+	
 	$(document).on('click','.addOferta',function(e){
 		e.preventDefault();
 		addOferta(this)
@@ -76,7 +93,6 @@
 		new Notificacao('Atenção!', 'Esta oferta será desabilitada permanentemente,deseja continuar?').dialogo().confirm(function(){
 			removeOferta(this)
 		});
-		
 	});
 	
 	$(document).on('change','#produtoBump',function(e){
@@ -99,11 +115,53 @@
 		gerarPreVisualizacaoBump();
 	});
 	
-	
-	
 	inputImages();
 	
 })();
+
+function verificarDisponibilidadeDaOferta(idOferta,elemento) {
+	new Ajax(urlPadrao + `adm/checkouts/verificar-oferta/${idOferta}/ajax`)
+	.erro(function(e){
+		new Notificacao('Erro', e.responseText).erro();
+	})
+	.sucesso(function(data){
+		if(data.retorno == false){
+			new Notificacao('Erro', "Esta oferta já está vinculada a outro checkout").erro();
+			$(elemento).prop('checked',false)
+		}
+		
+	});
+}
+
+function apagarCheckout(idCheckout) {
+	new Ajax(urlPadrao + `adm/checkouts/${idCheckout}/apagar`)
+	.erro(function(e){
+		new Notificacao('Erro', e.responseText).erro();
+	})
+	.sucesso(function(data){
+		gerarListaDeCheckouts($('#produtoId').val());
+	});
+}
+
+function abrirModalCheckout(idProduto) {
+	var modal = new Modal()
+		.ajax(new Ajax(urlPadrao + `adm/checkouts/novo/${idProduto}/modal`))
+		.ajaxSubmit(function(data) {})
+		.ajaxErro(function(e) {
+			new Notificacao('Erro', e.responseText).erro();
+		})
+		.comTitulo('Cadastro de Checkout');
+
+	modal.executarAoMostrar(function() {});
+	
+	modal.executarAoFechar(function() {
+		if(variavelPossuiValor($('#produtoId').val())){
+			gerarListaDeCheckouts($('#produtoId').val());
+		}
+	})
+	
+	modal.extragrande().mostrar();
+}
 
 function abrirModalParaCadastroRapidoDeProduto(paginateIndex) {
 	var modal = new Modal()
@@ -204,15 +262,6 @@ function gerarListaDeOrdersBump(idProduto) {
 		console.log(data)
 		var retorno = data.retorno;
 		
-		if(!variavelPossuiValor(retorno[0])){
-			$("#bumpBody").html(`
-				<tr>
-				 	<td colspan="3" class="text-center">Nenhum Bump Cadastrado</td>
-				</tr>
-			`)
-			
-		}
-		
 		var bumps = retorno.map(function(bump){
 			return `
 				<tr>
@@ -229,6 +278,52 @@ function gerarListaDeOrdersBump(idProduto) {
 		$("#bumpBody").html(`
 			${bumps}
 		`)
+		
+		if(!variavelPossuiValor(retorno[0])){
+			$("#bumpBody").html(`
+				<tr>
+				 	<td colspan="3" class="text-center">Nenhum Bump Cadastrado</td>
+				</tr>
+			`)
+			
+		}
+	});
+	
+}
+
+function gerarListaDeCheckouts(idProduto) {
+	
+	new Ajax(urlPadrao + `adm/produtos/${idProduto}/buscar-checkouts/ajax`)
+	.erro(function(e){
+		new Notificacao('Erro', e.responseText).erro();
+	})
+	.sucesso(function(data){
+		console.log(data)
+		var retorno = data.retorno;	
+		
+		var checkouts = retorno.map(function(checkout){
+			return `
+				<tr>
+    				<td>${checkout.id}</td>
+    				<td style="width:100%">${checkout.nome}</td>
+    				<td class="d-flex">
+    					<button data-id="${checkout.id}" class="btn btn-circle btn-danger removeCheckout"><i class="fas fa-times"></i></button>				    					
+					</td>
+				</tr>
+			`;
+		})
+		
+		$("#checkoutBody").html(`
+			${checkouts}
+		`)
+		
+		if(!variavelPossuiValor(retorno[0])){
+			$("#checkoutBody").html(`
+				<tr>
+				 	<td colspan="3" class="text-center">Nenhum Checkout Cadastrado</td>
+				</tr>
+			`)
+		}
 	});
 	
 }
@@ -339,15 +434,15 @@ function addOferta(el) {
 		return;
 	}
 	
-	$(btnContainer).html(`<button class="btn btn-circle btn-danger addOferta"><i class="fas fa-times"></i></i></button>`)
+	$(btnContainer).html(`<button class="btn btn-circle btn-danger removeOferta"><i class="fas fa-times"></i></i></button>`)
 	
 	$(item).after(` 
 		<div class="multt-produto-oferta row align-items-center mt-3">
     		<div class="form-group col-md-4 m-0">				       
-		        <input type="text" name="produto.ofertas[${contadorOfertas}].nome" class="form-control"/>
+		        <input type="text" name="produto.ofertas[${contadorOfertas}].nome" placeholder="Nome da Oferta" class="form-control nomeOferta"/>
 		    </div>
 		    <div class="form-group col-md-4 m-0">				        
-		        <input type="text" name="produto.ofertas[${contadorOfertas}].valor" class="form-control"/>
+		        <input type="text" name="produto.ofertas[${contadorOfertas}].valor" placeholder="Valor da Oferta" class="form-control valorOferta" alt="decimalSemZero"/>
 		    </div>
 		     <div class="form-group col-md-1 m-0 d-flex align-items-end">					    	
     			<button class="btn btn-circle btn-primary addOferta mr-3"><i class="fas fa-plus"></i></button>					        			    
@@ -356,6 +451,7 @@ function addOferta(el) {
 	`)
 	
 	contadorOfertas++
+	iniciarMeioMask();
 }
 
 function removeOferta(e) {

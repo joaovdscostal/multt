@@ -5,13 +5,14 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 
 import org.hibernate.criterion.Conjunction;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.MatchMode;
-
+import org.hibernate.criterion.Restrictions;
 
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
 import br.com.jvlabs.model.Checkout;
+import br.com.jvlabs.model.Oferta;
+import br.com.jvlabs.model.Produto;
 
 
 
@@ -28,6 +29,21 @@ public class CheckoutDao extends HibernateDao<Checkout> {
 			}
 
 		return datatableDao.carregandoParametros(conjunction).paginate();
+	}
+
+	public List<Checkout> buscarCheckoutsDoProduto(Produto produto) {
+		HibernateCriteriaDao<Checkout> criteria = createCriteria();
+		criteria.alias("ofertas");
+		criteria.add(Restrictions.in("ofertas.produto", produto));
+		List<Checkout> checkoutList = criteria.distinct().list();
+		return checkoutList;
+	}
+	
+	public Boolean verificarDisponibilidadeDeOferta(Oferta oferta) {
+		HibernateCriteriaDao<Checkout> criteria = createCriteria();
+		criteria.alias("ofertas");
+		criteria.add(Restrictions.in("ofertas.id", oferta.getId()));
+		return criteria.exists();
 	}
 
 

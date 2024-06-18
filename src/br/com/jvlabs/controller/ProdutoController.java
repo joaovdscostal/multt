@@ -15,6 +15,7 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.jvlabs.annotation.Privado;
 import br.com.jvlabs.dao.CategoriaProdutoDao;
+import br.com.jvlabs.dao.CheckoutDao;
 import br.com.jvlabs.dao.MetodoDePagamentoDao;
 import br.com.jvlabs.dao.OfertaDao;
 import br.com.jvlabs.dao.OrdemBumpDao;
@@ -23,6 +24,7 @@ import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
 import br.com.jvlabs.exception.BusinessException;
 import br.com.jvlabs.model.CategoriaProduto;
+import br.com.jvlabs.model.Checkout;
 import br.com.jvlabs.model.MetodoDePagamento;
 import br.com.jvlabs.model.Oferta;
 import br.com.jvlabs.model.OrdemBump;
@@ -42,6 +44,7 @@ public class ProdutoController extends ControllerProjeto {
 	@Inject private MetodoDePagamentoDao metodoDePagamentoDao;
 	@Inject private OfertaDao ofertaDao;
 	@Inject private OrdemBumpDao ordemBumpDao;
+	@Inject private CheckoutDao checkoutDao;
 
 	@Get("/adm/produtos") @Privado
 	public void index() {}
@@ -107,6 +110,12 @@ public class ProdutoController extends ControllerProjeto {
 		addObjetoAjax(orders);
 	}
 	
+	@Get("/adm/produtos/{produto.id}/buscar-checkouts/ajax") @Privado
+	public void buscarCheckous(Produto produto) {
+		List<Checkout> checkout = checkoutDao.buscarCheckoutsDoProduto(produto);
+		addObjetoAjax(checkout);
+	}
+	
 	@Get("/adm/produtos/{produto.id}/order-bump/modal") @Privado
 	public void criarOrderBump(Produto produto) {
 		produto = produtoDao.get(produto.getId());
@@ -114,10 +123,10 @@ public class ProdutoController extends ControllerProjeto {
 		List<Oferta> ofertas = ofertaDao.buscarOfertasDaContaPorProduto(produto);
 		
 		OrdemBump orderBump = OrdemBump.builder()
-										 .callToAction("Eu aceito esta oferta!")
-										 .titulo(produto.getNome())
-										 .descricao("adicione em sua compra!")
-										 .build();
+									   .callToAction("Eu aceito esta oferta!")
+									   .titulo(produto.getNome())
+									   .descricao("adicione em sua compra!")
+									   .build();
 		
 		result.include("produtoAtual",produto);
 		result.include("produtosList",produtos);
@@ -128,15 +137,17 @@ public class ProdutoController extends ControllerProjeto {
 	@Get("/adm/produtos/order-bump/editar/{ordemBump.id}/modal") @Privado
 	public void editarOrderBump(OrdemBump ordemBump) {
 		ordemBump = ordemBumpDao.get(ordemBump.getId());
-		Produto produto = produtoDao.get(ordemBump.pegarIdDoProduto());
+		Produto produto = produtoDao.get(ordemBump.pegarIdDoProdutoReferencia());
 		List<Produto> produtos = produtoDao.buscarProdutosDaConta(sessao.getConta());
-		List<Oferta> ofertas = ofertaDao.buscarOfertasDaContaPorProduto(produto);
+		List<Oferta> ofertas = ofertaDao.buscarOfertasDaContaPorProduto(ordemBump.getProduto());
 		
 		result.include("produtoAtual",produto);
 		result.include("produtosList",produtos);
 		result.include("ofertasList",ofertas);
 		result.include("orderBump",ordemBump);
 	}
+	
+	
 	
 	@Post("/adm/produtos/editar") @Privado
 	public void atualizar(Produto produto,List<UploadedFile> images) {
@@ -167,10 +178,13 @@ public class ProdutoController extends ControllerProjeto {
 			produto = produtoDao.get(produto.getId());
 			List<CategoriaProduto> categorias = categoriaProdutoDao.findAll();
 			List<MetodoDePagamento> metodos = metodoDePagamentoDao.findAll();
+			List<Checkout> checkouts = checkoutDao.buscarCheckoutsDoProduto(produto);
 			
+			result.include("listaCheckouts",checkouts);
 			result.include("produto", produto);
 			result.include("categorias", categorias);
 			result.include("metodosDePagamento", metodos);
+			
 		}catch (NoResultException e) {
 			addValidation("Produto nao encontrado!");
 			validator.onErrorForwardTo(this).index();

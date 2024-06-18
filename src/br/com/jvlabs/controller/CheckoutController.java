@@ -1,21 +1,26 @@
 package br.com.jvlabs.controller;
 
-import java.util.LinkedList;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.validation.Valid;
+
 import org.hibernate.HibernateException;
+
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
-import br.com.jvlabs.exception.BusinessException;
 import br.com.jvlabs.annotation.Privado;
 import br.com.jvlabs.dao.CheckoutDao;
+import br.com.jvlabs.dao.OfertaDao;
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
-import br.com.jvlabs.model.TipoUsuario;
+import br.com.jvlabs.dto.OfertaCheckoutDTO;
+import br.com.jvlabs.exception.BusinessException;
 import br.com.jvlabs.model.Checkout;
+import br.com.jvlabs.model.Oferta;
+import br.com.jvlabs.model.Produto;
 import br.com.jvlabs.service.CheckoutService;
 import br.com.jvlabs.util.GsonUtils;
 import br.com.jvlabs.util.HibernateUtil;
@@ -27,6 +32,7 @@ public class CheckoutController extends ControllerProjeto {
 
 	@Inject private CheckoutDao checkoutDao;
 	@Inject private CheckoutService checkoutService;
+	@Inject private OfertaDao ofertaDao;
 
 	@Get("/adm/checkouts") @Privado
 	public void index() {
@@ -44,8 +50,8 @@ public class CheckoutController extends ControllerProjeto {
 		}
 	}
 
-	@Post("/adm/checkouts") @Privado
-	public void criar(@Valid Checkout checkout) {
+	@Post("/adm/checkouts/") @Privado
+	public void criar(@Valid Checkout checkout,OfertaCheckoutDTO ofertaDTO) {
 		validator.onErrorForwardTo(this).novo();
 
 		try {
@@ -66,14 +72,18 @@ public class CheckoutController extends ControllerProjeto {
 			result.redirectTo(this).index();
 	}
 
-	@Post("/adm/checkouts/ajax") @Privado
-	public void criarAjax(@Valid Checkout checkout) {
+	@Post("/adm/checkouts/modal") @Privado
+	public void criarViaModal(@Valid Checkout checkout,List<OfertaCheckoutDTO> ofertasDTO) {
 
 		try {
 			HibernateUtil.beginTransaction();
-			checkout = checkoutService.cria(checkout);
+			checkout = checkoutService.criaViaProduto(checkout,ofertasDTO);
 			HibernateUtil.commit();
 		} catch (HibernateException e) {
+			HibernateUtil.rollback();
+			addErroAjax(e.getMessage());
+			return;
+		} catch (BusinessException e) {
 			HibernateUtil.rollback();
 			addErroAjax(e.getMessage());
 			return;
@@ -81,10 +91,22 @@ public class CheckoutController extends ControllerProjeto {
 
 		addObjetoAjax(checkout);
 	}
-
-	@Get("/adm/checkouts/novo") @Privado
-	public void novo() {
+	
+	@Get("/adm/checkouts/verificar-oferta/{oferta.id}/ajax") @Privado
+	public void verificarOfertaAjax(Oferta oferta) {
+		Boolean ofertaValida = checkoutDao.verificarDisponibilidadeDeOferta(oferta);
+		addObjetoAjax(!ofertaValida);
 	}
+	
+	@Get("/adm/checkouts/novo") @Privado
+	public void novo() {}
+
+	@Get("/adm/checkouts/novo/{produto.id}/modal") @Privado
+	public void novoCheckoutPage(Produto produto) {
+		List<Oferta> ofertas = ofertaDao.buscarOfertasDaContaPorProduto(produto);
+		result.include("listaOfertas",ofertas);
+	}
+	
 
 	@Post("/adm/checkouts/editar") @Privado
 	public void atualizar(Checkout checkout) {

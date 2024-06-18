@@ -1,7 +1,10 @@
 package br.com.jvlabs.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
@@ -16,8 +19,8 @@ import lombok.Setter;
 public class Checkout extends EntidadeNome implements Cloneable, EntidadeInterface{
 	private static final long serialVersionUID = 6870418303029482722L;
 
-	@OneToOne 
-	private Oferta oferta;
+	@ManyToMany 
+	private List<Oferta> ofertas;
 	
 	@Override
 	public void validarTransient() {}
@@ -28,5 +31,14 @@ public class Checkout extends EntidadeNome implements Cloneable, EntidadeInterfa
 		clube.removerId();
 		clube.setProduto(null);
 		return clube;
+	}
+
+	public void addOferta(Oferta oferta) {
+		if(this.ofertas == null) {
+			this.ofertas = new ArrayList<Oferta>();
+		}
+		
+		ofertas.add(oferta);
+		
 	}
 }

@@ -103,7 +103,7 @@ public class Produto extends EntidadeNomeAtivo implements Cloneable, EntidadeInt
 	public String pegarPrimeiraImagem() {
 		
 		if(this.imagens != null && !this.imagens.isEmpty()) {
-			return this.imagens.get(1).getNomeImagem();
+			return this.imagens.get(0).getNomeImagem();
 		}
 		
 		return null; 
