@@ -28,8 +28,8 @@
     text-align: center;
     display: block;
     float: left;
-    color: #9448AE !important;
     opacity: 0.2;
+    color: #666;
   
   }
   
@@ -40,6 +40,8 @@
   
   .slidemenu label span{
     display: block;    
+    font-size: 16px;
+    font-weight: 600;
   }
   
   .slider{
@@ -66,6 +68,7 @@
   
   .slidemenu .slide-toggle:checked + label{
     opacity: 1;
+    color: #9448AE !important; 
   }
 
   .slidemenu #slide-item-1:checked ~ .slider .bar{ margin-left: 0; }
@@ -79,7 +82,7 @@
 
 <div class="pl-4">
 	<div id="multt-menu-editar-produto">
-		   <nav class="slidemenu">
+		   <nav class="slidemenu fonte-padrao">
 	
 		      <!-- Item 1 -->
 		      <input type="radio" name="slideItem" id="slide-item-1" data-container-id="#gerais" class="slide-toggle" checked="">

@@ -1036,7 +1036,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 }
 
 .form-multt-padrao input{
-	color: rgba(60, 60, 60,0.2);
+	color: rgba(60, 60, 60);
 }
 
 .form-multt-padrao input:focus{
@@ -1047,7 +1047,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 }
 
 .form-multt-padrao textarea{
-	color: rgba(60, 60, 60,0.2);
+	color: rgba(60, 60, 60);
 }
 
 .form-multt-padrao textarea:focus{
@@ -1058,7 +1058,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 }
 
 .form-multt-padrao select{
-	color: rgba(60, 60, 60,0.2);
+	color: rgba(60, 60, 60);
 }
 
 .form-multt-padrao select:focus{
@@ -1068,19 +1068,6 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 	box-shadow: 0px 0px 10px rgba(148,72,174,1);
 }
 
-
-
-.form-multt-padrao input::-webkit-input-placeholder{
-	color: rgba(60, 60, 60,0.2);
-}
-
-.form-multt-padrao input::-moz-placeholder{
-	color: rgba(60, 60, 60,0.2);
-	opacity: 1;
-}
-.form-multt-padrao input::-ms-input-placeholder{
-	color: rgba(60, 60, 60,0.2);
-}
 
 .multt-footer-padrao{
 	padding-top: 15px;
@@ -1273,5 +1260,56 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
    }
 }
 
+.selection-card{
+        display: none;
+        transition: color 0.5s ease-in-out, 
+        border-color 0.5s ease-in-out, 
+        box-shadow 0.5s ease-in-out; 
+    }
 
+    .selection-card-label h3{
+        margin: 0px !important;
+        line-height: 1 !important;
+    }
+
+    @keyframes changeRadioColorSelection {
+        from {
+            color: black;
+            border-color: black;
+            box-shadow: none;
+            transform: scale(1);
+        }
+        to {
+            color: #9448AE;
+            border-color: #9448AE;
+            box-shadow: 0px 0px 12px 0px rgba(148,72,174,1);
+             transform: scale(1.02);
+        }
+    }
+
+    @keyframes expandBar {
+        from {
+            width: 0;
+        }
+        to {
+            width: 150px;
+        }
+    }
+
+    .multt-titulo-line-padrao{
+        border-bottom: 2px solid #9448AE;
+        width: 0px;
+    }
+
+    .selection-card:checked + .selection-card-label{
+        color: #9448AE;
+        animation: changeRadioColorSelection 0.5s forwards;
+       
+        border-color: #9448AE !important;
+        box-shadow: 0px 0px 19px 0px rgba(148,72,174,1);
+    }
+
+    .selection-card:checked + .selection-card-label .multt-titulo-line-padrao {
+        animation: expandBar 1s forwards;
+    }
 

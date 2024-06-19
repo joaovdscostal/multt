@@ -99,10 +99,16 @@ public class ProdutoController extends ControllerProjeto {
 	}
 	
 	@Get("/adm/produtos/novo") @Privado
-	public void novo() {}
+	public void novo() {
+		List<CategoriaProduto> categorias = categoriaProdutoDao.findAll();
+		result.include("categorias", categorias);
+	}
 
 	@Get("/adm/produtos/novo/modal") @Privado
-	public void novoModal() {}
+	public void novoModal() {
+		List<CategoriaProduto> categorias = categoriaProdutoDao.findAll();
+		result.include("categorias", categorias);
+	}
 	
 	@Get("/adm/produtos/{produto.id}/buscar-bumps/ajax") @Privado
 	public void buscarOrersBump(Produto produto) {
@@ -146,8 +152,6 @@ public class ProdutoController extends ControllerProjeto {
 		result.include("ofertasList",ofertas);
 		result.include("orderBump",ordemBump);
 	}
-	
-	
 	
 	@Post("/adm/produtos/editar") @Privado
 	public void atualizar(Produto produto,List<UploadedFile> images) {

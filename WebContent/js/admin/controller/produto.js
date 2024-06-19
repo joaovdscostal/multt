@@ -9,11 +9,6 @@
 	    	{ title: "Nome", data: "nome"  },
     ])
     .buttons([
-    {
-    	  title: "Clonar",
-    	  icon: "fad fa-clone",
-    	  url: urlPadrao + "adm/produtos/{id}/clonar"
-      },
       {
     	  title: "Editar",
     	  icon: "far fa-pencil-alt",
