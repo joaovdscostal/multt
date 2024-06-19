@@ -78,6 +78,10 @@
 		apagarCheckout(idCheckout);
 	});
 	
+	$(document).on('click','.selection-card-label',function(e){
+		$('#form-container-produto').show();
+	});
+	
 	$(document).on('click','.addOferta',function(e){
 		e.preventDefault();
 		addOferta(this)

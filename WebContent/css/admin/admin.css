@@ -1283,7 +1283,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
             color: #9448AE;
             border-color: #9448AE;
             box-shadow: 0px 0px 12px 0px rgba(148,72,174,1);
-             transform: scale(1.02);
+            transform: scale(1.02);
         }
     }
 
