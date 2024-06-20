@@ -20,7 +20,9 @@ import org.hibernate.annotations.Where;
 import br.com.jvlabs.dto.ImagemJsonDTO;
 import br.com.jvlabs.enumerated.TipoDeProduto;
 import br.com.jvlabs.enumerated.TipoPagamentoProduto;
+import br.com.jvlabs.util.DinheiroUtils;
 import br.com.jvlabs.util.GsonUtils;
+import br.com.jvlabs.util.Utils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -98,6 +100,10 @@ public class Produto extends EntidadeNomeAtivo implements Cloneable, EntidadeInt
 			this.imagens = new ArrayList<Imagem>();
 		}
 		
+	}
+	
+	public List<OrdemBump> listarBumps() {
+		return this.configuracao.getOrdersBump();
 	}
 	
 	public String pegarPrimeiraImagem() {

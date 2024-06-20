@@ -31,6 +31,7 @@
 			<link type="text/css" rel="stylesheet" href="${sessao.urlPadrao}js/plugins/img-upload/image-uploader.min.css">
 			<link href="${sessao.urlPadrao}css/admin/admin.css" rel="stylesheet">
 		</c:if>
+		
 		<c:if test="${ambiente != 'desenvolvimento'}">
 			<link href="${sessao.urlPadrao}css/compactado/${versao}/bibliotecas-min.css" rel="stylesheet">
 			<link rel="stylesheet" type="text/css" href="https://at.alicdn.com/t/font_o5hd5vvqpoqiwwmi.css">

@@ -9,6 +9,7 @@ import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import br.com.jvlabs.util.DinheiroUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,5 +36,9 @@ public class Oferta extends EntidadeNomeAtivo implements Cloneable, EntidadeInte
 		clube.removerId();
 		clube.setProduto(null);
 		return clube;
+	}
+	
+	public String pegarValorFormatado() {
+		return DinheiroUtils.formataBigDecimal(this.valor, 2);
 	}
 }

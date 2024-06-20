@@ -13,6 +13,7 @@ import br.com.caelum.vraptor.environment.Environment;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.jvlabs.exception.BusinessException;
 import br.com.jvlabs.model.Arquivo;
+import br.com.jvlabs.model.Checkout;
 import br.com.jvlabs.model.Conta;
 import br.com.jvlabs.model.Produto;
 
@@ -123,6 +124,14 @@ public class ArquivoServicePadrao {
 		Arquivo arquivo = Arquivo.montar(uploadedFile);
 		
 		String path = environment.get("realPath") + java.io.File.separator + "arquivos" + java.io.File.separator + "imagens";
+		
+		salvarArquivoInPath(arquivo.getNomeArquivo(), arquivo.getUploadFile().getFile(), path);
+		return arquivo.getNomeArquivo();
+	}
+
+	public String salvarBannerPara(UploadedFile uploadedFile, Checkout checkout) throws BusinessException, IOException {
+		Arquivo arquivo = Arquivo.montar(uploadedFile);		
+		String path = environment.get("realPath") + java.io.File.separator + "arquivos" + java.io.File.separator + "banners";
 		
 		salvarArquivoInPath(arquivo.getNomeArquivo(), arquivo.getUploadFile().getFile(), path);
 		return arquivo.getNomeArquivo();

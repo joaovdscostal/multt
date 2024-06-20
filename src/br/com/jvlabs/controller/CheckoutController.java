@@ -1,5 +1,6 @@
 package br.com.jvlabs.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -11,7 +12,9 @@ import org.hibernate.HibernateException;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
+import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.jvlabs.annotation.Privado;
+import br.com.jvlabs.annotation.Public;
 import br.com.jvlabs.dao.CheckoutDao;
 import br.com.jvlabs.dao.OfertaDao;
 import br.com.jvlabs.datatables.Table;
@@ -49,6 +52,12 @@ public class CheckoutController extends ControllerProjeto {
 			addErroAjax("Erro ao serializar paginate!");
 		}
 	}
+	
+	@Get("/checkout/{codigo}") @Public
+	public void checkoutPage(String codigo) {
+		Checkout checkout = checkoutDao.pegarViaCodigo(codigo);
+		result.include("checkout",checkout);
+	}
 
 	@Post("/adm/checkouts/") @Privado
 	public void criar(@Valid Checkout checkout,OfertaCheckoutDTO ofertaDTO) {
@@ -73,17 +82,21 @@ public class CheckoutController extends ControllerProjeto {
 	}
 
 	@Post("/adm/checkouts/modal") @Privado
-	public void criarViaModal(@Valid Checkout checkout,List<OfertaCheckoutDTO> ofertasDTO) {
+	public void criarViaModal(@Valid Checkout checkout,List<OfertaCheckoutDTO> ofertasDTO,UploadedFile banner) {
 
 		try {
 			HibernateUtil.beginTransaction();
-			checkout = checkoutService.criaViaProduto(checkout,ofertasDTO);
+			checkout = checkoutService.criaViaProduto(checkout,ofertasDTO,banner);
 			HibernateUtil.commit();
 		} catch (HibernateException e) {
 			HibernateUtil.rollback();
 			addErroAjax(e.getMessage());
 			return;
 		} catch (BusinessException e) {
+			HibernateUtil.rollback();
+			addErroAjax(e.getMessage());
+			return;
+		} catch (IOException e) {
 			HibernateUtil.rollback();
 			addErroAjax(e.getMessage());
 			return;

@@ -32,11 +32,24 @@
     ])
     .start();
 
-
-
-
-
-
+	$(document).on('click','.btn-multt-checkout-forma-pagamento',function(e){
+        selecionarBtnCheckout(this)
+    })
 
 })();
+
+
+ function selecionarBtnCheckout(element){
+    $('.btn-multt-checkout-forma-pagamento').removeClass('btn-checkout-selecionado');
+    $(element).addClass('btn-checkout-selecionado');
+    
+    var input = $(element).parent().find('input')
+    var campoId = $(input).attr('data-selection')
+    
+    console.log(campoId)
+    
+    $('.multt-checkout-form-pt-2').find('.row').hide()
+    $(campoId).show();
+    
+}
 

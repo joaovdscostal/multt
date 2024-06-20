@@ -26,8 +26,7 @@
 			</div>
 		</div>
 	</div>
-	<form class="m-3 validateForm load" action="${sessao.urlPadrao}adm/checkouts/modal" method="post" role="form"
-		enctype="multipart/form-data">
+	<form class="m-3 validateForm load" action="${sessao.urlPadrao}adm/checkouts/modal" method="post" role="form" enctype="multipart/form-data">
 		<%@include file="form.jsp"%>
 	</form>
 </template:admin>

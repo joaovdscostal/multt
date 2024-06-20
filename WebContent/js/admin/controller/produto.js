@@ -114,6 +114,11 @@
 		gerarPreVisualizacaoBump();
 	});
 	
+	$(document).on('change','.verificar-disponibilidade-oferta',function(e){
+		$('.verificar-disponibilidade-oferta').prop('checked',false)
+		$(this).prop('checked',true)
+	});
+		
 	inputImages();
 	
 })();

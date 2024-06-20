@@ -409,6 +409,10 @@
 				    				<td>${checkout.id}</td>
 				    				<td style="width:100%">${checkout.nome}</td>
 				    				<td class="d-flex">
+				    					<!-- <div class="mr-2">
+				    						<lable for="checkoutBannerInput" class="btn btn-circle btn-primary addBannerCheckout mr-2"><i class="fal fa-image"></i></lable>
+				    						<input type="file" id="checkoutBannerInput" style="display:none"/>
+				    					</div> -->
 				    					<button data-id="${checkout.id}" class="btn btn-circle btn-danger removeCheckout"><i class="fas fa-times"></i></button>				    					
 									</td>
 								</tr>

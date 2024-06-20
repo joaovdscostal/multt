@@ -10,9 +10,13 @@
 
 <div class="card-body card-padding">
 	<div class="form-row">
-    	<div class="form-group  col-md-12  ">
+    	<div class="form-group  col-md-6">
 	        <label for="checkoutNome" class="control-label">Nome</label>
-	        <input type="text" name="checkout.nome" id="checkoutNome" class="form-control required "  value="${checkout.nome}"    />
+	        <input type="text" name="checkout.nome" id="checkoutNome" class="form-control required"  value="${checkout.nome}"    />
+	    </div>
+	    <div class="form-group  col-md-6">
+	        <label for="checkoutBanner" class="control-label">Banner</label>
+	        <input type="file" name="banner" id="checkoutBanner" class="form-control"/>
 	    </div>
 	</div>
 	<hr/>
@@ -41,7 +45,7 @@
 	    			<c:forEach items="${listaOfertas}" var="oferta" varStatus="status">
 	    				<tr>
 							<td>
-								<input name="ofertasDTO[${status.count}].selected" type="checkbox" data-oferta-id="${oferta.id }" class="verificar-disponibilidade-oferta"/>
+								<input name="ofertasDTO[${status.count}].selected" type="checkbox" data-oferta-id="${oferta.id}" class="verificar-disponibilidade-oferta"/>
 								<input name="ofertasDTO[${status.count}].oferta.id" type="hidden" value="${oferta.id}"/>
 							</td>
 							<td>${oferta.nome}</td>
