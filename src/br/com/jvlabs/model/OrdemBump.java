@@ -41,7 +41,7 @@ public class OrdemBump extends Entidade implements Cloneable, EntidadeInterface{
 	private String descricao;
 	
 	@Type(type = "true_false")
-	private Boolean exibirImagemDoProduto;
+	private Boolean exibirImagemDoProduto = Boolean.FALSE;
 	
 	@Override
 	public void validarTransient() {}

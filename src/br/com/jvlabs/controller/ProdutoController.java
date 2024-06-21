@@ -154,12 +154,12 @@ public class ProdutoController extends ControllerProjeto {
 	}
 	
 	@Post("/adm/produtos/editar") @Privado
-	public void atualizar(Produto produto,List<UploadedFile> images) {
+	public void atualizar(Produto produto,List<UploadedFile> images,List<Long> preloaded) {
 		validator.onErrorForwardTo(this).editar(produto);
 
 		try {
 			HibernateUtil.beginTransaction();
-			produtoService.atualiza(produto,images);
+			produtoService.atualiza(produto,images,preloaded);
 			HibernateUtil.commit();
 		} catch (HibernateException e) {
 			HibernateUtil.rollback();

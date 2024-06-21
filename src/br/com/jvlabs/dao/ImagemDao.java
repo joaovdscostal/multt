@@ -6,12 +6,11 @@ import javax.enterprise.context.RequestScoped;
 
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.MatchMode;
-
 
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
 import br.com.jvlabs.model.Imagem;
+import br.com.jvlabs.model.Produto;
 
 
 
@@ -25,6 +24,12 @@ public class ImagemDao extends HibernateDao<Imagem> {
 
 
 		return datatableDao.carregandoParametros(conjunction).paginate();
+	}
+
+	public List<Imagem> buscarTodasDoProduto(Produto produto) {
+		HibernateCriteriaDao<Imagem> criteria = createCriteria();
+		criteria.add(Restrictions.eq("produto", produto));
+		return criteria.list();
 	}
 
 

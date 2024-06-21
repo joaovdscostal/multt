@@ -44,7 +44,7 @@ public class ProdutoService extends ServiceProjeto {
 		return produto;
 	}
 
-	public void atualiza(Produto produto,List<UploadedFile> images) throws BusinessException, IOException  {
+	public void atualiza(Produto produto,List<UploadedFile> images,List<Long> preload) throws BusinessException, IOException  {
 		Produto banco = produtoDao.get(produto.getId());
 		
 		List<Oferta> ofertasFront = produto.getOfertas();	
@@ -71,6 +71,7 @@ public class ProdutoService extends ServiceProjeto {
 		
 		produto = produtoDao.merge(produto);
 		
+		processarPreloadDeImagens(produto,preload);
 		cadastrarImagensParaProdutoQueExiste(produto,images);
 		
 		for(Oferta o:ofertasFront) {
@@ -88,6 +89,25 @@ public class ProdutoService extends ServiceProjeto {
 		logService.criarLog("PRODUTO-UPDATE", produto);
 	}
 	
+	private void processarPreloadDeImagens(Produto produto,List<Long> preload) {
+		List<Imagem> imagens = imagemDao.buscarTodasDoProduto(produto);
+		
+		if(imagens != null) {
+			if(preload != null && !preload.isEmpty()) {
+				for (Imagem img : imagens) {
+					if(!preload.contains(img.getId())) {
+						imagemDao.delete(img);
+					}
+				}
+			} else {
+				for (Imagem img : imagens) {
+					imagemDao.delete(img);
+				}
+			}
+		}
+		
+	}
+
 	private void cadastrarImagensParaProdutoQueExiste(Produto produto, List<UploadedFile> images) throws BusinessException, IOException {
 		produto.validarImagens();
 
@@ -101,6 +121,8 @@ public class ProdutoService extends ServiceProjeto {
 			}
 		}
 	}
+	
+	
 
 	public void apagar(Produto produto) {
 		produtoDao.delete(produto);
