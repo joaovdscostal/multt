@@ -172,4 +172,8 @@ public class Sessao implements Serializable{
 		return this.usuario != null && this.usuario.isUsuario();
 	}
 
+	public boolean temConta() {
+		return this.conta != null;
+	}
+
 }

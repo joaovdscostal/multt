@@ -11,6 +11,8 @@
 		<title>${configuracao.nome} - Administra&ccedil;&atilde;o</title>
 		<link rel="icon" type="image/png" href="${sessao.urlPadrao}img/favicon-32x32.png" sizes="32x32" />
 		<link rel="icon" type="image/png" href="${sessao.urlPadrao}img/favicon-16x16.png" sizes="16x16" />
+		<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		
 
 		<c:if test="${ambiente == 'desenvolvimento'}">
 			<link href="${sessao.urlPadrao}css/plugins/bootstrap/bootstrap-theme.css" rel="stylesheet">
@@ -26,8 +28,10 @@
 			<link href="${sessao.urlPadrao}css/plugins/flatpickr/flatpickr.min.css" rel="stylesheet">
 			<link href="${sessao.urlPadrao}css/plugins/select/bootstrap-select.min.css" rel="stylesheet">
 			<link rel="stylesheet" type="text/css" href="https://at.alicdn.com/t/font_o5hd5vvqpoqiwwmi.css">
+			<link type="text/css" rel="stylesheet" href="${sessao.urlPadrao}js/plugins/img-upload/image-uploader.min.css">
 			<link href="${sessao.urlPadrao}css/admin/admin.css" rel="stylesheet">
 		</c:if>
+		
 		<c:if test="${ambiente != 'desenvolvimento'}">
 			<link href="${sessao.urlPadrao}css/compactado/${versao}/bibliotecas-min.css" rel="stylesheet">
 			<link rel="stylesheet" type="text/css" href="https://at.alicdn.com/t/font_o5hd5vvqpoqiwwmi.css">
@@ -229,7 +233,7 @@
 		</c:if>
 		<div id="graficoDiv"></div>
 		<nav class="nav-cont-dashMenu desktop-dashboard">
-            <ul class="nav">	        
+            <ul class="nav nav-menu scrollbar-hide">	        
 		        <li class="nav-items-dashMenu ">
 		            <svg width="47" height="34" viewBox="0 0 47 34" fill="none" xmlns="http://www.w3.org/2000/svg">
 		                <g clip-path="url(#clip0_80_2797)">
@@ -274,8 +278,22 @@
 		                <path d="M33.0369 9.03711C32.2603 9.03711 31.6307 9.66673 31.6307 10.4434C31.6307 14.6512 28.2073 18.0746 23.9994 18.0746C19.7915 18.0746 16.3682 14.6512 16.3682 10.4434C16.3682 9.66673 15.7385 9.03711 14.9619 9.03711C14.1853 9.03711 13.5557 9.66673 13.5557 10.4434C13.5557 16.202 18.2407 20.8871 23.9994 20.8871C29.7582 20.8871 34.4432 16.202 34.4432 10.4434C34.4432 9.66673 33.8135 9.03711 33.0369 9.03711Z" fill="#EEEEEE"/>
 		            </svg>
 		            <a href="">Vendas</a>
+		            
 		        </li>
-		
+				
+				<c:if test="${sessao.isAdministrador()}">
+					<li class="nav-items-dashMenu ">
+						<svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+							<path d="M22 3c.53 0 1.039.211 1.414.586s.586.884.586 1.414v14c0 .53-.211 1.039-.586 1.414s-.884.586-1.414.586h-20c-.53 0-1.039-.211-1.414-.586s-.586-.884-.586-1.414v-14c0-.53.211-1.039.586-1.414s.884-.586 1.414-.586h20zm1 8h-22v8c0 .552.448 1 1 1h20c.552 0 1-.448 1-1v-8zm-15 5v1h-5v-1h5zm13-2v1h-3v-1h3zm-10 0v1h-8v-1h8zm-10-6v2h22v-2h-22zm22-1v-2c0-.552-.448-1-1-1h-20c-.552 0-1 .448-1 1v2h22z" stroke="#EEEEEE"/>
+						</svg>
+			            <a class="dropdown-toggle" data-toggle="collapse" href="#collapseFinanceiro" role="button" aria-expanded="false" aria-controls="collapseFinanceiro">Financeiro</a>
+			        </li>
+			        
+			        <div class="collapse" id="collapseFinanceiro" style="">				
+						 <a class="multt-sub-grid-link" href="${sessao.urlPadrao}adm/metodo-pagamento"><i class="fas fa-credit-card mr-2"></i>Metodos de Pagamento</a>			 
+					</div>
+				</c:if>
+				
 		        <li class="nav-items-dashMenu ">
 		            <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
 		                <path d="M18.75 43.75H31.25M18.75 43.75V33.3333M18.75 43.75H7.5C7.16848 43.75 6.85054 43.6183 6.61612 43.3839C6.3817 43.1495 6.25 42.8315 6.25 42.5V34.5833C6.25 34.2518 6.3817 33.9339 6.61612 33.6994C6.85054 33.465 7.16848 33.3333 7.5 33.3333H18.75M31.25 43.75V18.75M31.25 43.75H42.5C42.8315 43.75 43.1495 43.6183 43.3839 43.3839C43.6183 43.1495 43.75 42.8315 43.75 42.5V7.5C43.75 7.16848 43.6183 6.85054 43.3839 6.61612C43.1495 6.3817 42.8315 6.25 42.5 6.25H32.5C32.1685 6.25 31.8505 6.3817 31.6161 6.61612C31.3817 6.85054 31.25 7.16848 31.25 7.5V18.75M18.75 33.3333V20C18.75 19.6685 18.8817 19.3505 19.1161 19.1161C19.3505 18.8817 19.6685 18.75 20 18.75H31.25" stroke="#EEEEEE" stroke-width="3.125"/>
@@ -288,7 +306,7 @@
 		                <path d="M42.875 16.3318C42.8743 15.6157 42.6852 14.9124 42.3269 14.2925C41.9685 13.6725 41.4535 13.1577 40.8333 12.7997L26.5417 4.633C25.9209 4.27461 25.2168 4.08594 24.5 4.08594C23.7832 4.08594 23.0791 4.27461 22.4583 4.633L8.16667 12.7997C7.54654 13.1577 7.03146 13.6725 6.67311 14.2925C6.31476 14.9124 6.12573 15.6157 6.125 16.3318V32.6651C6.12573 33.3812 6.31476 34.0844 6.67311 34.7044C7.03146 35.3243 7.54654 35.8391 8.16667 36.1972L22.4583 44.3638C23.0791 44.7222 23.7832 44.9109 24.5 44.9109C25.2168 44.9109 25.9209 44.7222 26.5417 44.3638L40.8333 36.1972C41.4535 35.8391 41.9685 35.3243 42.3269 34.7044C42.6852 34.0844 42.8743 33.3812 42.875 32.6651V16.3318Z" stroke="#EEEEEE" stroke-width="4.08333" stroke-linecap="round" stroke-linejoin="round"/>
 		                <path d="M6.7373 14.291L24.4998 24.4993M24.4998 24.4993L42.2623 14.291M24.4998 24.4993V44.916" stroke="#EEEEEE" stroke-width="4.08333" stroke-linecap="round" stroke-linejoin="round"/>
 		            </svg>
-		            <a href="">Produtos</a>
+		            <a href="${sessao.urlPadrao}adm/produtos">Produtos</a>
 		        </li>
 		
 		        <li class="nav-items-dashMenu ">
@@ -341,7 +359,7 @@
 							 <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    ${sessao.getConta().pegarPrimeiroNome()} <i class="fas fa-caret-circle-down ml-2"></i>
 							 </a>
-							 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							 <div class="dropdown-menu dropdown-menu-dashboard" aria-labelledby="dropdownMenuLink">
 							    <a class="dropdown-item" href="${sessao.urlPadrao}adm/contas/alterar-conta">Editar Perfil</a>
 							    <a class="dropdown-item" href="${sessao.urlPadrao}adm/usuarios/${sessao.getUsuario().getId()}/senha">Alterar Senha</a>
 							    <a class="dropdown-item" href="${sessao.urlPadrao}adm/logout">Sair <i class="fas fa-sign-out ml-2"></i></a>						    
@@ -375,13 +393,33 @@
                             <div class="collapse" id="collapseExample">
                                 <div class="mb-3 mt-2 dashboard-mobile-menu-conteudo">
                                     <ul>
-                                        <li>Dashboard</li>
-                                        <li>Vendas</li>
-                                        <li>Relatório</li>
-                                        <li>Produtos</li>
-                                        <li>Links</li>
-                                        <li>Compras</li>
-                                        <li>Ver Mais</li>
+                                        <li>
+                                        	<a href="#">Dashboard</a>
+                                        </li>
+                                        <li>
+                                        	<a href="#">Vendas</a>
+                                        </li>
+                                        <li>
+                                        	<a class="dropdown-toggle" data-toggle="collapse" href="#collapseFinanceiroMobile" role="button" aria-expanded="false" aria-controls="collapseFinanceiroMobile">Financeiro</a>
+                                        	<div class="collapse" id="collapseFinanceiroMobile">				
+												 <a class="multt-sub-grid-link" href="${sessao.urlPadrao}adm/metodo-pagamento">
+												 	<i class="fas fa-credit-card mr-2"></i>Metodos de Pagamento
+												 </a>			 
+											</div>
+                                        </li>
+                                        
+                                        <li>
+                                        	<a href="#">Relatório</a>
+                                        </li>
+                                        <li>
+                                        	<a href="#">Produtos</a>
+                                        </li>
+                                        <li>
+                                        	<a href="#">Links</a>
+                                        </li>
+                                        <li>
+                                        	<a href="#">Compras</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -438,6 +476,8 @@
 
 		<script src="${sessao.urlPadrao}js/plugins/loading/js/jquery.showLoading.js"></script>
 		<script src="${sessao.urlPadrao}js/plugins/cookie/lib.js"></script>
+		
+		<script type="text/javascript" src="${sessao.urlPadrao}js/plugins/img-upload/image-uploader.min.js"></script>
 
 
 		<c:if test="${ambiente == 'desenvolvimento'}">

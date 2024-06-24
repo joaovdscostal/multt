@@ -609,13 +609,13 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
     width: 60px;
     top: 0;
     height: 100vh;
-    z-index: 100;
+
     background-color: #202020;
     overflow: hidden;
     transition: width 0.3s ease;
     cursor: pointer;
     box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.4);
-    z-index: 999999;
+    z-index: 9999;
   }
   .nav-cont-dashMenu:hover {
     width: 300px;
@@ -633,13 +633,63 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
     padding-left: 2.5rem !important;
   }
   
+  .nav-menu{
+	list-style-type: none;
+    color: white;
+    display: block !important;
+    padding-left: 2.5rem !important;
+    height: calc(100vh - 85px)!important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none;  
+    border-bottom: 1px dashed white;
+    padding-bottom: 5px;
+  }
+  
+  .nav-menu::-webkit-scrollbar {
+        width: 8px;  /* Width of the scrollbar */
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+       display: none !important;
+        width:0px;
+  }
+
+    .nav-menu::-webkit-scrollbar-track {
+        background: #f0f0f0;  /* Color of the track */
+    }
+
+    .nav-menu::-webkit-scrollbar-thumb {
+        background: #888;  /* Color of the thumb */
+        border-radius: 10px;
+    }
+
+    .nav-menu::-webkit-scrollbar-thumb:hover {
+        background: #555;  /* Color of the thumb when hovered */
+    }
+
+    /* Custom scrollbar for Firefox */
+    .nav-menu {
+        scrollbar-width: thin;  /* Makes scrollbar thinner */
+        scrollbar-color: #888 #f0f0f0;  /* thumb and track colors */
+    }
+  
   .nav:first-child {
     padding-top: 1.5rem;
   }
   
   .nav-items-dashMenu {
     font-family: 'Myanmar Khyay', sans-serif;
+    height: 35px ;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding-top: 6px;
+  }
+  
+  .nav-sub-items-dashMenu {
+    font-family: 'Myanmar Khyay', sans-serif;
     height: 35px;
+    background-color: white;
     margin-top: 25px;
     margin-bottom: 25px;
     padding-top: 6px;
@@ -670,6 +720,25 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
     font-size: 1.35em;
     white-space: nowrap;
 
+  }
+  
+  .multt-sub-grid-link{
+	 position: relative !important;
+     display: inline-block !important;
+     top: 0 !important;
+     padding-left: 12px !important;
+     padding-right: 0px !important;
+     margin-left: 0px !important;
+     margin-right: 0px !important;
+     text-decoration: none !important;
+     color: white !important;
+     font-family: 'Myanmar Khyay', sans-serif !important;
+     font-weight: 100 !important;
+     font-size: 1em !important;
+  }
+  
+  .multt-sub-grid-link:hover{
+	 color: #dea3f1 !important;
   }
   
   .nav-items-dashMenu svg {
@@ -719,7 +788,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 	  position: relative;
   }
   
-  .dropdown-menu a{
+  .menu-perfil-dashboard .dropdown-menu a{
 	 position: relative;
      display: inline-block;
      top: 0;
@@ -734,7 +803,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
      font-size: 1em;
   }
   
-  .dropdown-menu {
+  .menu-perfil-dashboard .dropdown-menu {
 	  left: 50px !important;
   }
   
@@ -787,6 +856,11 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
     color: white;
     text-align: center;
     padding: 0px !important;
+  }
+  
+  .dashboard-mobile-menu-conteudo a{
+	  color: white;
+	  text-decoration: none;
   }
 
   .dashboard-mobile-menu-conteudo li{
@@ -962,42 +1036,38 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 }
 
 .form-multt-padrao input{
-	background-color: #E6E6E6;
-	color: #9E9E9E;
-	border: none;
+	color: rgba(60, 60, 60);
 }
 
 .form-multt-padrao input:focus{
-	background-color: #E6E6E6;
-	border: none;
 	color: rgb(0, 0, 0);
+	-webkit-box-shadow: 0px 0px 10px rgba(148,72,174,1);
+	-moz-box-shadow: 0px 0px 10px rgba(148,72,174,1);
+	box-shadow: 0px 0px 10px rgba(148,72,174,1);
+}
+
+.form-multt-padrao textarea{
+	color: rgba(60, 60, 60);
+}
+
+.form-multt-padrao textarea:focus{
+	color: rgb(0, 0, 0);
+	-webkit-box-shadow: 0px 0px 10px rgba(148,72,174,1);
+	-moz-box-shadow: 0px 0px 10px rgba(148,72,174,1);
+	box-shadow: 0px 0px 10px rgba(148,72,174,1);
 }
 
 .form-multt-padrao select{
-	background-color: #E6E6E6;
-	border: none;
-	color: #9E9E9E;
+	color: rgba(60, 60, 60);
 }
 
 .form-multt-padrao select:focus{
-	background-color: #E6E6E6;
-	border: none;
 	color: rgb(0, 0, 0);
+	-webkit-box-shadow: 0px 0px 10px rgba(148,72,174,1);
+	-moz-box-shadow: 0px 0px 10px rgba(148,72,174,1);
+	box-shadow: 0px 0px 10px rgba(148,72,174,1);
 }
 
-
-
-.form-multt-padrao input::-webkit-input-placeholder{
-	color: #9E9E9E;
-}
-
-.form-multt-padrao input::-moz-placeholder{
-	color: #9E9E9E;
-	opacity: 1;
-}
-.form-multt-padrao input::-ms-input-placeholder{
-	color: #9E9E9E;
-}
 
 .multt-footer-padrao{
 	padding-top: 15px;
@@ -1059,5 +1129,187 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
 
 /* Input File CSS ................................................................................................*/
 
+/* Auxiliar Multt Form Menu CSS ................................................................................................*/
 
- 
+.container-ativo{
+	display: block !important;
+}
+
+.multt-form-menu{
+	display: none;
+}
+
+#multt-menu-editar-produto{
+	padding-top: 40px;
+}
+/* Auxiliar Multt Form Menu CSS ................................................................................................*/
+
+/* Auxiliar Multt Form List CSS ................................................................................................*/
+.lista-item-container{
+	border: 1px solid #d9d9d9;
+}
+
+.multt-aviso-vazio-padrao{
+	width: 100%;
+	text-align: center;
+}
+/* Auxiliar Multt Form List CSS ................................................................................................*/
+
+.multt-produto-ofertas-list-container{
+	border-top: 1px solid #d9d9d9;
+	border-bottom: 1px solid #d9d9d9;
+	padding: 10px; 
+}
+
+.pre-vizualizacao-order-bump{
+	border: 2px dashed gray;
+	min-height: 50px;
+	width: 100%;
+}
+
+.pre-vizualizacao-order-bump .card{
+	width: 100%;
+	max-width: 100%;
+	flex-shrink: none !important;
+}
+
+.pre-vizualizacao-order-bump .card>*{
+	flex-shrink: 1 !important;
+}
+
+.pre-vizualizacao-order-bump .img-container-bump{
+	border-top-left-radius: calc(0.5rem - 1px);
+	border-bottom-left-radius: calc(0.5rem - 1px);
+	min-width: 10%;
+	max-width: 15%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+
+.pre-vizualizacao-order-bump .container-bump{
+	border-left: 1px solid #edf2f9;
+	width: 100%;
+	flex-grow: 1;
+}
+
+.pre-vizualizacao-order-bump .container-bump .card-header{
+	border-top-left-radius: 0px;
+	background-color: gray;
+	color: white;
+	height: auto !important;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	white-space: normal;
+	word-wrap: break-word;
+}
+
+.pre-vizualizacao-order-bump .container-bump .card-body{
+	height: auto !important;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	white-space: normal;
+	word-wrap: break-word;
+}
+
+.pre-vizualizacao-order-bump .container-bump .card-header input{
+	height: 20px;
+	width: 20px;
+}
+
+@media (max-width: 550px) {
+   
+   .bump-mobile{
+	  display: block;
+	  height: 50px;
+	  width: 50px;
+   }
+   
+   .pre-vizualizacao-order-bump .img-container-bump{
+	  border: 1px solid #edf2f9 !important;
+	  border-bottom: none;
+	  min-width: 100%;
+	  max-width: unset;
+	  height: 100px;
+	  background-repeat: no-repeat;
+	  background-size: contain;
+	  background-position: center;   
+   }
+   
+   .pre-vizualizacao-order-bump .container-bump .card-header{
+		border-top-left-radius: 0px !important;
+		border-top-right-radius: 0px !important;
+	}
+   
+   .bump-desktop{
+	  display: none !important;
+	  height: 0px;
+	  width: 0px;
+   }
+}
+
+@media (min-width: 550px) {
+    .bump-mobile{
+	  display: none;
+	  height: 0px;
+	  width: 0px;
+   }
+   
+   .bump-desktop{
+	  display: block;
+   }
+}
+
+.selection-card{
+        display: none;
+        transition: color 0.5s ease-in-out, 
+        border-color 0.5s ease-in-out, 
+        box-shadow 0.5s ease-in-out; 
+    }
+
+    .selection-card-label h3{
+        margin: 0px !important;
+        line-height: 1 !important;
+    }
+
+    @keyframes changeRadioColorSelection {
+        from {
+            color: black;
+            border-color: black;
+            box-shadow: none;
+            transform: scale(1);
+        }
+        to {
+            color: #9448AE;
+            border-color: #9448AE;
+            box-shadow: 0px 0px 12px 0px rgba(148,72,174,1);
+            transform: scale(1.02);
+        }
+    }
+
+    @keyframes expandBar {
+        from {
+            width: 0;
+        }
+        to {
+            width: 150px;
+        }
+    }
+
+    .multt-titulo-line-padrao{
+        border-bottom: 2px solid #9448AE;
+        width: 0px;
+    }
+
+    .selection-card:checked + .selection-card-label{
+        color: #9448AE;
+        animation: changeRadioColorSelection 0.5s forwards;
+       
+        border-color: #9448AE !important;
+        box-shadow: 0px 0px 19px 0px rgba(148,72,174,1);
+    }
+
+    .selection-card:checked + .selection-card-label .multt-titulo-line-padrao {
+        animation: expandBar 1s forwards;
+    }
+

@@ -15,6 +15,9 @@ import br.com.caelum.vraptor.interceptor.Interceptor;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.jvlabs.enumerated.Estado;
 import br.com.jvlabs.enumerated.TipoConta;
+import br.com.jvlabs.enumerated.TipoDeProduto;
+import br.com.jvlabs.enumerated.TipoFormaPagamento;
+import br.com.jvlabs.enumerated.TipoPagamentoProduto;
 import br.com.jvlabs.model.TipoUsuario;
 import br.com.jvlabs.service.ConfiguracaoService;
 import br.com.jvlabs.util.DateUtils;
@@ -54,6 +57,9 @@ public class PutDataSessionInterceptor implements Interceptor {
 		result.include("urlArquivo", environment.get("urlPadrao") + "arquivos/");
 
 		result.include("tipoContaTipoContaList", TipoConta.values());
+		result.include("tipoTipoDeProdutoList", TipoDeProduto.values());
+		result.include("tipoPagamentoTipoPagamentoProdutoList", TipoPagamentoProduto.values());
+		result.include("portadorTipoFormaPagamentoList", TipoFormaPagamento.values());
 		result.include("estadoList", Estado.values());
 
 		if(sessao.isAdministrador()) {
