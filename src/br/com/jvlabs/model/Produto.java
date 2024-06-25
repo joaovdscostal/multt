@@ -41,6 +41,11 @@ public class Produto extends EntidadeNomeAtivo implements Cloneable, EntidadeInt
 	
 	private String emailDeSuporte;
 	
+	private String url;
+	
+	@Transient
+	private Integer qtdAlunos;
+	
 	private String paginaDeVendasExterna;
 	
 	@Enumerated(EnumType.STRING)
@@ -85,6 +90,14 @@ public class Produto extends EntidadeNomeAtivo implements Cloneable, EntidadeInt
 	public void limparListas() {
 		this.ofertas = null;
 		
+	}
+	
+	public Integer retornarQtdAlunos() {
+		if(this.qtdAlunos == null) {
+			this.qtdAlunos = 0;
+		}
+		
+		return this.qtdAlunos;
 	}
 
 	public void addOferta(Oferta ofertaPadrao) {

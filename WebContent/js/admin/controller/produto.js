@@ -26,6 +26,26 @@
     ])
     .start();   
     
+    var paginateCursos = new Paginate("produtoCursos")
+    .url(urlPadrao + "adm/produtos/json")
+    .form("produtoCursoForm")
+    .columns([
+      { title: "#", data: "id" },
+	  { title: "Nome", data: "nome"  },
+	  { title: "URL", data: "url"  },
+	  { title: "Alunos", data: "qtdAlunos"},
+    ])
+    .buttons([     
+      {
+        title: "Acessar",
+        icon: "fas fa-wrench",
+        url: urlPadrao + "adm/area-de-membros/{id}/config"   
+      },
+
+
+    ])
+    .start();   
+    
     $(document).on('click','.editarBump',function(e){
 		e.preventDefault();
 		var idOrderBump = $(this).attr('data-id');

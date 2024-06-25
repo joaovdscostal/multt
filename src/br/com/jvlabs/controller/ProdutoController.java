@@ -17,6 +17,7 @@ import br.com.jvlabs.annotation.Privado;
 import br.com.jvlabs.dao.CategoriaProdutoDao;
 import br.com.jvlabs.dao.CheckoutDao;
 import br.com.jvlabs.dao.MetodoDePagamentoDao;
+import br.com.jvlabs.dao.ModuloDao;
 import br.com.jvlabs.dao.OfertaDao;
 import br.com.jvlabs.dao.OrdemBumpDao;
 import br.com.jvlabs.dao.ProdutoDao;
@@ -26,6 +27,7 @@ import br.com.jvlabs.exception.BusinessException;
 import br.com.jvlabs.model.CategoriaProduto;
 import br.com.jvlabs.model.Checkout;
 import br.com.jvlabs.model.MetodoDePagamento;
+import br.com.jvlabs.model.Modulo;
 import br.com.jvlabs.model.Oferta;
 import br.com.jvlabs.model.OrdemBump;
 import br.com.jvlabs.model.Produto;
@@ -45,9 +47,30 @@ public class ProdutoController extends ControllerProjeto {
 	@Inject private OfertaDao ofertaDao;
 	@Inject private OrdemBumpDao ordemBumpDao;
 	@Inject private CheckoutDao checkoutDao;
+	@Inject private ModuloDao moduloDao;
 
 	@Get("/adm/produtos") @Privado
 	public void index() {}
+	
+	@Get("/adm/area-de-membros") @Privado
+	public void areaDeMembros() {
+		List<Produto> produtos = produtoDao.findAll();
+		
+		for(Produto p: produtos) {
+			p.retornarQtdAlunos();
+		}
+		
+		result.include("produtos", produtos);
+	}
+	
+	@Get("/adm/area-de-membros/{produto.id}/config") @Privado
+	public void areaDeMembrosConfig(Produto produto) {
+		produto = produtoDao.get(produto.getId());
+		List<Modulo> modulos = moduloDao.buscarModulosDoProduto(produto);
+		
+		result.include("modulos", modulos);
+		result.include("produto", produto);
+	}
 
 	@Get("/adm/produtos/json") @Privado
 	public void paginate(Table datatable) {
