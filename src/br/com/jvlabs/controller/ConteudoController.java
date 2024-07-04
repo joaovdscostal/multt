@@ -1,21 +1,22 @@
 package br.com.jvlabs.controller;
 
-import java.util.LinkedList;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.validation.Valid;
+
 import org.hibernate.HibernateException;
+
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
-import br.com.jvlabs.exception.BusinessException;
 import br.com.jvlabs.annotation.Privado;
 import br.com.jvlabs.dao.ConteudoDao;
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
-import br.com.jvlabs.model.TipoUsuario;
 import br.com.jvlabs.model.Conteudo;
+import br.com.jvlabs.model.Modulo;
 import br.com.jvlabs.service.ConteudoService;
 import br.com.jvlabs.util.GsonUtils;
 import br.com.jvlabs.util.HibernateUtil;
@@ -45,12 +46,12 @@ public class ConteudoController extends ControllerProjeto {
 	}
 
 	@Post("/adm/conteudos") @Privado
-	public void criar(@Valid Conteudo conteudo) {
-		validator.onErrorForwardTo(this).novo();
+	public void criar(@Valid Conteudo conteudo,Modulo modulo) {
+		validator.onErrorForwardTo(this).novo(modulo);
 
 		try {
 			HibernateUtil.beginTransaction();
-			conteudoService.cria(conteudo);
+			conteudoService.cria(conteudo,modulo);
 			HibernateUtil.commit();
 		} catch (HibernateException e) {
 			HibernateUtil.rollback();
@@ -61,29 +62,14 @@ public class ConteudoController extends ControllerProjeto {
 		addMessage("Conteudo criado com sucesso!");
 
 		if(temFlagNovo())
-			result.redirectTo(this).novo();
+			result.redirectTo(this).novo(modulo);
 		else
 			result.redirectTo(this).index();
 	}
 
-	@Post("/adm/conteudos/ajax") @Privado
-	public void criarAjax(@Valid Conteudo conteudo) {
-
-		try {
-			HibernateUtil.beginTransaction();
-			conteudo = conteudoService.cria(conteudo);
-			HibernateUtil.commit();
-		} catch (HibernateException e) {
-			HibernateUtil.rollback();
-			addErroAjax(e.getMessage());
-			return;
-		}
-
-		addObjetoAjax(conteudo);
-	}
-
 	@Get("/adm/conteudos/novo") @Privado
-	public void novo() {
+	public void novo(Modulo modulo) {
+		result.include("modulo",modulo);
 	}
 
 	@Post("/adm/conteudos/editar") @Privado

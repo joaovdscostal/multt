@@ -1,21 +1,23 @@
 package br.com.jvlabs.controller;
 
-import java.util.LinkedList;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.validation.Valid;
+
 import org.hibernate.HibernateException;
+
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
-import br.com.jvlabs.exception.BusinessException;
 import br.com.jvlabs.annotation.Privado;
 import br.com.jvlabs.dao.ModuloDao;
+import br.com.jvlabs.dao.ProdutoDao;
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
-import br.com.jvlabs.model.TipoUsuario;
 import br.com.jvlabs.model.Modulo;
+import br.com.jvlabs.model.Produto;
 import br.com.jvlabs.service.ModuloService;
 import br.com.jvlabs.util.GsonUtils;
 import br.com.jvlabs.util.HibernateUtil;
@@ -27,6 +29,7 @@ public class ModuloController extends ControllerProjeto {
 
 	@Inject private ModuloDao moduloDao;
 	@Inject private ModuloService moduloService;
+	@Inject private ProdutoDao produtoDao;
 
 	@Get("/adm/modulos") @Privado
 	public void index() {
@@ -81,9 +84,21 @@ public class ModuloController extends ControllerProjeto {
 
 		addObjetoAjax(modulo);
 	}
-
+	
+	@Get("/adm/modulos/{produto.id}/template") @Privado
+	public void buscarParaTemplate(Produto produto) {
+		produto = produtoDao.get(produto.getId());
+		List<Modulo> modulos = moduloDao.buscarModulosDoProduto(produto);	
+		addObjetoAjaxRecursive(modulos,"conteudos");
+	}
+	
 	@Get("/adm/modulos/novo") @Privado
-	public void novo() {
+	public void novo() {}
+
+	@Get("/adm/modulos/novo/modal") @Privado
+	public void novoModal(Long produtoId) {
+		Produto produto = produtoDao.get(produtoId);
+		result.include("produto",produto);
 	}
 
 	@Post("/adm/modulos/editar") @Privado

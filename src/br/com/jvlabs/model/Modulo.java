@@ -1,5 +1,6 @@
 package br.com.jvlabs.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -30,6 +31,8 @@ public class Modulo extends EntidadeNomeAtivo implements Cloneable, EntidadeInte
 	
 	@OneToMany
 	private List<Turma> turmas;
+	
+	private Boolean permitirTodasAsTurmas;
 
 	@Override
 	public void validarTransient() {}
@@ -39,5 +42,14 @@ public class Modulo extends EntidadeNomeAtivo implements Cloneable, EntidadeInte
 		Modulo modulo = (Modulo) super.clone();
 		modulo.removerId();
 		return modulo;
+	}
+
+	public void addConteudo(Conteudo conteudo) {
+		if(this.conteudos == null) {
+			this.conteudos = new ArrayList<>();
+		}
+		
+		this.conteudos.add(conteudo);
+		
 	}
 }

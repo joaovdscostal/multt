@@ -13,20 +13,21 @@
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="${sessao.urlPadrao}adm">Home</a></li>
-									<li class="breadcrumb-item"><a href="${sessao.urlPadrao}adm/conteudos">Conteudos</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Novo conteudo</li>
+									<li class="breadcrumb-item"><a href="${sessao.urlPadrao}adm/turmas">Turmas</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Nova turma</li>
 								</ol>
 							</nav>
 						</h6>
 						<h1 class="header-title">
-							Novo conteudo
+							Nova turma
 						</h1>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<form class="m-3 validateForm load" action="${sessao.urlPadrao}adm/conteudos" method="post" role="form" enctype="multipart/form-data">
+	<form class="m-3 validateForm load" action="${sessao.urlPadrao}adm/turmas" method="post" role="form"
+		enctype="multipart/form-data">
 		<%@include file="form.jsp"%>
 	</form>
 </template:admin>

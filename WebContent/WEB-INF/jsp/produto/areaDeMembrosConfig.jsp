@@ -29,6 +29,24 @@
     max-width: 500px;
     overflow: hidden;
   }
+  
+  @media (max-width: 550px) {
+	      .slidemenu{	    
+		    max-width: 90vw;
+		  }		
+		  
+		  .slidemenu label span{
+		    display: block;    
+		    font-size: 12px;
+		    font-weight: 600;
+		  }
+		  
+	}
+  
+  .mult-area-membros-container{
+  	padding-left: 10px;
+  	padding-right: 10px;
+  }
 
   .slidemenu #slide-item-1:checked ~ .slider .bar{ margin-left: 0; }
   .slidemenu #slide-item-2:checked ~ .slider .bar{ margin-left: 25%; }
@@ -39,21 +57,22 @@
 
 
 
-<div class="pl-4">
+<div class="mult-area-membros-container">
 	
 	<div id="multt-menu-editar-produto">
 	   <nav class="slidemenu fonte-padrao">	
-	      <input type="radio" name="slideItem" id="slide-item-1" data-container-id="#conteudo" class="slide-toggle" checked>
-	      <label for="slide-item-1"><span>Conteúdo</span></label>
+	   		
+	   	  <input type="radio" name="slideItem" id="slide-item-1"  data-container-id="#turmas" class="slide-toggle" checked>
+	      <label for="slide-item-1"><span>Turmas</span></label>
 	      
 	      <input type="radio" name="slideItem" id="slide-item-2"  data-container-id="#alunos" class="slide-toggle">
 	      <label for="slide-item-2"><span>Alunos</span></label>
-	      
-	      <input type="radio" name="slideItem" id="slide-item-3"  data-container-id="#turmas" class="slide-toggle">
-	      <label for="slide-item-3"><span>Turmas</span></label>
+	   
+	      <input type="radio" name="slideItem" id="slide-item-3" data-container-id="#conteudo" class="slide-toggle" >
+	      <label for="slide-item-3"><span>Conteúdo</span></label>
 	      
 	      <input type="radio" name="slideItem" id="slide-item-4"  data-container-id="#config" class="slide-toggle">
-	      <label for="slide-item-4"><span>Configurações</span></label>
+	      <label for="slide-item-4"><span>Config</span></label>
 
 	      <div class="slider">
 	          <div class="bar"></div>
@@ -79,71 +98,40 @@
 			</div>
 		</div>
 		
-		<div id="conteudo" class="multt-form-menu container-ativo">		
+		<div id="turmas" class="multt-form-menu container-ativo">			
+	   		<div clas="multt-container-escolas">
+	   			<hr/>
+	   				<div class="d-flex justify-content-between align-items-center">
+			   			<h3 class="header-title titulo-index-page">
+							Turmas
+						</h3>
+						<div>
+							<button class="btn btn-circle btn-primary add-turma"> <i class="fas fa-plus"></i> </button>
+						</div>
+					</div>
+				<hr/>
+				<div id="table-responsive turmas-container">
+					<table class="table table-nowrap" id="turmaDatatableMembros"></table>
+				</div> 
+	   		</div>
+		</div>	
+		
+		<div id="conteudo" class="multt-form-menu ">		
 	   		<div clas="multt-container-cursos row">
 	   			<hr/>
 	   				<div class="d-flex justify-content-between align-items-center">
 		   				<h3 class="header-title titulo-index-page"> Módulos </h3>
 		   				<div>
-			   				<button class="btn btn-circle btn-primary"> <i class="fas fa-plus"></i> </button>
-			   				<button class="btn btn-circle btn-primary"> <i class="far fa-trash-alt"></i> </button>
+			   				<button class="btn btn-circle btn-primary add-modulo"> <i class="fas fa-plus"></i> </button>
+			   				<button class="btn btn-circle btn-danger"> <i class="far fa-trash-alt"></i> </button>
 			   				<!-- <button class="btn btn-circle btn-primary"> <i class="fas fa-compress"></i> </button>
 			   				<button class="btn btn-circle btn-primary"> <i class="fas fa-expand"></i> </button>
 			   				<button class="btn btn-circle btn-primary"> <i class="fas fa-cloud-upload"></i> </button>		   				
 			   				<button class="btn btn-circle btn-primary"> <i class="far fa-eye"></i> </button> -->
 		   				</div>					
 	   				</div>
-		   			
-				<hr/>
-	   			<div class="col-md-12">
-	   				<div class="accordion" id="accordionExample">
-					  <div class="card">
-					    <div class="card-header" id="headingOne" style="background-color:#d2d6dc">
-				    		<div style="width:100%" class="d-flex justify-content-between align-items-center">
-				          		<h3><i class="fas fa-bars mr-2"></i><input type="checkbox" class="mr-2"/> M1</h3>					          		
-				          	</div>
-					      	<h2 class="mb-0">
-					      		
-						        <a href="#" class="btn btn-circle btn-light mr-2" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-						          		<i class="far fa-expand"></i>
-						        </a>
-						        
-						        <!-- <a href="#" class="btn btn-circle btn-light mr-2" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-						          		<i class="far fa-compress"></i>
-						        </a> -->
-						        
-						        <a href="#" class="btn btn-primary" type="button">
-						          	Conteúdo <i class="far fa-plus ml-2"></i>
-						        </a>
-					      	</h2>
-					    </div>
-					
-					    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-					      <div class="card-body">
-					      	<table class="table">
-					      		<tbody>
-					      			<tr>     				
-					      				<td style="width:100%">		      				
-						      				<i class="fas fa-bars mr-2"></i>
-						      				<input type="checkbox" class="mr-2"/> Nome 
-					      				</td>
-					      				<td> <h4><span class="badge badge-success">Publicado</span></h4> </td>
-					      				<td class="d-flex"> 
-					      					<button class="btn btn-circle btn-secondary mr-2"> <i class="fal fa-pencil-alt"></i> </button>
-					      					<button class="btn btn-circle btn-danger"> <i class="fas fa-times"></i> </button> 
-					      				</td>
-					      			</tr>	
-					      			
-					      			
-					      					      			
-					      		</tbody>
-					      	</table>
-					      </div>
-					    </div>
-					  </div>
-					  					  
-					</div>
-	   			</div>	   			
+				<hr/>			
+				<div id="modulos-container"></div>															
 	   		</div>
 		</div>
 			

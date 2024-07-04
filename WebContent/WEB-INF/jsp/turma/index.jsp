@@ -44,8 +44,7 @@
 			</div>
 			<div class="col-12">
 				<div class="table-responsive">
-					<table class="table table-nowrap" id="turmaDatatable">
-					</table>
+					<table class="table table-nowrap" id="turmaDatatable"></table>
 				</div>
 			</div>
 		</div>

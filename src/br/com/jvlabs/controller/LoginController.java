@@ -17,7 +17,6 @@ import br.com.jvlabs.service.LoginService;
 import br.com.jvlabs.service.UsuarioService;
 import br.com.jvlabs.util.HibernateUtil;
 
-
 @Controller
 public class LoginController extends br.com.jvlabs.controller.ControllerProjeto{
 
@@ -62,7 +61,7 @@ public class LoginController extends br.com.jvlabs.controller.ControllerProjeto{
 		}
 
 		if(sessao.possuiUrlContinuacao() && !sessao.possuiUrlContinuacaoParaLogin())
-			result.redirectTo(sessao.getUrlContinuacao());
+			result.redirectTo(sessao.getUrlContinuacao());	
 		else {
 			result.redirectTo(IndexController.class).admin();
 		}

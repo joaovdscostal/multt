@@ -17,20 +17,20 @@ import br.com.jvlabs.annotation.Privado;
 import br.com.jvlabs.dao.CategoriaProdutoDao;
 import br.com.jvlabs.dao.CheckoutDao;
 import br.com.jvlabs.dao.MetodoDePagamentoDao;
-import br.com.jvlabs.dao.ModuloDao;
 import br.com.jvlabs.dao.OfertaDao;
 import br.com.jvlabs.dao.OrdemBumpDao;
 import br.com.jvlabs.dao.ProdutoDao;
+import br.com.jvlabs.dao.TurmaDao;
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
 import br.com.jvlabs.exception.BusinessException;
 import br.com.jvlabs.model.CategoriaProduto;
 import br.com.jvlabs.model.Checkout;
 import br.com.jvlabs.model.MetodoDePagamento;
-import br.com.jvlabs.model.Modulo;
 import br.com.jvlabs.model.Oferta;
 import br.com.jvlabs.model.OrdemBump;
 import br.com.jvlabs.model.Produto;
+import br.com.jvlabs.model.Turma;
 import br.com.jvlabs.service.ProdutoService;
 import br.com.jvlabs.util.GsonUtils;
 import br.com.jvlabs.util.HibernateUtil;
@@ -47,7 +47,7 @@ public class ProdutoController extends ControllerProjeto {
 	@Inject private OfertaDao ofertaDao;
 	@Inject private OrdemBumpDao ordemBumpDao;
 	@Inject private CheckoutDao checkoutDao;
-	@Inject private ModuloDao moduloDao;
+	@Inject private TurmaDao turmaDao;
 
 	@Get("/adm/produtos") @Privado
 	public void index() {}
@@ -66,9 +66,9 @@ public class ProdutoController extends ControllerProjeto {
 	@Get("/adm/area-de-membros/{produto.id}/config") @Privado
 	public void areaDeMembrosConfig(Produto produto) {
 		produto = produtoDao.get(produto.getId());
-		List<Modulo> modulos = moduloDao.buscarModulosDoProduto(produto);
+		Boolean temTurma = turmaDao.existeTurmaComProduto(produto);
 		
-		result.include("modulos", modulos);
+		result.include("temTurma", temTurma);
 		result.include("produto", produto);
 	}
 

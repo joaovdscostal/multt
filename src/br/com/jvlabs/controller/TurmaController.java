@@ -1,20 +1,22 @@
 package br.com.jvlabs.controller;
 
-import java.util.LinkedList;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.validation.Valid;
+
 import org.hibernate.HibernateException;
+
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
-import br.com.jvlabs.exception.BusinessException;
 import br.com.jvlabs.annotation.Privado;
+import br.com.jvlabs.dao.ProdutoDao;
 import br.com.jvlabs.dao.TurmaDao;
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
-import br.com.jvlabs.model.TipoUsuario;
+import br.com.jvlabs.model.Produto;
 import br.com.jvlabs.model.Turma;
 import br.com.jvlabs.service.TurmaService;
 import br.com.jvlabs.util.GsonUtils;
@@ -27,6 +29,7 @@ public class TurmaController extends ControllerProjeto {
 
 	@Inject private TurmaDao turmaDao;
 	@Inject private TurmaService turmaService;
+	@Inject private ProdutoDao produtoDao;
 
 	@Get("/adm/turmas") @Privado
 	public void index() {
@@ -81,9 +84,20 @@ public class TurmaController extends ControllerProjeto {
 
 		addObjetoAjax(turma);
 	}
-
+	
 	@Get("/adm/turmas/novo") @Privado
-	public void novo() {
+	public void novo() {}
+	
+	@Get("/adm/turmas/lista") @Privado
+	public void listaTurmas() {
+		List<Turma> turmas = turmaDao.findAll();
+		addObjetoAjax(turmas);
+	}
+	
+	@Get("/adm/turmas/novo/modal") @Privado
+	public void novoModal(Produto produto) {
+		produto = produtoDao.get(produto.getId());
+		result.include("produto",produto);
 	}
 
 	@Post("/adm/turmas/editar") @Privado

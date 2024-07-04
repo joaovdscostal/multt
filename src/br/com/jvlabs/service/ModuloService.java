@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 import br.com.jvlabs.dao.ModuloDao;
+import br.com.jvlabs.model.Conteudo;
 import br.com.jvlabs.model.Modulo;
 
 @RequestScoped
@@ -14,8 +15,15 @@ public class ModuloService extends ServiceProjeto {
 	private ModuloDao moduloDao;
 
 	public Modulo cria(Modulo modulo) {
-
-
+		Integer ordem = moduloDao.pegarUltimoNumeroGeradoParardem();
+		
+		if(ordem == null) {
+			ordem = 0;
+		} else {
+			ordem++;
+		}
+		
+		modulo.setOrdem(ordem);
 		modulo = moduloDao.merge(modulo);
 		logService.criarLog("MODULO-CREATE", modulo);
 		return modulo;
@@ -48,6 +56,12 @@ public class ModuloService extends ServiceProjeto {
 			dado.setOrdem(ordem);
 			moduloDao.merge(dado);
 		}
+	}
+
+	public void inserirConteudo(Modulo modulo, Conteudo conteudo) {
+		Modulo banco = moduloDao.get(modulo.getId());
+		banco.addConteudo(conteudo);
+		moduloDao.merge(banco);
 	}
 
 }

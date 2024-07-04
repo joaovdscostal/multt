@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
@@ -22,8 +23,11 @@ public class Turma extends Entidade implements Cloneable, EntidadeInterface{
 
 	private BigDecimal valor;
 	
-	@OneToMany
+	@ManyToMany
 	private List<Oferta> ofertas;
+	
+	@OneToOne
+	private Produto produto;
 
 	@Override
 	public void validarTransient() {}

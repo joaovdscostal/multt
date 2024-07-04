@@ -5,15 +5,14 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 
 import org.hibernate.criterion.Conjunction;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.MatchMode;
-
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
 import br.com.jvlabs.model.Modulo;
-import br.com.jvlabs.model.Oferta;
 import br.com.jvlabs.model.Produto;
 
 
@@ -36,9 +35,13 @@ public class ModuloDao extends HibernateDao<Modulo> {
 	public List<Modulo> buscarModulosDoProduto(Produto produto) {
 		HibernateCriteriaDao<Modulo> criteria = createCriteria();
 		criteria.add(Restrictions.eq("produto", produto));
-		return criteria.list();
+		return criteria.ordenandoPor(Order.desc("ordem")).list();
 	}
 
-
+	public Integer pegarUltimoNumeroGeradoParardem() {
+		HibernateCriteriaDao<Modulo> criteria = createCriteria();
+	    Integer maxOrdem = criteria.inteiro(Projections.max("ordem"));
+		return maxOrdem;
+	}
 
 }

@@ -21,8 +21,6 @@
         confirm: true,
         confirmMessage: "Deseja excluir este(a) produto?",
       },
-
-
     ])
     .start();   
     
@@ -41,10 +39,37 @@
         icon: "fas fa-wrench",
         url: urlPadrao + "adm/area-de-membros/{id}/config"   
       },
-
-
     ])
     .start();   
+    
+     var paginateTurmas = new Paginate("turmaDatatableMembros")
+    .url(urlPadrao + "adm/turmas/json")
+    .form("turmaFormMembros")
+    .columns([
+  		{ title: "#", data: "id" },
+    	{ title: "Valor", data: "valor"  },
+    ])
+    .buttons([
+        {
+    	    title: "Clonar",
+    	    icon: "fad fa-clone",
+    	    url: urlPadrao + "adm/turmas/{id}/clonar"
+        },
+        {
+    	    title: "Editar",
+    	    icon: "far fa-pencil-alt",
+    	    url: urlPadrao + "adm/turmas/{id}/editar"
+        },
+        {
+	        title: "Remover",
+	        icon: "far fa-trash",
+	        url: urlPadrao + "adm/turmas/{id}/apagar",
+	        confirm: true,
+	        confirmMessage: "Deseja excluir este(a) turma?",
+	        warning: true
+        },
+    ])
+    .start();
     
     $(document).on('click','.editarBump',function(e){
 		e.preventDefault();
@@ -138,10 +163,59 @@
 		$('.verificar-disponibilidade-oferta').prop('checked',false)
 		$(this).prop('checked',true)
 	});
+	
+	$(document).on('click','.add-modulo',function(e){
+		e.preventDefault();
+		abrirModalParaCadastroRapidoDeModulo();
+	});
+	
+	$(document).on('click','.add-turma',function(e){
+		e.preventDefault();
+		abrirModalParaCadastroRapidoDeTurma(paginateTurmas);
+	});
+	
+	$(document).on('click','.add-conteudo',function(e){
+		e.preventDefault();
+		var modId = $('.add-conteudo').attr('data-mod-id');
+		abrirModalParaCadastroRapidoDeConteudo(modId);
+	});
+	
+	$(document).on('change','#conteudoTipoliberacao',function(e){
+		var tipo = $(this).val();
+		console.log(tipo)
+		
+		$('.liberacao-conteudo').hide();
+		
+		if(tipo == 'POR_DIAS_APOS_COMPRA'){
+			$('#dias-apos-liberacao').show();
+		} 
+		
+		if(tipo == 'POR_DATA'){
+			$('#data-liberacao').show();
+		} 
+		
+	});
 		
 	inputImages();
-	
+	gerarModulos()
 })();
+
+function gerarModulos() {
+	if ($("#modulos-container").length) {
+		var id = $("#produtoId").val();
+
+		new Ajax(urlPadrao + `adm/modulos/${id}/template`)
+		.sucesso(function(data) {
+			console.log(data)
+			
+			var dataTemplate = { dados: data.retorno };
+			var template = $.templates("#ModuloTemplate");
+			var htmlTemplate = template.render(dataTemplate);
+
+			$("#modulos-container").html(htmlTemplate);
+		});
+	}
+}
 
 function verificarDisponibilidadeDaOferta(idOferta,elemento) {
 	new Ajax(urlPadrao + `adm/checkouts/verificar-oferta/${idOferta}/ajax`)
@@ -184,6 +258,51 @@ function abrirModalCheckout(idProduto) {
 		}
 	})
 	
+	modal.extragrande().mostrar();
+}
+
+function abrirModalParaCadastroRapidoDeTurma(paginateTurmas) {
+	var produtoId = $('#produtoId').val();
+	var modal = new Modal()
+	.ajax(new Ajax(urlPadrao + `adm/turmas/novo/modal?produto.id=${produtoId}`))
+	.ajaxSubmit(function(data) {
+		paginateTurmas.start();
+	})
+	.ajaxErro(function(e) {
+		new Notificacao('Erro', e.responseText).erro();
+	})
+	.comTitulo('Cadastro de Módulo');
+
+	modal.executarAoMostrar(function() {});
+	modal.medio().mostrar();
+}
+
+function abrirModalParaCadastroRapidoDeModulo() {
+	var produtoId = $('#produtoId').val();
+	var modal = new Modal()
+	.ajax(new Ajax(urlPadrao + `adm/modulos/novo/modal?produtoId=${produtoId}`))
+	.ajaxSubmit(function(data) {})
+	.ajaxErro(function(e) {
+		new Notificacao('Erro', e.responseText).erro();
+	})
+	.comTitulo('Cadastro de Módulo');
+
+	modal.executarAoMostrar(function() {});
+	modal.medio().mostrar();
+}
+
+function abrirModalParaCadastroRapidoDeConteudo(modId) {
+	console.log(modId)
+	
+	var modal = new Modal()
+	.ajax(new Ajax(urlPadrao + `adm/conteudos/novo?modulo.id=${modId}`))
+	.ajaxSubmit(function(data) {})
+	.ajaxErro(function(e) {
+		new Notificacao('Erro', e.responseText).erro();
+	})
+	.comTitulo('Cadastro de Conteúdo');
+
+	modal.executarAoMostrar(function() {});
 	modal.extragrande().mostrar();
 }
 

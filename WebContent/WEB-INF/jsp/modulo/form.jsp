@@ -1,65 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-
-
-
-
 <c:if test="${not empty modulo.id}">
     <input type="hidden" name="modulo.id" value="${modulo.id}" />
-
-		<input type="hidden" name="modulo.ordem" value="${modulo.ordem}" />
-
+	<input type="hidden" name="modulo.ordem" value="${modulo.ordem}" />
 </c:if>
 
+<c:if test="${not empty produto.id}">
+	<input type="hidden" name="modulo.produto.id" value="${produto.id}" />
+</c:if>
 
 <div class="card-body card-padding">
 
-
-
-	<div class="form-row">
-
-
-
-		    			    <div class="form-group  col-md-12  ">
-			        <label for="moduloNome" class="control-label">Nome</label>
-			        <input type="text" name="modulo.nome" id="moduloNome" class="form-control required "  value="${modulo.nome}"    />
-			    </div>
-
-
-
-
-		    			    <div class="form-group  col-md-12  ">
-			        <label for="moduloOrdem" class="control-label">Ordem</label>
-			        <input type="text" name="modulo.ordem" id="moduloOrdem" class="form-control required " alt="numero" value="${modulo.ordem}"    />
-			    </div>
-
-
-
-
-		    
-
-
-
-		    
-
-
-
-		    
+	<div class="header header-padrao-multt titulo-de-formulario pt-0">
+		<div class="container-fluid fonte-padrao p-0">
+			<div class="d-flex justify-content-between align-items-center ">
+				<div>
+					<h2 class="header-title titulo-index-page">
+						Novo Módulo
+					</h2>
+					<div class="multt-titulo-line-padrao"></div> 			
+				</div>
+			</div>
+		</div>
 	</div>
-
-
-
-
-		    <div class="form-group custom-control custom-switch">
-		        <input name="modulo.ativo" type="checkbox" class="custom-control-input " id="moduloAtivo"
-		         	<c:if test="${empty modulo.ativo || modulo.ativo == true}">checked="checked"</c:if> >
-		        <label class="custom-control-label" for="moduloAtivo">Ativo?</label>
-		    </div>
-
+	
+	<div class="form-row">
+    	<div class="form-group col-md-12">
+	        <label for="moduloNome" class="control-label">Nome</label>
+	        <input type="text" name="modulo.nome" id="moduloNome" class="form-control required"  value="${modulo.nome}"/>
+	    </div>        
+	</div>
+	<hr/>
+	<div class="header header-padrao-multt titulo-de-formulario pt-0">
+		<div class="container-fluid fonte-padrao p-0">
+			<div class="d-flex justify-content-between align-items-center ">
+				<div>
+					<h2 class="header-title titulo-index-page">
+						Turmas Liberadas
+					</h2>
+					<div class="multt-titulo-line-padrao"></div> 			
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="turmas-modulo-container">
+    	<div class="todas-as-turmas-select-item-modulo">
+	       <input type="checkbox" id="todasAsTurmas"/>
+	       <label for="todasAsTurmas" class="control-label">
+	       		<div class="select-turma-item-btn">
+	       			Todas as Turmas
+	       		</div>
+	       </label>
+	    </div>	        
+	</div>
+	<hr/>
+    <div class="form-group custom-control custom-switch">
+        <input name="modulo.ativo" type="checkbox" class="custom-control-input " id="moduloAtivo"
+         	<c:if test="${empty modulo.ativo || modulo.ativo == true}">checked="checked"</c:if> >
+        <label class="custom-control-label" for="moduloAtivo">Ativo?</label>
+    </div>
 
     <div class="form-group">
         <c:if test="${empty modulo.id}">

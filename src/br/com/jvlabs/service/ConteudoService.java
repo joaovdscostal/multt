@@ -1,22 +1,26 @@
 package br.com.jvlabs.service;
 
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import java.util.List;
 
 import br.com.jvlabs.dao.ConteudoDao;
 import br.com.jvlabs.model.Conteudo;
+import br.com.jvlabs.model.Modulo;
 
 @RequestScoped
 public class ConteudoService extends ServiceProjeto {
 
-	@Inject
-	private ConteudoDao conteudoDao;
-
-	public Conteudo cria(Conteudo conteudo) {
-
+	@Inject private ConteudoDao conteudoDao;
+	@Inject private ModuloService moduloService;
+	
+	public Conteudo cria(Conteudo conteudo,Modulo modulo) {
+		
 
 		conteudo = conteudoDao.merge(conteudo);
+		moduloService.inserirConteudo(modulo,conteudo);
+		
 		logService.criarLog("CONTEUDO-CREATE", conteudo);
 		return conteudo;
 	}
