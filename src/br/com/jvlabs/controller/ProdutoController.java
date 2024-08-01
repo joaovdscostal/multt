@@ -20,6 +20,7 @@ import br.com.jvlabs.dao.MetodoDePagamentoDao;
 import br.com.jvlabs.dao.OfertaDao;
 import br.com.jvlabs.dao.OrdemBumpDao;
 import br.com.jvlabs.dao.ProdutoDao;
+import br.com.jvlabs.dao.TurmaDao;
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
 import br.com.jvlabs.exception.BusinessException;
@@ -29,6 +30,7 @@ import br.com.jvlabs.model.MetodoDePagamento;
 import br.com.jvlabs.model.Oferta;
 import br.com.jvlabs.model.OrdemBump;
 import br.com.jvlabs.model.Produto;
+import br.com.jvlabs.model.Turma;
 import br.com.jvlabs.service.ProdutoService;
 import br.com.jvlabs.util.GsonUtils;
 import br.com.jvlabs.util.HibernateUtil;
@@ -45,9 +47,30 @@ public class ProdutoController extends ControllerProjeto {
 	@Inject private OfertaDao ofertaDao;
 	@Inject private OrdemBumpDao ordemBumpDao;
 	@Inject private CheckoutDao checkoutDao;
+	@Inject private TurmaDao turmaDao;
 
 	@Get("/adm/produtos") @Privado
 	public void index() {}
+	
+	@Get("/adm/area-de-membros") @Privado
+	public void areaDeMembros() {
+		List<Produto> produtos = produtoDao.findAll();
+		
+		for(Produto p: produtos) {
+			p.retornarQtdAlunos();
+		}
+		
+		result.include("produtos", produtos);
+	}
+	
+	@Get("/adm/area-de-membros/{produto.id}/config") @Privado
+	public void areaDeMembrosConfig(Produto produto) {
+		produto = produtoDao.get(produto.getId());
+		Boolean temTurma = turmaDao.existeTurmaComProduto(produto);
+		
+		result.include("temTurma", temTurma);
+		result.include("produto", produto);
+	}
 
 	@Get("/adm/produtos/json") @Privado
 	public void paginate(Table datatable) {

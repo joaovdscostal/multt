@@ -41,6 +41,19 @@ public class HibernateCriteriaDao<T> {
 				criteria.addOrder(order);
 			}
 		}
+	
+	
+	}
+	
+	public Integer inteiro(Projection projection) {
+		setProjection(projection);
+
+		Object object = criteria.uniqueResult();
+
+		if(object == null)
+			return 0;
+
+		return (Integer) object;
 	}
 
 	public HibernateCriteriaDao<T> add(Criterion criterion) {

@@ -30,8 +30,7 @@ public class OfertaController extends ControllerProjeto {
 	@Inject private OfertaService ofertaService;
 
 	@Get("/adm/ofertas") @Privado
-	public void index() {
-	}
+	public void index() {}
 
 	@Get("/adm/ofertas/json") @Privado
 	public void paginate(Table datatable) {

@@ -5,17 +5,13 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 
 import org.hibernate.criterion.Conjunction;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
 import br.com.jvlabs.model.Conta;
 import br.com.jvlabs.model.Produto;
-
-
-
 
 @RequestScoped
 public class ProdutoDao extends HibernateDao<Produto> {

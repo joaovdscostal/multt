@@ -8,13 +8,14 @@
 
 <!--Inicio Menu Slide Produto ........................................................................................ -->
 <style>
-
-  clear{
-    clear: both;
-  }
-  
-  .slide-toggle{
-    display: none;
+ 
+  .slidemenu label{
+    width: 33.333333%;
+    text-align: center;
+    display: block;
+    float: left;
+    opacity: 0.2;
+    color: #666; 
   }
   
   .slidemenu{
@@ -23,58 +24,16 @@
     overflow: hidden;
   }
   
-  .slidemenu label{
-    width: 33.333333%;
-    text-align: center;
-    display: block;
-    float: left;
-    opacity: 0.2;
-    color: #666;
-  
-  }
-  
-  .slidemenu label:hover{
-    cursor: pointer;
-    color: #666;
-  }
-  
-  .slidemenu label span{
-    display: block;    
-    font-size: 16px;
-    font-weight: 600;
-  }
-  
-  .slider{
-    width: 100%;
-    height: 5px;
-    display: block;
-    background: #ccc;
-    border-radius: 5px;
-    margin-top: 23px;
-  }
-  
   .slider .bar{
     width: 33.333333%;
     height: 5px;
     background: #9448AE;
     border-radius: 5px;
   }
-  
-  .slidemenu label, .slider .bar {
-    transition: all 500ms ease-in-out;
-    -webkit-transition: all 300ms ease-in-out;
-    -moz-transition: all 300ms ease-in-out;
-  }
-  
-  .slidemenu .slide-toggle:checked + label{
-    opacity: 1;
-    color: #9448AE !important; 
-  }
 
   .slidemenu #slide-item-1:checked ~ .slider .bar{ margin-left: 0; }
   .slidemenu #slide-item-2:checked ~ .slider .bar{ margin-left: 33.333333%; }
   .slidemenu #slide-item-3:checked ~ .slider .bar{ margin-left: 66.666666% }
-  /*.slidemenu #slide-item-4:checked ~ .slider .bar{ margin-left: 75%; }*/
 </style>
 <!--Fim Menu Slide Produto ........................................................................................... -->
 

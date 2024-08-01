@@ -14,3 +14,10 @@ br.com.jvlabs.model.OrdemBump
 br.com.jvlabs.model.CondicaoDePagamento
 
 br.com.jvlabs.model.Checkout
+
+br.com.jvlabs.model.Turma
+br.com.jvlabs.model.Matricula
+br.com.jvlabs.model.HistoricoMatricula
+br.com.jvlabs.model.Modulo
+br.com.jvlabs.model.Conteudo
+br.com.jvlabs.model.Progresso
