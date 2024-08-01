@@ -9,14 +9,14 @@
 <!--Inicio Menu Slide Produto ........................................................................................ -->
 <style>
   .slider .bar{
-    width: 25%;
+    width: 33.3%;
     height: 5px;
     background: #9448AE;
     border-radius: 5px;
   }
   
   .slidemenu label{
-    width: 25%;
+    width: 33.3%;
     text-align: center;
     display: block;
     float: left;
@@ -49,9 +49,9 @@
   }
 
   .slidemenu #slide-item-1:checked ~ .slider .bar{ margin-left: 0; }
-  .slidemenu #slide-item-2:checked ~ .slider .bar{ margin-left: 25%; }
-  .slidemenu #slide-item-3:checked ~ .slider .bar{ margin-left: 50%; }
-  .slidemenu #slide-item-4:checked ~ .slider .bar{ margin-left: 75%; }
+  .slidemenu #slide-item-2:checked ~ .slider .bar{ margin-left: 33.3%; }
+  .slidemenu #slide-item-3:checked ~ .slider .bar{ margin-left: 66.6%; }
+  /*.slidemenu #slide-item-4:checked ~ .slider .bar{ margin-left: 75%; }*/
 </style>
 <!--Fim Menu Slide Produto ........................................................................................... -->
 
@@ -71,8 +71,8 @@
 	      <input type="radio" name="slideItem" id="slide-item-3" data-container-id="#conteudo" class="slide-toggle" >
 	      <label for="slide-item-3"><span>Conteúdo</span></label>
 	      
-	      <input type="radio" name="slideItem" id="slide-item-4"  data-container-id="#config" class="slide-toggle">
-	      <label for="slide-item-4"><span>Config</span></label>
+	      <!-- <input type="radio" name="slideItem" id="slide-item-4"  data-container-id="#config" class="slide-toggle">
+	      <label for="slide-item-4"><span>Config</span></label> -->
 
 	      <div class="slider">
 	          <div class="bar"></div>
@@ -101,17 +101,103 @@
 		<div id="turmas" class="multt-form-menu container-ativo">			
 	   		<div clas="multt-container-escolas">
 	   			<hr/>
-	   				<div class="d-flex justify-content-between align-items-center">
-			   			<h3 class="header-title titulo-index-page">
-							Turmas
-						</h3>
-						<div>
-							<button class="btn btn-circle btn-primary add-turma"> <i class="fas fa-plus"></i> </button>
+   				<div class="d-flex justify-content-between align-items-center">
+		   			<h3 class="header-title titulo-index-page">
+						Turmas
+					</h3>
+					<div>
+						<button class="btn btn-circle btn-primary add-turma"> <i class="fas fa-plus"></i> </button>
+					</div>
+				</div>
+				<hr/>
+				<div class="table-responsive" id="turmas-container">
+					<table class="table table-nowrap" id="turmaDatatableMembros"></table>
+				</div> 
+	   		</div>
+		</div>	
+		
+		<div id="alunos" class="multt-form-menu">			
+	   		<div clas="multt-container-escolas">
+	   			<hr/>
+   				<div class="d-flex justify-content-between align-items-center">
+		   			<h3 class="header-title titulo-index-page">
+						Alunos
+					</h3>
+					<div>
+						<button class="btn btn-circle btn-primary add-matricula"> <i class="fas fa-plus"></i> </button>
+					</div>
+				</div>
+				<hr/>
+				<div class="row">
+					<div class="col-12 col-lg-4">
+						<div class="card card-multt">
+							<div class="card-body">
+								<div class="row align-items-center">
+									<div class="col">
+										<h6 class="text-uppercase mb-2">Número de Alunos</h6>
+										<span class="h2 mb-0 text-primary" id="totalAlunos"></span>
+									</div>
+									<div class="col-auto">
+										<span class="h2 fal fas fa-users mb-0"></span>
+									</div>
+									<div class="col-12 mt-3 text-left">
+										<span class="h2 mb-0" id="alunoQuantidade">1</span>
+									</div>
+									<div class="col-12 text-left">
+										<p style="font-size: 10px" class="m-0"> Alunos Matriculados </p>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
+					
+					<div class="col-12 col-lg-4">
+						<div class="card card-multt">
+							<div class="card-body">
+								<div class="row align-items-center">
+									<div class="col">
+										<h6 class="text-uppercase mb-2">Progressão</h6>
+										<span class="h2 mb-0 text-primary" id="alunosMediaProgressao"></span>
+									</div>
+									<div class="col-auto">
+										<span class="h2 fal fas fa-tasks mb-0"></span>
+									</div>
+									<div class="col-12 mt-3 text-left">
+										<span class="h2 mb-0" id="alunoProgressao"><fmt:formatNumber minFractionDigits="2" value = "20" />%</span>
+									</div>
+									<div class="col-12 text-left">
+										<p style="font-size: 10px" class="m-0"> Média de Progressão </p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-12 col-lg-4">
+						<div class="card card-multt">
+							<div class="card-body">
+								<div class="row align-items-center">
+									<div class="col">
+										<h6 class="text-uppercase mb-2">Conclusão</h6>
+										<span class="h2 mb-0 text-primary" id="alunosProgressaoConcluidos"></span>
+									</div>
+									<div class="col-auto">
+										<span class="h2 fal fas fa-check-circle mb-0"></span>
+									</div>
+									<div class="col-12 mt-3 text-left">
+										<span class="h2 mb-0" id="alunoProgressaoConcluido"><fmt:formatNumber minFractionDigits="2" value = "20"/>%</span>
+									</div>
+									<div class="col-12 text-left">
+										<p style="font-size: 10px" class="m-0"> Concluíram o Curso </p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>						
+				</div>
 				<hr/>
-				<div id="table-responsive turmas-container">
-					<table class="table table-nowrap" id="turmaDatatableMembros"></table>
+				<div class="table-responsive" id="alunos-container">
+					<table class="table table-nowrap" id="alunosDatatableMembros"></table>
 				</div> 
 	   		</div>
 		</div>	
@@ -131,7 +217,7 @@
 		   				</div>					
 	   				</div>
 				<hr/>			
-				<div id="modulos-container"></div>															
+				<div class="container-responsive" id="modulos-container"></div>															
 	   		</div>
 		</div>
 			

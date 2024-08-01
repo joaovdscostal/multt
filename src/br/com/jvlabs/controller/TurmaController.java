@@ -16,6 +16,7 @@ import br.com.jvlabs.dao.ProdutoDao;
 import br.com.jvlabs.dao.TurmaDao;
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
+import br.com.jvlabs.exception.BusinessException;
 import br.com.jvlabs.model.Produto;
 import br.com.jvlabs.model.Turma;
 import br.com.jvlabs.service.TurmaService;
@@ -32,7 +33,22 @@ public class TurmaController extends ControllerProjeto {
 	@Inject private ProdutoDao produtoDao;
 
 	@Get("/adm/turmas") @Privado
-	public void index() {
+	public void index() {}
+	
+	@Get("/adm/modulos/turmas/produto/{produto.id}/possui-turmas/ajax") @Privado
+	public void possuiTurmas(Produto produto) {
+		try {
+			Boolean possuiTurma = turmaService.existeTurmaParaProduto(produto);
+			
+			if(possuiTurma == true) {
+				addObjetoAjax(possuiTurma);
+			} else {
+				addErroAjax("Cadastre ao menos uma turma antes de cadastrar os módulos");
+			}
+			
+		} catch (Exception e) {
+			addErroAjax("Erro ao verificar se produto possui turmas");
+		}
 	}
 
 	@Get("/adm/turmas/json") @Privado
@@ -40,6 +56,18 @@ public class TurmaController extends ControllerProjeto {
 		try {
 			datatable.filters(request);
 			TableResponse<Turma> response = turmaDao.paginate(datatable);
+			String retorno = new GsonUtils().padrao().toJson(response);
+			addPlainAjax(retorno);
+		} catch (StackOverflowError e) {
+			addErroAjax("Erro ao serializar paginate!");
+		}
+	}
+	
+	@Get("/adm/turmas/{produto.id}/json") @Privado
+	public void paginate(Table datatable,Produto produto) {
+		try {
+			datatable.filters(request);
+			TableResponse<Turma> response = turmaDao.paginateComProduto(datatable,produto);
 			String retorno = new GsonUtils().padrao().toJson(response);
 			addPlainAjax(retorno);
 		} catch (StackOverflowError e) {
@@ -126,6 +154,19 @@ public class TurmaController extends ControllerProjeto {
 			validator.onErrorForwardTo(this).index();
 		}
 	}
+	
+	@Get("/adm/turmas/{turma.id}/editar/modal") @Privado
+	public void editarModal(Turma turma) {
+		try {
+			turma = turmaDao.get(turma.getId());
+			Produto produto = produtoDao.get(turma.getProduto().getId());
+			result.include("produto",produto);
+			result.include("turma", turma);	
+		}catch (NoResultException e) {
+			addValidation("Turma nao encontrada!");
+			validator.onErrorForwardTo(this).index();
+		}
+	}
 
 	@Get("/adm/turmas/{turma.id}/apagar") @Privado
 	public void apagar(Turma turma) {
@@ -138,10 +179,35 @@ public class TurmaController extends ControllerProjeto {
 			HibernateUtil.rollback();
 			addLogAndSendToErrorPage(e, "TurmaController.apagar");
 			return;
+		} catch (BusinessException e) {
+			HibernateUtil.rollback();
+			addValidation(e.getMessage());
+			return;
 		}
 
 		addMessage("Turma removida com sucesso!");
 		result.redirectTo(this).index();
+	}
+	
+	@Post("/adm/turmas/{turma.id}/apagar/ajax") @Privado
+	public void apagarAjax(Turma turma) {
+
+		try {
+			HibernateUtil.beginTransaction();
+			turmaService.apagar(turma);
+			HibernateUtil.commit();
+		} catch (HibernateException e) {
+			HibernateUtil.rollback();
+			addErroAjax(e.getMessage());
+			return;
+		} catch (BusinessException e) {
+			HibernateUtil.rollback();
+			addErroAjax(e.getMessage());
+			return;
+		}
+		
+		addObjetoAjax("Turma excluída com sucesso");
+		return;
 	}
 
 	@Get("/adm/turmas/{turma.id}/clonar") @Privado
@@ -162,6 +228,26 @@ public class TurmaController extends ControllerProjeto {
 
 		addMessage("Turma clonada com sucesso!");
 		result.redirectTo(this).editar(turma);
+	}
+	
+	@Post("/adm/turmas/{turma.id}/clonar/ajax") @Privado
+	public void clonarAjax(Turma turma) {
+
+		try {
+			HibernateUtil.beginTransaction();
+			turma = turmaService.clonar(turma);
+			HibernateUtil.commit();
+		} catch (HibernateException e) {
+			HibernateUtil.rollback();
+			addLogAndSendToErrorPage(e, "TurmaController.apagar");
+			return;
+		} catch (CloneNotSupportedException e) {
+			HibernateUtil.rollback();
+			addValidation("N&atilde;o foi poss&iacute;vel clonar a turma" + e.getMessage());
+			return;
+		}
+
+		addObjetoAjax("Turma clonada com sucesso");
 	}
 
 

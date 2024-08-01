@@ -216,6 +216,10 @@ public class Usuario extends EntidadeNomeAtivo {
 		return this.tipo != null && this.tipo.isUsuario();
 	}
 
+	public boolean possuiTipo() {
+		return this.tipo != null;
+	}
+
 
 
 

@@ -47,15 +47,18 @@ public class UsuarioService extends ServiceProjeto {
 		usuario.setEmail(email);
 		usuario.setLogin(email);
 		usuario.setAtivo(true);
-		usuario.setTipo(TipoUsuario.USUARIO);
-
+		
+		if(!usuario.possuiTipo()) {
+			usuario.setTipo(TipoUsuario.USUARIO);
+		}
+		
 		if(usuarioDao.existeUsuarioComLogin(usuario.getLogin()))
 			throw new BusinessException("Ja existe um usuario com esse login!");
 
 		Usuario usuarioBanco = usuarioDao.merge(usuario);
 
 		if(logService != null)
-			logService.criarLog("USUARIO-CREATE", usuario);
+			logService.criarLog("USUARIO-CREATE", usuarioBanco);
 
 		return usuarioBanco;
 	}

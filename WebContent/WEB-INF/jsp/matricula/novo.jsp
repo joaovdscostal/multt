@@ -26,7 +26,7 @@
 			</div>
 		</div>
 	</div>
-	<form class="m-3 validateForm load" action="${sessao.urlPadrao}adm/matriculas" method="post" role="form"
+	<form class="m-3 validateForm load" action="${sessao.urlPadrao}adm/matriculas/ajax" method="post" role="form"
 		enctype="multipart/form-data">
 		<%@include file="form.jsp"%>
 	</form>

@@ -37,21 +37,21 @@
 			<label for="conteudoTipoliberacao" class="control-label"> Tipo de Liberação</label>
 			<select name="conteudo.tipoLiberacao" class="form-control required " data-toggle="select" id="conteudoTipoliberacao">
 				<c:forEach items="${tipoLiberacaoTipoLiberacaoList}" var="tipoLiberacao">
-					<option value="${tipoLiberacao}" ${conteudo.tipoLiberacao==tipoLiberacao ? 'selected' : ''} >
+					<option value="${tipoLiberacao}" ${conteudo.tipoLiberacao == tipoLiberacao ? 'selected' : ''} >
 							${tipoLiberacao.descricao}
 					</option>
 				</c:forEach>
 			</select>
 		</div>
 		
-    	<div class="form-group col-md-6 liberacao-conteudo" id="dias-apos-liberacao" style="display:none">
+    	<div class="form-group col-md-6 liberacao-conteudo" id="dias-apos-liberacao" ${not empty conteudo.id and not empty conteudo.diasApos ? '' : 'style="display:none"'}>
 	        <label for="conteudoDiasapos" class="control-label"> Dias Após Compra</label>
 	        <input type="text" name="conteudo.diasApos" id="conteudoDiasapos" class="form-control" alt="numero" value="${conteudo.diasApos}"/>
 	    </div>
 	    
-	    <div class="form-group col-md-6 liberacao-conteudo" id="data-liberacao" style="display:none">
+	    <div class="form-group col-md-6 liberacao-conteudo" id="data-liberacao" ${not empty conteudo.id and not empty conteudo.data ? '' : 'style="display:none"'}>
 	        <label for="conteudoData" class="control-label"> Data </label>
-	        <input type="text" name="conteudo.data" id="conteudoData" class="form-control"/>
+	        <input type="text" name="conteudo.data" id="conteudoData" alt="date" class="form-control custom-date" value="<fmt:formatDate value="${conteudo.data}" pattern="dd/MM/yyyy"/>"/>
 	    </div>
 
 	</div>

@@ -4,7 +4,7 @@
 <%@taglib prefix="template" tagdir="/WEB-INF/tags" %>
 
 <template:admin>
-	<form class="m-3 validateForm load" action="${sessao.urlPadrao}adm/turmas" method="post" role="form"
+	<form class="m-3 validateForm load" action="${sessao.urlPadrao}adm/turmas/editar" method="post" role="form"
 		enctype="multipart/form-data">
 		<%@include file="form.jsp"%>
 	</form>

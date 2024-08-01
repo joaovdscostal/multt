@@ -89,7 +89,7 @@ public class ConteudoController extends ControllerProjeto {
 		result.redirectTo(this).index();
 	}
 
-	@Get("/adm/conteudos/{conteudo.id}/editar") @Privado
+	@Get("/adm/conteudos/{conteudo.id}/editar/modal") @Privado
 	public void editar(Conteudo conteudo) {
 		try {
 			result.include("conteudo", conteudoDao.get(conteudo.getId()));

@@ -14,10 +14,13 @@ import br.com.caelum.vraptor.Post;
 import br.com.jvlabs.annotation.Privado;
 import br.com.jvlabs.dao.ModuloDao;
 import br.com.jvlabs.dao.ProdutoDao;
+import br.com.jvlabs.dao.TurmaDao;
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
+import br.com.jvlabs.exception.BusinessException;
 import br.com.jvlabs.model.Modulo;
 import br.com.jvlabs.model.Produto;
+import br.com.jvlabs.model.Turma;
 import br.com.jvlabs.service.ModuloService;
 import br.com.jvlabs.util.GsonUtils;
 import br.com.jvlabs.util.HibernateUtil;
@@ -30,6 +33,7 @@ public class ModuloController extends ControllerProjeto {
 	@Inject private ModuloDao moduloDao;
 	@Inject private ModuloService moduloService;
 	@Inject private ProdutoDao produtoDao;
+	@Inject private TurmaDao turmaDao;
 
 	@Get("/adm/modulos") @Privado
 	public void index() {
@@ -57,7 +61,11 @@ public class ModuloController extends ControllerProjeto {
 			HibernateUtil.commit();
 		} catch (HibernateException e) {
 			HibernateUtil.rollback();
-			addLogAndSendToErrorPage(e, "ModuloController.criar");
+			addErroAjax(e.getMessage());
+			return;
+		} catch (BusinessException e) {
+			HibernateUtil.rollback();
+			addErroAjax(e.getMessage());
 			return;
 		}
 
@@ -67,22 +75,6 @@ public class ModuloController extends ControllerProjeto {
 			result.redirectTo(this).novo();
 		else
 			result.redirectTo(this).index();
-	}
-
-	@Post("/adm/modulos/ajax") @Privado
-	public void criarAjax(@Valid Modulo modulo) {
-
-		try {
-			HibernateUtil.beginTransaction();
-			modulo = moduloService.cria(modulo);
-			HibernateUtil.commit();
-		} catch (HibernateException e) {
-			HibernateUtil.rollback();
-			addErroAjax(e.getMessage());
-			return;
-		}
-
-		addObjetoAjax(modulo);
 	}
 	
 	@Get("/adm/modulos/{produto.id}/template") @Privado
@@ -98,7 +90,19 @@ public class ModuloController extends ControllerProjeto {
 	@Get("/adm/modulos/novo/modal") @Privado
 	public void novoModal(Long produtoId) {
 		Produto produto = produtoDao.get(produtoId);
+		List<Turma> turmasDoProduto = turmaDao.buscarTurmasDoProduto(produto);
+		
+		result.include("turmasDoProduto",turmasDoProduto);
 		result.include("produto",produto);
+	}
+	
+	@Get("/adm/modulos/editar/{modulo.id}/modal") @Privado
+	public void editarModal(Modulo modulo) {
+		modulo = moduloDao.get(modulo.getId());
+		List<Turma> turmasDoProduto = turmaDao.buscarTurmasDoProduto(modulo.getProduto());
+		
+		result.include("turmasDoProduto",turmasDoProduto);
+		result.include("modulo",modulo);
 	}
 
 	@Post("/adm/modulos/editar") @Privado
@@ -111,7 +115,12 @@ public class ModuloController extends ControllerProjeto {
 			HibernateUtil.commit();
 		} catch (HibernateException e) {
 			HibernateUtil.rollback();
-			addLogAndSendToErrorPage(e, "ModuloController.atualizar");
+			addErroAjax(e.getMessage());
+			return;
+		} catch (BusinessException e) {
+			HibernateUtil.rollback();
+			addErroAjax(e.getMessage());
+			return;
 		}
 
 		addMessage("Modulo atualizado com sucesso!");

@@ -6,7 +6,8 @@
     .form("turmaForm")
     .columns([
       { title: "#", data: "id" },
-	    	{ title: "Valor", data: "valor"  },
+      { title: "Nome", data: "nome" },
+	  { title: "Valor", data: "valor",width:'100%'}
     ])
     .buttons([
     {

@@ -14,6 +14,7 @@ import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
 import br.com.jvlabs.model.Modulo;
 import br.com.jvlabs.model.Produto;
+import br.com.jvlabs.model.Turma;
 
 
 
@@ -43,5 +44,14 @@ public class ModuloDao extends HibernateDao<Modulo> {
 	    Integer maxOrdem = criteria.inteiro(Projections.max("ordem"));
 		return maxOrdem;
 	}
+
+	public Boolean possuiModuloComTurma(Turma turma) {
+		HibernateCriteriaDao<Modulo> criteria = createCriteria();
+		criteria.alias("turmas");
+		criteria.add(Restrictions.in("turmas.id", turma.getId()));
+		return criteria.exists();
+	}
+
+	
 
 }

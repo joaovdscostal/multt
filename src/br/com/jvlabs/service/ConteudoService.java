@@ -16,8 +16,8 @@ public class ConteudoService extends ServiceProjeto {
 	@Inject private ModuloService moduloService;
 	
 	public Conteudo cria(Conteudo conteudo,Modulo modulo) {
+		conteudo.tratarTipoLiberacao();
 		
-
 		conteudo = conteudoDao.merge(conteudo);
 		moduloService.inserirConteudo(modulo,conteudo);
 		
@@ -25,8 +25,9 @@ public class ConteudoService extends ServiceProjeto {
 		return conteudo;
 	}
 
-	public void atualiza(Conteudo conteudo)  {
-		conteudoDao.update(conteudo);
+	public void atualiza(Conteudo conteudo) {
+		conteudo.tratarTipoLiberacao();
+		conteudoDao.merge(conteudo);
 		logService.criarLog("CONTEUDO-UPDATE", conteudo);
 	}
 

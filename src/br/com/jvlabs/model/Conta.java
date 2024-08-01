@@ -11,12 +11,15 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import br.com.jvlabs.enumerated.TipoConta;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "CONTA")
 @SQLDelete(sql = "UPDATE CONTA SET excluido = 'T' WHERE id = ?", check = ResultCheckStyle.COUNT)
-@Where(clause = "excluido <> 'T'") @Getter @Setter
+@Where(clause = "excluido <> 'T'") @Getter @Setter @Builder @AllArgsConstructor @NoArgsConstructor
 public class Conta extends EntidadeNome implements Cloneable, EntidadeInterface{
 
 	private static final long serialVersionUID = 6870418303029482722L;

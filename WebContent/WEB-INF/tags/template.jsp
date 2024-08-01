@@ -13,8 +13,8 @@
 						          	<i class="far fa-expand"></i>
 						        </a>
 
-								<a href="#" class="btn btn-circle btn-primary mr-2" type="button" data-toggle="collapse" data-target="#modCollapse-{{:ordem}}" aria-expanded="true" aria-controls="modCollapse-{{:ordem}}">
-						          	<i class="fal fa-pencil-alt"></i>
+								<a class="btn btn-circle btn-primary mr-2 editar-modulo" data-mod-id="{{:id}}" type="button">
+						          	<i class="fal fa-pencil-alt" style="color:white"></i>
 						        </a>					    
 						        
 						        <a href="#" class="btn btn-circle btn-primary add-conteudo" data-mod-id="{{:id}}" type="button">
@@ -34,8 +34,8 @@
 					      				</td>
 					      				<td> <h4><span class="badge badge-success">Publicado</span></h4> </td>
 					      				<td class="d-flex"> 
-					      					<button class="btn btn-circle btn-secondary mr-2"> <i class="fal fa-pencil-alt"></i> </button>
-					      					<button class="btn btn-circle btn-danger"> <i class="fas fa-times"></i> </button> 
+					      					<button class="btn btn-circle btn-secondary mr-2 editar-conteudo" data-id-conteudo="{{:id}}"> <i class="fal fa-pencil-alt"></i> </button>
+					      					<button class="btn btn-circle btn-danger excluir-conteudo" data-id-conteudo="{{:id}}"> <i class="fas fa-times"></i> </button> 
 					      				</td>
 					      			</tr>	
 					      			{{/for}}					      					      								      							      					      			

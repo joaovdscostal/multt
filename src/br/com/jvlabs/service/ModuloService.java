@@ -1,21 +1,30 @@
 package br.com.jvlabs.service;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
 import br.com.jvlabs.dao.ModuloDao;
+import br.com.jvlabs.dao.TurmaDao;
+import br.com.jvlabs.exception.BusinessException;
 import br.com.jvlabs.model.Conteudo;
 import br.com.jvlabs.model.Modulo;
+import br.com.jvlabs.model.Turma;
 
 @RequestScoped
 public class ModuloService extends ServiceProjeto {
 
-	@Inject
-	private ModuloDao moduloDao;
+	@Inject private ModuloDao moduloDao;
+	@Inject private TurmaDao turmaDao;
+	
 
-	public Modulo cria(Modulo modulo) {
+	public Modulo cria(Modulo modulo) throws BusinessException {	
 		Integer ordem = moduloDao.pegarUltimoNumeroGeradoParardem();
+		
+		if(!modulo.possuiTurmas()) {
+			throw new BusinessException("O módulo deve possuir ao menos uma turma");
+		}
 		
 		if(ordem == null) {
 			ordem = 0;
@@ -29,8 +38,15 @@ public class ModuloService extends ServiceProjeto {
 		return modulo;
 	}
 
-	public void atualiza(Modulo modulo)  {
-		moduloDao.update(modulo);
+	public void atualiza(Modulo modulo) throws BusinessException  {
+		Modulo banco = moduloDao.get(modulo.getId());
+		modulo.setProduto(banco.getProduto());
+		
+		if(!modulo.possuiTurmas()) {
+			throw new BusinessException("O módulo deve possuir ao menos uma turma");
+		}
+		
+		moduloDao.merge(modulo);
 		logService.criarLog("MODULO-UPDATE", modulo);
 	}
 
@@ -62,6 +78,11 @@ public class ModuloService extends ServiceProjeto {
 		Modulo banco = moduloDao.get(modulo.getId());
 		banco.addConteudo(conteudo);
 		moduloDao.merge(banco);
+	}
+
+	public Boolean possuiModuloComTurma(Turma turma) {
+		turma = turmaDao.get(turma.getId());
+		return moduloDao.possuiModuloComTurma(turma);
 	}
 
 }

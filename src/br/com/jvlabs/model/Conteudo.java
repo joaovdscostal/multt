@@ -65,4 +65,20 @@ public class Conteudo extends Entidade implements Cloneable, EntidadeInterface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public void tratarTipoLiberacao() {
+		if(this.tipoLiberacao.equals(TipoLiberacao.POR_DATA)) {
+			this.diasApos = null;
+		}
+		
+		if(this.tipoLiberacao.equals(TipoLiberacao.POR_DIAS_APOS_COMPRA)) {
+			this.data = null;
+		}
+		
+		if(this.tipoLiberacao.equals(TipoLiberacao.IMEDIATA)) {
+			this.data = null;
+			this.diasApos = null;
+		}
+		
+	}
 }

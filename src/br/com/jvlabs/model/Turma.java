@@ -17,7 +17,7 @@ import lombok.Setter;
 @Entity(name = "TURMA")
 @SQLDelete(sql = "UPDATE TURMA SET excluido = 'T' WHERE id = ?", check = ResultCheckStyle.COUNT)
 @Where(clause = "excluido <> 'T'") @Getter @Setter
-public class Turma extends Entidade implements Cloneable, EntidadeInterface{
+public class Turma extends EntidadeNomeAtivo implements Cloneable, EntidadeInterface{
 
 	private static final long serialVersionUID = 6870418303029482722L;
 

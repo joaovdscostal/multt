@@ -10,6 +10,8 @@ import br.com.jvlabs.dao.ContaDao;
 import br.com.jvlabs.enumerated.TipoConta;
 import br.com.jvlabs.exception.BusinessException;
 import br.com.jvlabs.model.Conta;
+import br.com.jvlabs.model.Matricula;
+import br.com.jvlabs.model.TipoUsuario;
 import br.com.jvlabs.model.Usuario;
 
 @RequestScoped
@@ -70,6 +72,34 @@ public class ContaService extends ServiceProjeto {
 		logService.criarLog("CONTA-CLONE", conta);
 		return clonada;
 	}
+
+	public Conta criarParaMatricula(Matricula matricula) throws BusinessException {
+		Usuario usuario = new Usuario();
+		usuario.setTipo(TipoUsuario.CONSUMIDOR);
+		usuario = usuarioService.criarUsuario(usuario,matricula.getNomeAluno(),matricula.getEmailAluno());
+		
+		Conta conta = Conta.builder()
+				           .email(usuario.getEmail())
+				           .tipoConta(TipoConta.ALUNO)
+				           .usuario(usuario)
+				           .build();
+		
+		conta.setNome(usuario.getNome());
+		conta = contaDao.merge(conta);
+		logService.criarLog("CONTA-CREATE", conta);
+		return conta;
+	}
+
+	public Boolean existeContaPorEmail(String email) {
+		return contaDao.existeContaPorEmail(email);
+	}
+
+	public Conta buscarContaParaMatricula(String email) {
+		// TODO Auto-generated method stub
+		return contaDao.buscarContaParaMatricula(email);
+	}
+
+	
 
 
 }

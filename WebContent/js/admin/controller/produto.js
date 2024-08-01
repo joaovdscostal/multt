@@ -1,6 +1,8 @@
 "use strict";
 
 (function() {
+  var produtoId = $('#produtoId').val();
+	
   var paginateIndex = new Paginate("produtoDatatable")
     .url(urlPadrao + "adm/produtos/json")
     .form("produtoForm")
@@ -24,6 +26,8 @@
     ])
     .start();   
     
+//.............................................................................................................................................
+    
     var paginateCursos = new Paginate("produtoCursos")
     .url(urlPadrao + "adm/produtos/json")
     .form("produtoCursoForm")
@@ -41,75 +45,80 @@
       },
     ])
     .start();   
+
+//.............................................................................................................................................
     
      var paginateTurmas = new Paginate("turmaDatatableMembros")
-    .url(urlPadrao + "adm/turmas/json")
+    .url(urlPadrao + `adm/turmas/${produtoId}/json`)
     .form("turmaFormMembros")
     .columns([
   		{ title: "#", data: "id" },
-    	{ title: "Valor", data: "valor"  },
+    	{ title: "Nome", data: "nome" },
+	  	{ title: "Valor", data: "valor"}
     ])
     .buttons([
         {
     	    title: "Clonar",
     	    icon: "fad fa-clone",
-    	    url: urlPadrao + "adm/turmas/{id}/clonar"
+    		classeParaChamarFuncao: 'clonar-turma'
         },
         {
     	    title: "Editar",
     	    icon: "far fa-pencil-alt",
-    	    url: urlPadrao + "adm/turmas/{id}/editar"
+    	    classeParaChamarFuncao: 'editar-turma'
         },
         {
 	        title: "Remover",
 	        icon: "far fa-trash",
-	        url: urlPadrao + "adm/turmas/{id}/apagar",
-	        confirm: true,
-	        confirmMessage: "Deseja excluir este(a) turma?",
+	        classeParaChamarFuncao: 'del-turma',
 	        warning: true
         },
     ])
     .start();
     
-    $(document).on('click','.editarBump',function(e){
-		e.preventDefault();
-		var idOrderBump = $(this).attr('data-id');
-		abrirModalParaEdicaoDeBump(idOrderBump);
-	});
-	
-	$(document).on('click','.removeBump',function(e){
-		e.preventDefault();
-		var idOrderBump = $(this).attr('data-id');
-		excluirOrderBump(idOrderBump);
-	});
+//.............................................................................................................................................
+    
+    var paginateMembros = new Paginate("alunosDatatableMembros")
+    .url(urlPadrao + `adm/matriculas/por-produto/${produtoId}/json`)
+    .form("alunosForm")
+    .columns([
+	    { title: "#", data: "id"},
+		{ title: "Aluno", data: "aluno.nome"},
+		{ title: "Turma", data: "turma.nome"},
+		//{ title: "Status", data: "statusMatricula" },
+		//{ title: "data", data: "data", render: renderDateTimeMoment},
+    ])
+    .buttons([
+		/*{
+		    title: "Clonar",
+		    icon: "fad fa-clone",
+		    url: urlPadrao + "adm/matriculas/{id}/clonar"
+		},*/
+		{
+		    title: "Editar",
+		    icon: "far fa-pencil-alt",
+		    classeParaChamarFuncao: 'editar-matricula',
+		},
+		{
+		    title: "Remover",
+		    icon: "far fa-trash",
+		    classeParaChamarFuncao: 'del-matricula',
+		    warning: true
+		},
+    ])
+    .start();
+    
+//.............................................................................................................................................
 
 	$(document).on('click','.cadastrar-rapido-produto',function(e){
 		e.preventDefault();
 		abrirModalParaCadastroRapidoDeProduto(paginateIndex);
 	});
 	
-	$(document).on('click','.cadastrar-order-bump',function(e){
-		e.preventDefault();
-		var idProduto = $(this).attr('data-produto-id')
-		abrirModalParaCadastroDeOrderBump(idProduto);
-	});
-	
 	$(document).on('click','.cadastrar-checkout',function(e){
 		e.preventDefault();
 		var idProduto = $(this).attr('data-produto-id')
 		abrirModalCheckout(idProduto);
-	});
-	
-	$(document).on('change','#exibirImagemBump',function(e){
-		var produtoImagem = $('#produtoBump').find('option:selected').attr('data-img')
-		
-		if(variavelPossuiValor(produtoImagem)){
-			alternarImagemBump()
-		} else {
-			new Notificacao('Ops!','Não há produto selecionado, ou o produto selecionado não tem imagem').erro();
-			$('#exibirImagemBump').prop('checked', false);
-		}
-	
 	});
 	
 	$(document).on('click','.verificar-disponibilidade-oferta',function(e){
@@ -127,16 +136,37 @@
 		$('#form-container-produto').show();
 	});
 	
-	$(document).on('click','.addOferta',function(e){
+	
+	//...OrderBump.......................................................
+	
+	$(document).on('click','.editarBump',function(e){
 		e.preventDefault();
-		addOferta(this)
+		var idOrderBump = $(this).attr('data-id');
+		abrirModalParaEdicaoDeBump(idOrderBump);
 	});
 	
-	$(document).on('click','.removeOferta',function(e){
+	$(document).on('click','.removeBump',function(e){
 		e.preventDefault();
-		new Notificacao('Atenção!', 'Esta oferta será desabilitada permanentemente,deseja continuar?').dialogo().confirm(function(){
-			removeOferta(this)
-		});
+		var idOrderBump = $(this).attr('data-id');
+		excluirOrderBump(idOrderBump);
+	});
+	
+	$(document).on('change','#exibirImagemBump',function(e){
+		var produtoImagem = $('#produtoBump').find('option:selected').attr('data-img')
+		
+		if(variavelPossuiValor(produtoImagem)){
+			alternarImagemBump()
+		} else {
+			new Notificacao('Ops!','Não há produto selecionado, ou o produto selecionado não tem imagem').erro();
+			$('#exibirImagemBump').prop('checked', false);
+		}
+	
+	});
+	
+	$(document).on('click','.cadastrar-order-bump',function(e){
+		e.preventDefault();
+		var idProduto = $(this).attr('data-produto-id')
+		abrirModalParaCadastroDeOrderBump(idProduto);
 	});
 	
 	$(document).on('change','#produtoBump',function(e){
@@ -159,19 +189,140 @@
 		gerarPreVisualizacaoBump();
 	});
 	
+	//...OrderBump.......................................................
+	
+	//...Oferta.......................................................
+		
 	$(document).on('change','.verificar-disponibilidade-oferta',function(e){
 		$('.verificar-disponibilidade-oferta').prop('checked',false)
 		$(this).prop('checked',true)
 	});
 	
-	$(document).on('click','.add-modulo',function(e){
+	$(document).on('click','.addOferta',function(e){
 		e.preventDefault();
-		abrirModalParaCadastroRapidoDeModulo();
+		addOferta(this)
 	});
+	
+	$(document).on('click','.removeOferta',function(e){
+		e.preventDefault();
+		new Notificacao('Atenção!', 'Esta oferta será desabilitada permanentemente,deseja continuar?').dialogo().confirm(function(){
+			removeOferta(this)
+		});
+	});
+		
+	//...Oferta.......................................................
+	
+	//...Matricula.......................................................
+	
+	$(document).on('click','.add-matricula',function(e){
+		e.preventDefault();
+		var produtoId = $('#produtoId').val();
+		new Ajax(urlPadrao + `adm/modulos/turmas/produto/${produtoId}/possui-turmas/ajax`)
+		.erro(function(data){
+			new Notificacao('Ops!', data.responseText).erro();
+		})
+		.sucesso(function(data){
+			abrirModalParaCadastroRapidoDeMatricula();
+			paginateMembros.start();
+			buscarDadosDeAlunos(produtoId);
+		});
+	});
+	
+	$(document).on('click','.del-matricula',function(e){
+		e.preventDefault();
+		var matriculaId = $(this).attr('data-id');
+		excluirMatricula(matriculaId,paginateMembros);
+	});
+	
+	/*$(document).on('click','.clonar-matricula',function(e){
+		e.preventDefault();
+		var matriculaId = $(this).attr('data-id');
+		clonarMatricula(matriculaId,paginateMembros);
+	});*/
+	
+	$(document).on('click','.editar-matricula',function(e){
+		e.preventDefault();
+		var matriculaId = $(this).attr('data-id');
+		abrirModalParaEdicaoRapidaDeMatricula(matriculaId,paginateMembros);
+	});
+	
+	//...Matricula.......................................................
+	
+	//...Turma.......................................................
 	
 	$(document).on('click','.add-turma',function(e){
 		e.preventDefault();
 		abrirModalParaCadastroRapidoDeTurma(paginateTurmas);
+	});
+	
+	$(document).on('click','.del-turma',function(e){
+		e.preventDefault();
+		var turmaId = $(this).attr('data-id');
+		excluirTurma(turmaId,paginateTurmas);
+	});
+	
+	$(document).on('click','.clonar-turma',function(e){
+		e.preventDefault();
+		var turmaId = $(this).attr('data-id');
+		clonarTurma(turmaId,paginateTurmas);
+	});
+	
+	$(document).on('click','.editar-turma',function(e){
+		e.preventDefault();
+		var turmaId = $(this).attr('data-id');
+		abrirModalParaEdicaoRapidaDeTurma(turmaId,paginateTurmas);
+	});
+	
+	$(document).on('click','#todasAsTurmas',function(e){
+		var valorCampo = $(this).is(':checked');
+		var todasMarcadas = true;
+		
+		if(valorCampo ==  true){
+			$('.turma-selection').prop('checked',true)
+		}
+		
+		$('.turma-selection').each(function(index,element){
+			if($(element).is(':checked') == false){
+				todasMarcadas = false;
+			}
+		})
+		
+		$('#todasAsTurmas').prop('checked',todasMarcadas)
+		
+	});
+	
+	$(document).on('click','.turma-selection',function(e){
+		var todasMarcadas = true;
+		
+		$('.turma-selection').each(function(index,element){
+			if($(element).is(':checked') == false){
+				todasMarcadas = false;
+			}
+		})
+		
+		console.log(todasMarcadas);
+		
+		$('#todasAsTurmas').prop('checked',todasMarcadas)
+	});
+	
+	//...Turma.......................................................
+	
+	//...Modulo e Conteudo.......................................................
+	
+	$(document).on('click','.add-modulo',function(e){
+		e.preventDefault();
+		var produtoId = $('#produtoId').val();
+		new Ajax(urlPadrao + `adm/modulos/turmas/produto/${produtoId}/possui-turmas/ajax`)
+		.erro(function(data){
+			new Notificacao('Ops!', data.responseText).erro();
+		})
+		.sucesso(function(data){
+			abrirModalParaCadastroRapidoDeModulo();
+		});		
+	});
+	
+	$(document).on('click','.editar-modulo',function(e){
+		gerarModalParaEdicaoRapidaDeModulo(this);
 	});
 	
 	$(document).on('click','.add-conteudo',function(e){
@@ -195,10 +346,67 @@
 		} 
 		
 	});
+	
+	$(document).on('click','.editar-conteudo',function(e){
+		var idConteudo = $(this).attr('data-id-conteudo')
+		abrirModalParaEditarConteudo(idConteudo)
+	});
+	
+	$(document).on('click','.excluir-conteudo',function(e){
+		var idConteudo = $(this).attr('data-id-conteudo')
+		excluirConteudo(idConteudo)
+	});
+	
+	//...Modulo e Conteudo.......................................................
 		
 	inputImages();
-	gerarModulos()
+	gerarModulos();
+	buscarDadosDeAlunos(produtoId);
 })();
+
+function buscarDadosDeAlunos(idProduto) {
+	
+	new Ajax(urlPadrao + `adm/alunos/buscar-dados-produto/${idProduto}/ajax`)
+	.erro(function(data){
+		new Notificacao('Erro', e.responseText).erro();
+	})
+	.sucesso(function(data){
+		var retorno = data.retorno;
+		renderizarDadosDeAlunosParaProduto(retorno)
+	});
+}
+
+function renderizarDadosDeAlunosParaProduto(dados) {
+	console.log(dados);
+	$('#alunoQuantidade').html(dados[0])
+}
+
+function excluirConteudo(idConteudo) {
+	new Ajax(urlPadrao + `adm/conteudos/${idConteudo}/apagar`)
+	.sucesso(function(data){
+		gerarModulos()
+		new Notificacao('Sucesso!','Conteúdo excluído com sucesso!').sucesso();
+	});
+}
+
+function abrirModalParaEditarConteudo(idConteudo) {
+	var modal = new Modal()
+	.ajax(new Ajax(urlPadrao + `adm/conteudos/${idConteudo}/editar/modal`))
+	.ajaxSubmit(function(data) {
+		gerarModulos()
+		new Notificacao('Sucesso!','Conteúdo editado com sucesso!').sucesso();
+	})
+	.ajaxErro(function(e) {
+		new Notificacao('Erro', e.responseText).erro();
+	})
+	.comTitulo('Edição de Conteúdo');
+
+	modal.executarAoMostrar(function() {});
+	
+	modal.executarAoFechar(function() {})
+	
+	modal.extragrande().mostrar();
+}
 
 function gerarModulos() {
 	if ($("#modulos-container").length) {
@@ -263,6 +471,7 @@ function abrirModalCheckout(idProduto) {
 
 function abrirModalParaCadastroRapidoDeTurma(paginateTurmas) {
 	var produtoId = $('#produtoId').val();
+	
 	var modal = new Modal()
 	.ajax(new Ajax(urlPadrao + `adm/turmas/novo/modal?produto.id=${produtoId}`))
 	.ajaxSubmit(function(data) {
@@ -271,17 +480,102 @@ function abrirModalParaCadastroRapidoDeTurma(paginateTurmas) {
 	.ajaxErro(function(e) {
 		new Notificacao('Erro', e.responseText).erro();
 	})
-	.comTitulo('Cadastro de Módulo');
+	.comTitulo('Cadastro de Turma');
 
 	modal.executarAoMostrar(function() {});
 	modal.medio().mostrar();
 }
 
+function abrirModalParaEdicaoRapidaDeTurma(turmaId,paginateTurmas){
+	var modal = new Modal()
+	.ajax(new Ajax(urlPadrao + `adm/turmas/${turmaId}/editar/modal`))
+	.ajaxSubmit(function(data) {
+		paginateTurmas.start();
+	})
+	.ajaxErro(function(e) {
+		new Notificacao('Erro', e.responseText).erro();
+	})
+	.comTitulo('Edição de Turma');
+
+	modal.executarAoMostrar(function() {});
+	modal.medio().mostrar();
+}
+
+function abrirModalParaEdicaoRapidaDeMatricula(matriculaId,paginateMatriculas){
+	var modal = new Modal()
+	.ajax(new Ajax(urlPadrao + `adm/matriculas/${matriculaId}/editar/modal`))
+	.ajaxSubmit(function(data) {
+		paginateMatriculas.start();
+	})
+	.ajaxErro(function(e) {
+		new Notificacao('Erro', e.responseText).erro();
+	})
+	.comTitulo('Edição de Matricula');
+
+	modal.executarAoMostrar(function() {});
+	modal.medio().mostrar();
+}
+
+
+
+function excluirMatricula(matriculaId,paginateMembros){
+	new Notificacao('Atenção!', 'Deseja mesmo apagar esta matrícula?').dialogo().confirm(function(){
+		new Ajax(urlPadrao + `adm/matriculas/${matriculaId}/apagar/ajax`)
+		.post()
+		.erro(function(data){
+			new Notificacao('Erro', data.responseText).erro();
+			swal.close();
+		})
+		.sucesso(function(data){
+			console.log();
+			new Notificacao('Sucesso!', data.retorno).sucesso();
+			paginateMembros.start();
+			swal.close();
+		});
+	});
+	
+}
+
+function excluirTurma(turmaId,paginateTurmas){
+	new Notificacao('Atenção!', 'Deseja mesmo apagar esta turma?').dialogo().confirm(function(){
+		new Ajax(urlPadrao + `adm/turmas/${turmaId}/apagar/ajax`)
+		.post()
+		.erro(function(data){
+			new Notificacao('Erro', data.responseText).erro();
+			swal.close();
+		})
+		.sucesso(function(data){
+			console.log();
+			new Notificacao('Sucesso!', data.retorno).sucesso();
+			paginateTurmas.start();
+			swal.close();
+		});
+	});
+	
+}
+
+function clonarTurma(turmaId,paginateTurmas) {
+	new Ajax(urlPadrao + `adm/turmas/${turmaId}/clonar/ajax`)
+	.post()
+	.erro(function(data){
+		new Notificacao('Erro', data.responseText).erro();
+	})
+	.sucesso(function(data){
+		console.log(data.retorno);
+		new Notificacao('Sucesso!', data.retorno).sucesso();
+		paginateTurmas.start();
+	});
+}
+
 function abrirModalParaCadastroRapidoDeModulo() {
 	var produtoId = $('#produtoId').val();
+	
 	var modal = new Modal()
 	.ajax(new Ajax(urlPadrao + `adm/modulos/novo/modal?produtoId=${produtoId}`))
-	.ajaxSubmit(function(data) {})
+	.ajaxSubmit(function(data) {
+		gerarModulos()
+		new Notificacao('Sucesso!','Módulo cadastrado com sucesso!').sucesso();
+	})
 	.ajaxErro(function(e) {
 		new Notificacao('Erro', e.responseText).erro();
 	})
@@ -291,12 +585,55 @@ function abrirModalParaCadastroRapidoDeModulo() {
 	modal.medio().mostrar();
 }
 
+function abrirModalParaCadastroRapidoDeMatricula() {
+	var produtoId = $('#produtoId').val();
+	
+	var modal = new Modal()
+	.ajax(new Ajax(urlPadrao + `adm/matriculas/novo/modal?produtoId=${produtoId}`))
+	.ajaxSubmit(function(data) {
+		new Notificacao('Sucesso!','Aluno cadastrado com sucesso!').sucesso();
+	})
+	.ajaxErro(function(e) {
+		new Notificacao('Erro', e.responseText).erro();
+	})
+	.comTitulo('Cadastro de Matrícula');
+
+	modal.executarAoMostrar(function() {});
+	modal.medio().mostrar();
+}
+
+
+
+function gerarModalParaEdicaoRapidaDeModulo(elemento) {
+	var moduloId = $(elemento).attr('data-mod-id');
+	
+	var modal = new Modal()
+	.ajax(new Ajax(urlPadrao + `adm/modulos/editar/${moduloId}/modal`))
+	.ajaxSubmit(function(data) {
+		gerarModulos()
+		new Notificacao('Sucesso!','Módulo editado com sucesso!').sucesso();
+	})
+	.ajaxErro(function(e) {
+		new Notificacao('Erro', e.responseText).erro();
+	})
+	.comTitulo('Cadastro de Módulo');
+
+	modal.executarAoMostrar(function() {});
+	modal.executarAoFechar(function() {
+		gerarModulos()
+	})
+	modal.medio().mostrar();
+}
+
 function abrirModalParaCadastroRapidoDeConteudo(modId) {
 	console.log(modId)
 	
 	var modal = new Modal()
 	.ajax(new Ajax(urlPadrao + `adm/conteudos/novo?modulo.id=${modId}`))
-	.ajaxSubmit(function(data) {})
+	.ajaxSubmit(function(data) {
+		gerarModulos()
+		new Notificacao('Sucesso!','Conteúdo cadastrado com sucesso!').sucesso();
+	})
 	.ajaxErro(function(e) {
 		new Notificacao('Erro', e.responseText).erro();
 	})

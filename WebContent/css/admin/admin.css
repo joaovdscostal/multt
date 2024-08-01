@@ -1350,4 +1350,10 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
     opacity: 1;
     color: #9448AE !important; 
   }
+  
+  .card-multt{
+	  background-color: #DDB6EA !important;
+	  color:black !important;
+  }
+  
 

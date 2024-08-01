@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
 
 import lombok.Getter;
@@ -29,10 +34,14 @@ public class Modulo extends EntidadeNomeAtivo implements Cloneable, EntidadeInte
 	@OneToMany	
 	private List<Conteudo> conteudos;
 	
-	@OneToMany
+	@ManyToMany
+	@JoinTable(name = "MODULO_TURMA",
+	joinColumns = @JoinColumn(name = "modulo_id"),
+	inverseJoinColumns = @JoinColumn(name = "turma_id"))
 	private List<Turma> turmas;
 	
-	private Boolean permitirTodasAsTurmas;
+	@Type(type = "true_false")
+	private Boolean permitirTodasAsTurmas = Boolean.FALSE;
 
 	@Override
 	public void validarTransient() {}
@@ -51,5 +60,13 @@ public class Modulo extends EntidadeNomeAtivo implements Cloneable, EntidadeInte
 		
 		this.conteudos.add(conteudo);
 		
+	}
+
+	public boolean possuiProduto() {
+		return this.produto != null;
+	}
+
+	public boolean possuiTurmas() {
+		return this.turmas != null && !this.turmas.isEmpty();
 	}
 }

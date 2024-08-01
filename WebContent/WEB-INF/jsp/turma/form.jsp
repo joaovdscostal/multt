@@ -8,14 +8,19 @@
 </c:if>
 
 <c:if test="${not empty produto.id}">
-    <input type="hidden" name="produto.id" value="${produto.id}"/>
+    <input type="hidden" name="turma.produto.id" value="${produto.id}"/>
 </c:if>
 
 <div class="card-body card-padding">
 	<div class="form-row">
+		<div class="form-group col-md-12  ">
+	        <label for="turmaNome" class="control-label">Nome</label>
+	        <input type="text" name="turma.nome" id="turmaNome" class="form-control required" value="${turma.nome}"/>
+	    </div>
+	
     	<div class="form-group  col-md-12  ">
 	        <label for="turmaValor" class="control-label">Valor</label>
-	        <input type="text" name="turma.valor" id="turmaValor" class="form-control required " alt="decimalSemZero" value="${turma.valor}"/>
+	        <input type="text" name="turma.valor" id="turmaValor" class="form-control required" alt="decimalSemZero" value="${turma.valor}"/>
 	    </div>
 	    
 	    <div class="form-group  col-md-12">
@@ -27,7 +32,13 @@
 					</option>
 				</c:forEach>
 			</select>
-	    </div>   
+	    </div> 
+	    
+	    <div class="form-group custom-control custom-switch">
+	        <input name="turma.ativo" type="checkbox" class="custom-control-input " id="turmaAtivo"
+	         	<c:if test="${empty turma.ativo || turma.ativo == true}">checked="checked"</c:if> >
+	        <label class="custom-control-label" for="turmaAtivo">Ativo?</label>
+	    </div>  
 	</div>
 
     <div class="form-group">

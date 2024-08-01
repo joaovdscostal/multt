@@ -6,12 +6,9 @@ import javax.enterprise.context.RequestScoped;
 
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.MatchMode;
-
 
 import br.com.jvlabs.datatables.Table;
 import br.com.jvlabs.datatables.TableResponse;
-import br.com.jvlabs.model.Conta;
 import br.com.jvlabs.model.Produto;
 import br.com.jvlabs.model.Turma;
 
@@ -34,6 +31,13 @@ public class TurmaDao extends HibernateDao<Turma> {
 		HibernateCriteriaDao<Turma> criteria = createCriteria();
 		criteria.add(Restrictions.eq("produto", produto));
 		return criteria.exists();
+	}
+
+	public TableResponse<Turma> paginateComProduto(Table datatable, Produto produto) {
+		DatatableDao<Turma> datatableDao = comDatatable(datatable);
+		Conjunction conjunction = Restrictions.conjunction();
+		conjunction.add(Restrictions.eq("produto",produto));
+		return datatableDao.carregandoParametros(conjunction).paginate();
 	}
 
 }

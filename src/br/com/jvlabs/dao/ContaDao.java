@@ -34,6 +34,20 @@ public class ContaDao extends HibernateDao<Conta> {
 		return criteria.uniqueResult();
 	}
 
+	public Boolean existeContaPorEmail(String email) {
+		HibernateCriteriaDao<Conta> criteria = createCriteria();
+		criteria.alias("usuario");
+		criteria.add(Restrictions.eq("usuario.email", email));
+		return criteria.exists();
+	}
+
+	public Conta buscarContaParaMatricula(String email) {
+		HibernateCriteriaDao<Conta> criteria = createCriteria();
+		criteria.alias("usuario");
+		criteria.add(Restrictions.eq("usuario.email", email));
+		return criteria.uniqueResult();
+	}
+
 
 
 }

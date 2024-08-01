@@ -1,5 +1,6 @@
 package br.com.jvlabs.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
@@ -27,6 +29,12 @@ public class Matricula extends Entidade implements Cloneable, EntidadeInterface{
 
 	@OneToOne
 	private Conta aluno;
+	
+	@Transient
+	private String nomeAluno;
+	
+	@Transient
+	private String emailAluno;
 	
 	@OneToOne
 	private Turma turma;
@@ -54,5 +62,10 @@ public class Matricula extends Entidade implements Cloneable, EntidadeInterface{
 	public String getExibicao() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	public Long getIdProdutoDaTurma() {
+		return this.turma.getProduto().getId();
 	}
 }
